@@ -57,7 +57,6 @@ Activated layers, additional packages, excluded packages, etc"
      spell-checking
      syntax-checking
      ;; version-control
-     org-alert
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -142,6 +141,7 @@ etc..."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
+                         nimbus
                          doom-tomorrow-night
                          doom-sourcerer
                          doom-molokai
@@ -238,7 +238,7 @@ etc..."
    dotspacemacs-loading-progress-bar t
    ;; If non nil the frame is fullscreen when Emacs starts up. (default nil)
    ;; (Emacs 24.4+ only)
-   dotspacemacs-fullscreen-at-startup t
+   dotspacemacs-fullscreen-at-startup nil
    ;; If non nil `spacemacs/toggle-fullscreen' will not use native fullscreen.
    ;; Use to disable fullscreen animations in OSX. (default nil)
    dotspacemacs-fullscreen-use-non-native nil
@@ -331,7 +331,7 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
-  ;; MELPA packages
+;; MELPA
   (require 'package)
   (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
                       (not (gnutls-available-p))))
@@ -344,55 +344,67 @@ you should place your code here."
       (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
   (package-initialize)
 
-  ;; Themes
+;; Themes
+  ;; doom
   (add-to-list 'load-path "~/Documents/emacs-doom-themes/")
   (require 'doom-themes)
+
+  ;; nimbus needed this line on personal machine for some reason
+  (load-theme 'nimbus t)
 
   ;; projectile-mode setup
   (projectile-mode +1)
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
+  ;; persistent scratch
   (persistent-scratch-autosave-mode 1)
 
-  ;; Org mode setup
+;; Org
   ;; Hook for toggling word wrap
   (add-hook 'org-mode-hook #'toggle-word-wrap)
+
   ;; Change ellipsis
-  (setq org-ellipsis "▼")
+  (setq org-ellipsis "↴")
   ;; Alt: ▼, ↴, ⬎, ⤷, ⤵, and ⋱
+
   ;; Assign agenda files
-  (setq org-agenda-files '("~/Dropbox/org/daily_planner.org"
+  (setq org-agenda-files '(
                            "~/Dropbox/org/org.org"
+                           "~/Dropbox/org/daily_planner.org"
                            "~/Dropbox/org/inbox.org"
-                           "~/Dropbox/org/someday.org"
-                           "~/org/inbox.org"))
+                           "~/Dropbox/org/denver.org"
+                           "~/Dropbox/org/cal.org"
+                           ))
   ;; Refile targets
   (setq org-refile-targets
         '(("~/org/inbox.org" :maxlevel . 1)
           ("~/org/tickler.org" :maxlevel . 1)
           ("~/org/retro.org" :maxlevel . 1)
           ))
+
   ;; org-capture template
-  (setq org-capture-templates '(
-                                ("t" "Todo [inbox]" entry
-                                (file+headline "~/org/inbox.org" "Tasks")
-                                "* TODO %i%?")
+  (setq org-capture-templates '(("t" "Todo [inbox]" entry
+                                 (file+headline "~/org/inbox.org" "Tasks")
+                                 "* TODO %i%?")
                                 ("T" "Tickler" entry
                                  (file+headline "~/org/tickler.org" "Tickler")
                                  "* %i%? \n %U")
-                               )
-        )
-  )
+                                )))
+
   ;; Org TO DO keywords
   (setq org-todo-keywords
         '((sequence "TODO(t)" "|" "DONE(d!)" "CANCELLED(c@)")))
 
+;; auto-mode-alist
   ;; auto set major mode for specific file type
-  (add-to-list 'auto-mode-alist '("\\.clj\\'" . clojure-mode))
   (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
 
-;; https://github.com/clojure-emacs/cider/issues/2284 Attempting to fix desync
-;; of refactor-nrepl and CIDER version differences
+;; clojure
+  (add-to-list 'auto-mode-alist '("\\.clj\\'" . clojure-mode))
+
+  ;; https://github.com/clojure-emacs/cider/issues/2284 Attempting to fix desync
+  ;; of refactor-nrepl and CIDER version differences
   (setq cljr-inject-dependencies-at-jack-in nil)
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -411,10 +423,10 @@ you should place your code here."
     ("~/Dropbox/org/daily_planner.org" "~/Dropbox/org/org.org" "~/Dropbox/org/someday.org" "~/org/inbox.org")))
  '(package-selected-packages
    (quote
-    (org-alert flyspell-correct-helm flyspell-correct auto-dictionary smeargle orgit magit-gitflow helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link magit-popup git-commit with-editor flycheck-pos-tip pos-tip flycheck sql-indent yaml-mode clj-refactor inflections edn paredit peg cider-eval-sexp-fu cider sesman queue clojure-mode doom-sourcerer-theme-theme doom-sourcerer-theme evil-magit magit web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss haml-mode emmet-mode persistent-scratch rjsx-mode doom-themes org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download htmlize gnuplot reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js2-mode js-doc coffee-mode mmm-mode markdown-toc markdown-mode gh-md helm-projectile helm-make ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-mode-manager projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
+    (tern org-alert flyspell-correct-helm flyspell-correct auto-dictionary smeargle orgit magit-gitflow helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link magit-popup git-commit with-editor flycheck-pos-tip pos-tip flycheck sql-indent yaml-mode clj-refactor inflections edn paredit peg cider-eval-sexp-fu cider sesman queue clojure-mode doom-sourcerer-theme-theme doom-sourcerer-theme evil-magit magit web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss haml-mode emmet-mode persistent-scratch rjsx-mode doom-themes org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download htmlize gnuplot reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js2-mode js-doc coffee-mode mmm-mode markdown-toc markdown-mode gh-md helm-projectile helm-make ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-mode-manager projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:family "Source Code Pro" :foundry "nil" :slant normal :weight normal :height 130 :width normal)))))
