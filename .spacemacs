@@ -366,8 +366,8 @@ you should place your code here."
   ;; don't split windows when displaying agenda
   (setq org-agenda-window-setup 'current-window)
 
-  ;; Hook for toggling word wrap
-  (add-hook 'org-mode-hook #'toggle-word-wrap)
+  ;; Hook for toggling visual word wrap
+  (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
 
   ;; Change ellipsis
   (setq org-ellipsis "↴")
