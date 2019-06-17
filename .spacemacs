@@ -58,6 +58,7 @@ Activated layers, additional packages, excluded packages, etc"
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
+                                      org-journal
                                       persistent-scratch
                                       rjsx-mode
                                       )
@@ -375,7 +376,7 @@ you should place your code here."
 
   ;; org-journal
   (customize-set-variable 'org-journal-dir "~/Dropbox/org/journal/")
-  (require 'org-jorunal)
+  (require 'org-journal)
 
   ;; Assign agenda files
   (setq org-agenda-files '(
@@ -389,11 +390,11 @@ you should place your code here."
 
   ;; Refile targets
   (setq org-refile-targets
-        '(("~/org/inbox.org" :maxlevel . 1)
-          ("~/org/gtd.org" :maxlevel . 1)
-          ("~/org/tickler.org" :maxlevel . 1)
-          ("~/org/org.org" :maxlevel . 1)
-          ("~/org/retro.org" :maxlevel . 1)
+        '(("~/Dropbox/org/inbox.org" :maxlevel . 1)
+          ("~/Dropbox/org/gtd.org" :maxlevel . 1)
+          ("~/Dropbox/org/tickler.org" :maxlevel . 1)
+          ("~/Dropbox/org/org.org" :maxlevel . 1)
+          ("~/Dropbox/org/retro.org" :maxlevel . 1)
           ))
 
   ;; org-capture template
