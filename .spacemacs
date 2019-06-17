@@ -373,11 +373,16 @@ you should place your code here."
   (setq org-ellipsis "↴")
   ;; Alt: ▼, ↴, ⬎, ⤷, ⤵, and ⋱
 
+  ;; org-journal
+  (customize-set-variable 'org-journal-dir "~/Dropbox/org/journal/")
+  (require 'org-jorunal)
+
   ;; Assign agenda files
   (setq org-agenda-files '(
-                           "~/Dropbox/org/org.org"
                            "~/Dropbox/org/inbox.org"
-                           "~/Dropbox/org/denver.org"
+                           "~/Dropbox/org/gtd.org"
+                           "~/Dropbox/org/tickler.org"
+                           "~/Dropbox/org/org.org"
                            "~/Dropbox/org/cal.org"
   ;;                         "~/Dropbox/org/habits.nomobile"
                            ))
@@ -385,16 +390,18 @@ you should place your code here."
   ;; Refile targets
   (setq org-refile-targets
         '(("~/org/inbox.org" :maxlevel . 1)
+          ("~/org/gtd.org" :maxlevel . 1)
           ("~/org/tickler.org" :maxlevel . 1)
+          ("~/org/org.org" :maxlevel . 1)
           ("~/org/retro.org" :maxlevel . 1)
           ))
 
   ;; org-capture template
   (setq org-capture-templates '(("t" "Todo [inbox]" entry
-                                 (file+headline "~/org/inbox.org" "Tasks")
+                                 (file+headline "~/Dropbox/org/inbox.org" "Tasks")
                                  "* TODO %i%?")
                                 ("T" "Tickler" entry
-                                 (file+headline "~/org/tickler.org" "Tickler")
+                                 (file+headline "~/Dropbox/org/tickler.org" "Tickler")
                                  "* %i%? \n %U")
                                 )))
 
@@ -431,7 +438,7 @@ you should place your code here."
     ("~/Dropbox/org/org.org" "~/Dropbox/org/daily_planner.org" "~/Dropbox/org/inbox.org" "~/Dropbox/org/denver.org" "~/Dropbox/org/cal.org")))
  '(package-selected-packages
    (quote
-    (xterm-color shell-pop multi-term git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter eshell-z eshell-prompt-extras esh-help diff-hl define-word yaml-mode ws-butler winum which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org tagedit sql-indent spaceline smeargle slim-mode scss-mode sass-mode rjsx-mode reveal-in-osx-finder restart-emacs rainbow-delimiters pug-mode popwin persp-mode persistent-scratch pcre2el pbcopy paradox osx-trash osx-dictionary orgit org-projectile org-present org-pomodoro org-mime org-download org-bullets open-junk-file neotree mwim move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint launchctl json-mode js2-refactor js-doc indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu emmet-mode elisp-slime-nav dumb-jump diminish company-web company-tern company-statistics column-enforce-mode coffee-mode clojure-snippets clj-refactor clean-aindent-mode cider-eval-sexp-fu auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
+    (org-journal xterm-color shell-pop multi-term git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter eshell-z eshell-prompt-extras esh-help diff-hl define-word yaml-mode ws-butler winum which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org tagedit sql-indent spaceline smeargle slim-mode scss-mode sass-mode rjsx-mode reveal-in-osx-finder restart-emacs rainbow-delimiters pug-mode popwin persp-mode persistent-scratch pcre2el pbcopy paradox osx-trash osx-dictionary orgit org-projectile org-present org-pomodoro org-mime org-download org-bullets open-junk-file neotree mwim move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint launchctl json-mode js2-refactor js-doc indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu emmet-mode elisp-slime-nav dumb-jump diminish company-web company-tern company-statistics column-enforce-mode coffee-mode clojure-snippets clj-refactor clean-aindent-mode cider-eval-sexp-fu auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
