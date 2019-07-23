@@ -393,6 +393,7 @@ you should place your code here."
         '(("~/Dropbox/org/inbox.org" :maxlevel . 1)
           ("~/Dropbox/org/gtd.org" :maxlevel . 1)
           ("~/Dropbox/org/tickler.org" :maxlevel . 1)
+          ("~/Dropbox/org/work.org" :maxlevel . 1)
           ("~/Dropbox/org/org.org" :maxlevel . 1)
           ("~/Dropbox/org/retro.org" :maxlevel . 1)
           ))
@@ -424,7 +425,10 @@ you should place your code here."
 
   ;; https://github.com/clojure-emacs/cider/issues/2284 Attempting to fix desync
   ;; of refactor-nrepl and CIDER version differences
-  (setq cljr-inject-dependencies-at-jack-in nil)
+;; Commenting out because nrepl is broke as hell on this machine for some reason
+;; could not locate nrepl/middleware/pr_values_init.class
+  ;; (setq cljr-inject-dependencies-at-jack-in nil)
+
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
