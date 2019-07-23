@@ -400,3 +400,7 @@ export ACTIVEMQ_HOME="/usr/local/apache-activemq-5.15.0"
 export GERONIMO_HOME="/usr/local/geronimo-tomcat7-javaee6-3.0.1/"
 
 export PATH=$PATH:$ACTIVEMQ_HOME/bin:$JAVA_HOME
+
+ # new global node folder setup to keep this separated from other installation folders
+ # https://stackoverflow.com/a/40905762
+ export PATH=~/.npm-global/bin:$PATH

@@ -1,1 +1,58 @@
 * TODO Write symlinking script
+* TODO Write script to install fonts
+```
+# if still using Roboto Mono Medium for Powerline
+# https://github.com/powerline/fonts
+# clone
+git clone https://github.com/powerline/fonts.git --depth=1
+# install
+cd fonts
+./install.sh
+# clean-up a bit
+cd ..
+rm -rf fonts
+```
+* TODO Figure out how to automate the ~/.vim/ instalation (with plug, :PlugInstall)
+* Other things:
+  - Chrome bookmarking strategy
+  - install npm 
+    - use node website installation (if the below SET UP GLOBAL FOLDER part breaks, use brew isntead)
+      - SET UP 
+        - mkdir ~/.npm-global
+        - npm config set prefix '~/.npm-global'
+        - (path addition is set in ~/dotfiles/.bash_profile)
+  - install iterm
+  - install zsh
+  - install homebrew
+  - install dropbox (AND SET UP THE IGNORE SETTINGS IMMEDIATELY)
+  - install emacs-mac via homebrew and spacemacs from git
+  ```
+  https://github.com/syl20bnr/spacemacs#macos
+
+  brew tap railwaycat/emacsmacport
+  brew cask install emacs-mac-spacemacs-icon
+  # instructions for brew linkapps is outdated
+
+  # These instructions for emacs-plus DID NOT WORK. Could not download evil packages.
+  # $ brew tap d12frosted/emacs-plus
+  # $ brew install emacs-plus
+ 
+  # ln -s /usr/local/Cellar/emacs-plus/*/Emacs.app/ /Applications/
+
+  git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+
+  ```
+  - need to install these fonts or it looks dumb
+    git clone https://github.com/adobe-fonts/source-code-pro.git
+    open font book for ios
+    click plus button
+    nav to directory, install
+    remove source-code-pro
+  - install bat
+    https://github.com/sharkdp/bat
+    brew install bat
+  - install tldr
+    npm install -g tldr
+
+    
+    
