@@ -374,36 +374,33 @@ you should place your code here."
   (setq org-ellipsis "↴")
   ;; Alt: ▼, ↴, ⬎, ⤷, ⤵, and ⋱
 
-  ;; org-journal
-  (customize-set-variable 'org-journal-dir "~/Dropbox/org/journal/")
-  (require 'org-journal)
-
+  ;; ~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org
   ;; Assign agenda files
   (setq org-agenda-files '(
-                           "~/Dropbox/org/inbox.org"
-                           "~/Dropbox/org/gtd.org"
-                           "~/Dropbox/org/tickler.org"
-                           "~/Dropbox/org/org.org"
-                           "~/Dropbox/org/cal.org"
+                           "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/inbox.org"
+                           "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/gtd.org"
+                           "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/tickler.org"
+                           "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/org.org"
+                           "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/cal.org"
   ;;                         "~/Dropbox/org/habits.nomobile"
                            ))
 
   ;; Refile targets
   (setq org-refile-targets
-        '(("~/Dropbox/org/inbox.org" :maxlevel . 1)
-          ("~/Dropbox/org/gtd.org" :maxlevel . 1)
-          ("~/Dropbox/org/tickler.org" :maxlevel . 1)
-          ("~/Dropbox/org/work.org" :maxlevel . 1)
-          ("~/Dropbox/org/org.org" :maxlevel . 1)
-          ("~/Dropbox/org/retro.org" :maxlevel . 1)
+        '(("~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/inbox.org" :maxlevel . 1)
+          ("~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/gtd.org" :maxlevel . 1)
+          ("~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/tickler.org" :maxlevel . 1)
+          ("~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/work.org" :maxlevel . 1)
+          ("~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/org.org" :maxlevel . 1)
+          ("~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/retro.org" :maxlevel . 1)
           ))
 
   ;; org-capture template
   (setq org-capture-templates '(("t" "Todo [inbox]" entry
-                                 (file+headline "~/Dropbox/org/inbox.org" "Tasks")
+                                 (file+headline "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/inbox.org" "Tasks")
                                  "* TODO %i%?")
                                 ("T" "Tickler" entry
-                                 (file+headline "~/Dropbox/org/tickler.org" "Tickler")
+                                 (file+headline "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/tickler.org" "Tickler")
                                  "* %i%? \n %U")
                                 )))
 
@@ -423,6 +420,9 @@ you should place your code here."
 ;; clojure
   (add-to-list 'auto-mode-alist '("\\.clj\\'" . clojure-mode))
 
+;; was getting error 'the lein executable isn't on your exec path' launching cider repl
+  (add-to-list 'exec-path "/usr/local/bin")
+
   ;; https://github.com/clojure-emacs/cider/issues/2284 Attempting to fix desync
   ;; of refactor-nrepl and CIDER version differences
 ;; Commenting out because nrepl is broke as hell on this machine for some reason
@@ -440,7 +440,7 @@ you should place your code here."
  '(evil-want-Y-yank-to-eol nil)
  '(org-agenda-files
    (quote
-    ("~/Dropbox/org/org.org" "~/Dropbox/org/daily_planner.org" "~/Dropbox/org/inbox.org" "~/Dropbox/org/denver.org" "~/Dropbox/org/cal.org")))
+    ("~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/org.org" "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/daily_planner.org" "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/inbox.org" "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/denver.org" "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/cal.org")))
  '(package-selected-packages
    (quote
     (powerline smartparens org-category-capture alert log4e gntp org-plus-contrib markdown-mode magit-popup magit skewer-mode simple-httpd json-snatcher json-reformat js2-mode hydra parent-mode projectile request haml-mode gitignore-mode flyspell-correct pos-tip flycheck flx highlight transient git-commit with-editor goto-chg f web-completion-data s dash-functional tern dash company multiple-cursors paredit peg lv eval-sexp-fu cider sesman pkg-info parseedn clojure-mode parseclj a epl bind-map bind-key yasnippet packed helm avy helm-core async auto-complete popup org-journal xterm-color shell-pop multi-term git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter eshell-z eshell-prompt-extras esh-help diff-hl define-word yaml-mode ws-butler winum which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org tagedit sql-indent spaceline smeargle slim-mode scss-mode sass-mode rjsx-mode reveal-in-osx-finder restart-emacs rainbow-delimiters pug-mode popwin persp-mode persistent-scratch pcre2el pbcopy paradox osx-trash osx-dictionary orgit org-projectile org-present org-pomodoro org-mime org-download org-bullets open-junk-file neotree mwim move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint launchctl json-mode js2-refactor js-doc indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu emmet-mode elisp-slime-nav dumb-jump diminish company-web company-tern company-statistics column-enforce-mode coffee-mode clojure-snippets clj-refactor clean-aindent-mode cider-eval-sexp-fu auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
