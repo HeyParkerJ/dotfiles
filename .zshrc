@@ -111,3 +111,8 @@ source ~/.bashrc
 # Example aliases
 alias zshconfig="vim ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
+export PATH="/usr/local/sbin:$PATH"
+
+# ll after cd
+#chpwd() ll
+# was doing it twice

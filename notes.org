@@ -54,5 +54,7 @@ rm -rf fonts
   - install tldr
     npm install -g tldr
 
+- brew install the_silver_searcher
+- brew install leiningen
     
     
