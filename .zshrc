@@ -82,6 +82,7 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 source ~/.bash_aliases
 source ~/.bashrc
+source ~/dotfiles/private/.secrets
 
 # User configuration
 

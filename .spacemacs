@@ -59,6 +59,7 @@ Activated layers, additional packages, excluded packages, etc"
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
                                       org-journal
+                                      org-gcal
                                       persistent-scratch
                                       rjsx-mode
                                       )
@@ -113,6 +114,7 @@ etc..."
    ;; (default 'vim)
    dotspacemacs-editing-style 'vim
    ;; If non nil output loading progress in `*Messages*' buffer. (default nil)
+   dotspacemacs-mode-line-theme 'spacemacs
    dotspacemacs-verbose-loading nil
    ;; Specify the startup banner. Default value is `official', it displays
    ;; the official spacemacs logo. An integer value is the index of text
@@ -380,7 +382,7 @@ you should place your code here."
                            "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/inbox.org"
                            "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/tickler.org"
                            "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/org.org"
-                           "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/cal.org"
+                           "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/gcal.org"
   ;;                         "~/Dropbox/org/habits.nomobile"
                            ))
 
@@ -401,7 +403,9 @@ you should place your code here."
                                  "* %i%? \n %U")
                                 ("S" "Someday" entry
                                  (file+headline "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/someday.org" "Someday")
-                                 "* %i%? \n %U"))))
+                                 "* %i%? \n %U")
+                                ("a" "Appointment" entry (file "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/gcal.org" )
+                                 "* %?\n\n%^T\n\n:PROPERTIES:\n\n:END:\n\n"))))
 
   ;; Org TO DO keywords
   (setq org-todo-keywords
@@ -415,6 +419,12 @@ you should place your code here."
   (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
 
 ;; gcal
+(setq org-gcal-client-id (getenv "ORG_GCAL_CLIENT_ID")
+    org-gcal-client-secret (getenv "ORG_GCAL_CLIENT_SECRET")
+    org-gcal-file-alist '(((getenv "ORG_GCAL_EMAIL_ID") .  "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/gcal.org")))
+
+(add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
+(add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))
 
 ;; clojure
   (add-to-list 'auto-mode-alist '("\\.clj\\'" . clojure-mode))
@@ -439,7 +449,7 @@ you should place your code here."
  '(evil-want-Y-yank-to-eol nil)
  '(org-agenda-files
    (quote
-    ("~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/org.org" "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/inbox.org" "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/cal.org")))
+    ("~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/org.org" "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/inbox.org" "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/gcal.org")))
  '(package-selected-packages
    (quote
     (powerline smartparens org-category-capture alert log4e gntp org-plus-contrib markdown-mode magit-popup magit skewer-mode simple-httpd json-snatcher json-reformat js2-mode hydra parent-mode projectile request haml-mode gitignore-mode flyspell-correct pos-tip flycheck flx highlight transient git-commit with-editor goto-chg f web-completion-data s dash-functional tern dash company multiple-cursors paredit peg lv eval-sexp-fu cider sesman pkg-info parseedn clojure-mode parseclj a epl bind-map bind-key yasnippet packed helm avy helm-core async auto-complete popup org-journal xterm-color shell-pop multi-term git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter eshell-z eshell-prompt-extras esh-help diff-hl define-word yaml-mode ws-butler winum which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org tagedit sql-indent spaceline smeargle slim-mode scss-mode sass-mode rjsx-mode reveal-in-osx-finder restart-emacs rainbow-delimiters pug-mode popwin persp-mode persistent-scratch pcre2el pbcopy paradox osx-trash osx-dictionary orgit org-projectile org-present org-pomodoro org-mime org-download org-bullets open-junk-file neotree mwim move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint launchctl json-mode js2-refactor js-doc indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu emmet-mode elisp-slime-nav dumb-jump diminish company-web company-tern company-statistics column-enforce-mode coffee-mode clojure-snippets clj-refactor clean-aindent-mode cider-eval-sexp-fu auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
@@ -462,7 +472,7 @@ This function is called at the very end of Spacemacs initialization."
  '(evil-want-Y-yank-to-eol nil)
  '(org-agenda-files
    (quote
-    ("~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/inbox.org" "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/tickler.org" "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/org.org" "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/cal.org")))
+    ("~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/inbox.org" "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/tickler.org" "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/org.org")))
  '(package-selected-packages
    (quote
     (powerline smartparens org-category-capture alert log4e gntp org-plus-contrib markdown-mode magit-popup magit skewer-mode simple-httpd json-snatcher json-reformat js2-mode hydra parent-mode projectile request haml-mode gitignore-mode flyspell-correct pos-tip flycheck flx highlight transient git-commit with-editor goto-chg f web-completion-data s dash-functional tern dash company multiple-cursors paredit peg lv eval-sexp-fu cider sesman pkg-info parseedn clojure-mode parseclj a epl bind-map bind-key yasnippet packed helm avy helm-core async auto-complete popup org-journal xterm-color shell-pop multi-term git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter eshell-z eshell-prompt-extras esh-help diff-hl define-word yaml-mode ws-butler winum which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org tagedit sql-indent spaceline smeargle slim-mode scss-mode sass-mode rjsx-mode reveal-in-osx-finder restart-emacs rainbow-delimiters pug-mode popwin persp-mode persistent-scratch pcre2el pbcopy paradox osx-trash osx-dictionary orgit org-projectile org-present org-pomodoro org-mime org-download org-bullets open-junk-file neotree mwim move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint launchctl json-mode js2-refactor js-doc indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu emmet-mode elisp-slime-nav dumb-jump diminish company-web company-tern company-statistics column-enforce-mode coffee-mode clojure-snippets clj-refactor clean-aindent-mode cider-eval-sexp-fu auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
