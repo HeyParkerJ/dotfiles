@@ -404,6 +404,8 @@ export PATH=$PATH:$ACTIVEMQ_HOME/bin:$JAVA_HOME
  # new global node folder setup to keep this separated from other installation folders
  # https://stackoverflow.com/a/40905762
  # export PATH="~/.npm-global/bin:$PATH"
-export PATH="/usr/local/sbin:$PATH"
+export PATH="/Users/parker.johnson/.npm-global/bin:/usr/local/sbin:$PATH"
+
+# 09/04/2019 - I don't think this is being used in my current setup...
 
 
