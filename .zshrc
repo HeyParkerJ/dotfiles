@@ -111,8 +111,6 @@ source ~/.bashrc
 # Example aliases
 alias zshconfig="vim ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
-export PATH="/usr/local/sbin:$PATH"
 
-# ll after cd
-#chpwd() ll
-# was doing it twice
+#the .npm-global thing is because I set up npm in a different way on my new work machine 09/04/2019
+export PATH="/Users/parker.johnson/.npm-global/bin:/usr/local/sbin:$PATH"
