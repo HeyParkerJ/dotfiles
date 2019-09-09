@@ -409,7 +409,7 @@ you should place your code here."
 
   ;; Org TO DO keywords
   (setq org-todo-keywords
-        '((sequence "TODO(t)" "IN-PROGRESS(p!)" "WAITING(w@)" "|" "DONE(d!)" "CANCELLED(c@)")))
+        '((sequence "TODO(t)" "PRIORITY(P)" "IN-PROGRESS(p!)" "WAITING(w@)" "|" "DONE(d!)" "CANCELLED(c@)")))
 
 ;; set up nomobile org files
 ;; (add-to-list 'auto-mode-alist '("\\.nomobile\\'" . org-mode))
