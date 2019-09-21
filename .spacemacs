@@ -336,6 +336,10 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
+  ;; Setting this to try to improve file syncing between mobile and desktop editing of org files
+  ;; https://stackoverflow.com/questions/1480572/how-to-have-emacs-auto-refresh-all-buffers-when-files-have-changed-on-disk
+  (global-auto-revert-mode t)
+
 ;; MELPA
   (require 'package)
   (require 'use-package)
