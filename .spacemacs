@@ -37,11 +37,16 @@ Activated layers, additional packages, excluded packages, etc"
      yaml
      clojure
      html
-     javascript
+     (javascript :variables
+                 javascript-backend 'tern
+                 javascript-fmt-tool 'prettier
+                 ;;javascript-repl 'skewer
+                 ;;javascript-repl 'nodejs
+                 )
      osx
      markdown
      helm
-     auto-completion
+     company
      better-defaults
      emacs-lisp
      git
@@ -53,6 +58,8 @@ Activated layers, additional packages, excluded packages, etc"
      syntax-checking
      version-control
      groovy
+     slack
+     spotify
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
