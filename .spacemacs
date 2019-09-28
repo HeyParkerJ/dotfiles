@@ -373,6 +373,9 @@ you should place your code here."
   (persistent-scratch-autosave-mode 1)
 
 ;; Org
+  ;; Save every 30s of inactivity
+  (add-hook 'auto-save-hook 'org-save-all-org-buffers)
+
   ;; open agenda on startup
   (org-agenda-list)
   (switch-to-buffer "*Org Agenda*")
