@@ -65,7 +65,6 @@ Activated layers, additional packages, excluded packages, etc"
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
-                                      org-journal
                                       org-gcal
                                       persistent-scratch
                                       rjsx-mode
