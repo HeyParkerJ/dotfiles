@@ -46,7 +46,6 @@ Activated layers, additional packages, excluded packages, etc"
      osx
      markdown
      helm
-     company
      better-defaults
      emacs-lisp
      git
