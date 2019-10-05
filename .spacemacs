@@ -38,11 +38,14 @@ Activated layers, additional packages, excluded packages, etc"
      clojure
      html
      (javascript :variables
-                 javascript-backend 'tern
-                 javascript-fmt-tool 'prettier
+                 javascript-backend 'lsp
+                 ;;javascript-fmt-tool 'prettier
                  ;;javascript-repl 'skewer
                  ;;javascript-repl 'nodejs
                  )
+     lsp
+     html
+     react
      osx
      markdown
      helm
@@ -335,6 +338,29 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
+  ;; System information
+  (defun my/laptop-p ()
+    (equal (system-name) "Parkers-MBP"))
+  (defun my/server-p ()
+    (and (equal (system-name) "localhost") (equal user-login-name "parker")))
+
+  ;; Personal information
+  (setq user-full-name "Parker Johnson"
+        user-mail-address "parkerjohnsonwebdev@gmail.com")
+
+  ;; Secrets loading. Not set up now but this is how to do it.
+  ;; (load ~/dotfiles/.emacs.secrets t)
+
+  ;; Backups. C-x C-f (find-file) should help sort through these if needed.
+  ;; Should investigate if Spacemacs handles this already at all.
+  (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+
+  ;; "Disk space is cheap. Save lots" - Sacha Chua
+  (setq delete-old-versions -1)
+  (setq version-control t)
+  (setq vc-make-backup-files t)
+  (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
+
   ;; Setting this to try to improve file syncing between mobile
   ;; https://stackoverflow.com/questions/1480572/how-to-have-emacs-auto-refresh-all-buffers-when-files-have-changed-on-disk
   (global-auto-revert-mode t)
@@ -355,10 +381,6 @@ you should place your code here."
   (package-initialize)
 
 ;; Themes
-  ;; doom
-;;  (add-to-list 'load-path "~/Documents/emacs-doom-themes/")
-;;  (require 'doom-themes)
-
   ;; nimbus needed this line on personal machine for some reason
   (load-theme 'nimbus t)
 
@@ -429,12 +451,6 @@ you should place your code here."
   (setq org-todo-keywords
         '((sequence "TODO(t)" "PRIORITY(P)" "IN-PROGRESS(p!)" "WAITING(w@)" "|" "DONE(d!)" "CANCELLED(c@)")))
 
-;; set up nomobile org files
-;; (add-to-list 'auto-mode-alist '("\\.nomobile\\'" . org-mode))
-
-;; auto-mode-alist
-  ;; auto set major mode for specific file type
-  (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
 
 ;; gcal
 (setq org-gcal-client-id (getenv "ORG_GCAL_CLIENT_ID")
