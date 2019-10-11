@@ -366,6 +366,9 @@ you should place your code here."
   ;; Set time in modeline
   (display-time-mode 1)
 
+  ;; Too lazy to type 'no'
+  (fset 'yes-or-no-p 'y-or-n-p)
+
   ;; Setting this to try to improve file syncing between mobile
   ;; https://stackoverflow.com/questions/1480572/how-to-have-emacs-auto-refresh-all-buffers-when-files-have-changed-on-disk
   (global-auto-revert-mode t)
