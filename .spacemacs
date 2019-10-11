@@ -32,7 +32,7 @@ Activated layers, additional packages, excluded packages, etc"
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(typescript
      sql
      yaml
      clojure
@@ -62,6 +62,7 @@ Activated layers, additional packages, excluded packages, etc"
      groovy
      slack
      spotify
+     emoji
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -71,6 +72,7 @@ Activated layers, additional packages, excluded packages, etc"
                                       org-gcal
                                       persistent-scratch
                                       rjsx-mode
+                                      graphql-mode
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -361,6 +363,9 @@ you should place your code here."
   (setq vc-make-backup-files t)
   (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
 
+  ;; Set time in modeline
+  (display-time-mode 1)
+
   ;; Setting this to try to improve file syncing between mobile
   ;; https://stackoverflow.com/questions/1480572/how-to-have-emacs-auto-refresh-all-buffers-when-files-have-changed-on-disk
   (global-auto-revert-mode t)
@@ -510,14 +515,10 @@ This function is called at the very end of Spacemacs initialization."
  '(evil-want-Y-yank-to-eol nil)
  '(org-agenda-files
    (quote
-    ("~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/org.org"
-     "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/inbox.org"
-     "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/gcal.org"
-     "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/work.org"
-     )))
+    ("~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/org.org" "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/inbox.org" "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/gcal.org" "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/work.org")))
  '(package-selected-packages
    (quote
-    (groovy-mode groovy-imports pcache powerline smartparens org-category-capture alert log4e gntp org-plus-contrib markdown-mode magit-popup magit skewer-mode simple-httpd json-snatcher json-reformat js2-mode hydra parent-mode projectile request haml-mode gitignore-mode flyspell-correct pos-tip flycheck flx highlight transient git-commit with-editor goto-chg f web-completion-data s dash-functional tern dash company multiple-cursors paredit peg lv eval-sexp-fu cider sesman pkg-info parseedn clojure-mode parseclj a epl bind-map bind-key yasnippet packed helm avy helm-core async auto-complete popup org-journal xterm-color shell-pop multi-term git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter eshell-z eshell-prompt-extras esh-help diff-hl define-word yaml-mode ws-butler winum which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org tagedit sql-indent spaceline smeargle slim-mode scss-mode sass-mode rjsx-mode reveal-in-osx-finder restart-emacs rainbow-delimiters pug-mode popwin persp-mode persistent-scratch pcre2el pbcopy paradox osx-trash osx-dictionary orgit org-projectile org-present org-pomodoro org-mime org-download org-bullets open-junk-file neotree mwim move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint launchctl json-mode js2-refactor js-doc indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu emmet-mode elisp-slime-nav dumb-jump diminish company-web company-tern company-statistics column-enforce-mode coffee-mode clojure-snippets clj-refactor clean-aindent-mode cider-eval-sexp-fu auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
+    (tide typescript-mode import-js grizzl add-node-modules-path powerline smartparens org-category-capture alert log4e gntp org-plus-contrib markdown-mode magit-popup magit skewer-mode simple-httpd json-snatcher json-reformat js2-mode hydra parent-mode projectile request haml-mode gitignore-mode flyspell-correct pos-tip flycheck flx highlight transient git-commit with-editor goto-chg f web-completion-data s dash-functional tern dash company multiple-cursors paredit peg lv eval-sexp-fu cider sesman pkg-info parseedn clojure-mode parseclj a epl bind-map bind-key yasnippet packed helm avy helm-core async auto-complete popup org-journal xterm-color shell-pop multi-term git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter eshell-z eshell-prompt-extras esh-help diff-hl define-word yaml-mode ws-butler winum which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org tagedit sql-indent spaceline smeargle slim-mode scss-mode sass-mode rjsx-mode reveal-in-osx-finder restart-emacs rainbow-delimiters pug-mode popwin persp-mode persistent-scratch pcre2el pbcopy paradox osx-trash osx-dictionary orgit org-projectile org-present org-pomodoro org-mime org-download org-bullets open-junk-file neotree mwim move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint launchctl json-mode js2-refactor js-doc indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu emmet-mode elisp-slime-nav dumb-jump diminish company-web company-tern company-statistics column-enforce-mode coffee-mode clojure-snippets clj-refactor clean-aindent-mode cider-eval-sexp-fu auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
