@@ -38,7 +38,7 @@ Activated layers, additional packages, excluded packages, etc"
      clojure
      html
      (javascript :variables
-                 javascript-backend 'lsp
+                 ;;javascript-backend 'lsp
                  ;;javascript-fmt-tool 'prettier
                  ;;javascript-repl 'skewer
                  ;;javascript-repl 'nodejs
@@ -71,6 +71,8 @@ Activated layers, additional packages, excluded packages, etc"
                                       org-gcal
                                       persistent-scratch
                                       rjsx-mode
+                                      org-tree-slide
+                                      ox-reveal
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -328,7 +330,7 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  )
+)
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
@@ -338,9 +340,17 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
+  ;; Temp stuff that I'm just trying and should be moved down or removed entirely once that decision is obvious
+  (with-eval-after-load "org-tree-slide"
+    (define-key org-tree-slide-mode-map (kbd "H-M-,") 'org-tree-slide-move-previous-tree)
+    (define-key org-tree-slide-mode-map (kbd "H-M-.") 'org-tree-slide-move-next-tree)
+    )
+
   ;; System information
   (defun my/laptop-p ()
     (equal (system-name) "Parkers-MBP"))
+  (defun my/work-laptop-p ()
+    (equal (system-name) "m-pjohnson2"))
   (defun my/server-p ()
     (and (equal (system-name) "localhost") (equal user-login-name "parker")))
 
@@ -350,6 +360,10 @@ you should place your code here."
 
   ;; Secrets loading. Not set up now but this is how to do it.
   ;; (load ~/dotfiles/.emacs.secrets t)
+
+  ;; As per javascript layer readme - add this if your global node modules is in a non-standard location
+  (if (my/work-laptop-p)
+      (add-to-list 'exec-path "/Users/parker.johnson/.npm-global/bin" t))
 
   ;; Backups. C-x C-f (find-file) should help sort through these if needed.
   ;; Should investigate if Spacemacs handles this already at all.
@@ -413,39 +427,49 @@ you should place your code here."
 
   ;; ~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org
   ;; Assign agenda files
-  (setq org-agenda-files '(
-                           "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/inbox.org"
-                           "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/work.org"
-                           "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/nosync/tickler.org"
-                           "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/org.org"
-                           "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/gcal.org"
-                           ))
+  (if (my/work-laptop-p)
+      (setq org-agenda-files '("~/org/work.org"))
+    (setq org-agenda-files '("~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/inbox.org"
+                             "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/work.org"
+                             "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/nosync/tickler.org"
+                             "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/org.org"
+                             "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/gcal.org")))
 
   ;; Refile targets
-  (setq org-refile-targets
-        '(("~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/inbox.org" :maxlevel . 1)
-          ("~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/nosync/tickler.org" :maxlevel . 1)
-          ("~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/work.org" :maxlevel . 1)
-          ("~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/org.org" :maxlevel . 1)
-          ))
+  ;;(setq org-refile-targets
+  ;;      '(("~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/inbox.org" :maxlevel . 1)
+  ;;        ("~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/nosync/tickler.org" :maxlevel . 1)
+  ;;        ("~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/work.org" :maxlevel . 1)
+  ;;        ("~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/org.org" :maxlevel . 1)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Source Code Pro" :foundry "nil" :slant normal :weight normal :height 130 :width normal)))))
 
   ;; org-capture template
-  (setq org-capture-templates '(("t" "Todo [inbox]" entry
-                                 (file+headline "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/inbox.org" "Tasks")
-                                 "* TODO %i%?")
-                                ("w" "Todo work [work]" entry
-                                 (file+headline "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/work.org" "Tasks")
-                                 "* TODO %i%?")
-                                ("T" "Tickler" entry
-                                 (file+headline "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/nosync/tickler.org" "Tickler")
-                                 "* %i%? \n %U")
-                                ("S" "Someday" entry
-                                 (file+headline "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/nosync/someday.org" "Someday")
-                                 "* %i%? \n %U")
-                                ("a" "Appointment" entry (file "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/gcal.org" )
-                                 "* %?\n\n%^T\n\n:PROPERTIES:\n\n:END:\n\n")
-                                ("j" "Journal" entry (file+olp+datetree "~/org/journal.org")
-                                 "** %<%H:%M> %?\n"))))
+  (if (my/work-laptop-p)
+    (setq org-capture-templates '(("t" "Todo [inbox]" entry
+                                   (file+headline "~/org/inbox.org" "Tasks")
+                                   "* TODO %i%?")
+                                  ("w" "Todo work [work]" entry
+                                   (file+headline "~/org/work.org" "Tasks")
+                                   "* TODO %i%?")
+                                   ))
+    (setq org-capture-templates '(("t" "Todo [inbox]" entry
+                                   (file+headline "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/inbox.org" "Tasks")
+                                  ("T" "Tickler" entry
+                                   (file+headline "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/nosync/tickler.org" "Tickler")
+                                   "* %i%? \n %U")
+                                  ("S" "Someday" entry
+                                   (file+headline "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/nosync/someday.org" "Someday")
+                                   "* %i%? \n %U")
+                                  ("a" "Appointment" entry (file "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/gcal.org" )
+                                   "* %?\n\n%^T\n\n:PROPERTIES:\n\n:END:\n\n")
+                                  ("j" "Journal" entry (file+olp+datetree "~/org/journal.org")
+                                   "** %<%H:%M> %?\n")))
+    ))
 
   ;; Org TO DO keywords
   (setq org-todo-keywords
@@ -471,7 +495,7 @@ you should place your code here."
 ;; Commenting out because nrepl is broke as hell on this machine for some reason
 ;; could not locate nrepl/middleware/pr_values_init.class
   ;; (setq cljr-inject-dependencies-at-jack-in nil)
-
+)
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -481,13 +505,6 @@ you should place your code here."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(evil-want-Y-yank-to-eol nil)
- '(org-agenda-files
-   (quote
-    ("~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/org.org"
-     "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/inbox.org"
-     "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/gcal.org"
-     "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/work.org"
-     )))
  '(package-selected-packages
    (quote
     (powerline smartparens org-category-capture alert log4e gntp org-plus-contrib markdown-mode magit-popup magit skewer-mode simple-httpd json-snatcher json-reformat js2-mode hydra parent-mode projectile request haml-mode gitignore-mode flyspell-correct pos-tip flycheck flx highlight transient git-commit with-editor goto-chg f web-completion-data s dash-functional tern dash company multiple-cursors paredit peg lv eval-sexp-fu cider sesman pkg-info parseedn clojure-mode parseclj a epl bind-map bind-key yasnippet packed helm avy helm-core async auto-complete popup org-journal xterm-color shell-pop multi-term git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter eshell-z eshell-prompt-extras esh-help diff-hl define-word yaml-mode ws-butler winum which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org tagedit sql-indent spaceline smeargle slim-mode scss-mode sass-mode rjsx-mode reveal-in-osx-finder restart-emacs rainbow-delimiters pug-mode popwin persp-mode persistent-scratch pcre2el pbcopy paradox osx-trash osx-dictionary orgit org-projectile org-present org-pomodoro org-mime org-download org-bullets open-junk-file neotree mwim move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint launchctl json-mode js2-refactor js-doc indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu emmet-mode elisp-slime-nav dumb-jump diminish company-web company-tern company-statistics column-enforce-mode coffee-mode clojure-snippets clj-refactor clean-aindent-mode cider-eval-sexp-fu auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
@@ -508,16 +525,9 @@ This function is called at the very end of Spacemacs initialization."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(evil-want-Y-yank-to-eol nil)
- '(org-agenda-files
-   (quote
-    ("~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/org.org"
-     "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/inbox.org"
-     "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/gcal.org"
-     "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/work.org"
-     )))
  '(package-selected-packages
    (quote
-    (groovy-mode groovy-imports pcache powerline smartparens org-category-capture alert log4e gntp org-plus-contrib markdown-mode magit-popup magit skewer-mode simple-httpd json-snatcher json-reformat js2-mode hydra parent-mode projectile request haml-mode gitignore-mode flyspell-correct pos-tip flycheck flx highlight transient git-commit with-editor goto-chg f web-completion-data s dash-functional tern dash company multiple-cursors paredit peg lv eval-sexp-fu cider sesman pkg-info parseedn clojure-mode parseclj a epl bind-map bind-key yasnippet packed helm avy helm-core async auto-complete popup org-journal xterm-color shell-pop multi-term git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter eshell-z eshell-prompt-extras esh-help diff-hl define-word yaml-mode ws-butler winum which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org tagedit sql-indent spaceline smeargle slim-mode scss-mode sass-mode rjsx-mode reveal-in-osx-finder restart-emacs rainbow-delimiters pug-mode popwin persp-mode persistent-scratch pcre2el pbcopy paradox osx-trash osx-dictionary orgit org-projectile org-present org-pomodoro org-mime org-download org-bullets open-junk-file neotree mwim move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint launchctl json-mode js2-refactor js-doc indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu emmet-mode elisp-slime-nav dumb-jump diminish company-web company-tern company-statistics column-enforce-mode coffee-mode clojure-snippets clj-refactor clean-aindent-mode cider-eval-sexp-fu auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
+    (ox-reveal powerline smartparens org-category-capture alert log4e gntp org-plus-contrib markdown-mode magit-popup magit skewer-mode simple-httpd json-snatcher json-reformat js2-mode hydra parent-mode projectile request haml-mode gitignore-mode flyspell-correct pos-tip flycheck flx highlight transient git-commit with-editor goto-chg f web-completion-data s dash-functional tern dash company multiple-cursors paredit peg lv eval-sexp-fu cider sesman pkg-info parseedn clojure-mode parseclj a epl bind-map bind-key yasnippet packed helm avy helm-core async auto-complete popup org-journal xterm-color shell-pop multi-term git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter eshell-z eshell-prompt-extras esh-help diff-hl define-word yaml-mode ws-butler winum which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org tagedit sql-indent spaceline smeargle slim-mode scss-mode sass-mode rjsx-mode reveal-in-osx-finder restart-emacs rainbow-delimiters pug-mode popwin persp-mode persistent-scratch pcre2el pbcopy paradox osx-trash osx-dictionary orgit org-projectile org-present org-pomodoro org-mime org-download org-bullets open-junk-file neotree mwim move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint launchctl json-mode js2-refactor js-doc indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu emmet-mode elisp-slime-nav dumb-jump diminish company-web company-tern company-statistics column-enforce-mode coffee-mode clojure-snippets clj-refactor clean-aindent-mode cider-eval-sexp-fu auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -525,3 +535,4 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Source Code Pro" :foundry "nil" :slant normal :weight normal :height 130 :width normal)))))
 )
+
