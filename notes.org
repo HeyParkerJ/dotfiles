@@ -16,6 +16,9 @@ rm -rf fonts
 * Other things:
   - install iterm
   - install zsh
+  - install vim-plug
+    - https://github.com/junegunn/vim-plug
+  - git config --global --edit
   - install homebrew
   - install npm 
     - use node website installation (if the below SET UP GLOBAL FOLDER part breaks, use brew isntead)

@@ -352,7 +352,7 @@ you should place your code here."
   (defun my/laptop-p ()
     (equal (system-name) "Parkers-MBP"))
   (defun my/work-laptop-p ()
-    (equal (system-name) "m-pjohnson2"))
+    (equal (system-name) "m-pjohnson"))
   (defun my/server-p ()
     (and (equal (system-name) "localhost") (equal user-login-name "parker")))
 
