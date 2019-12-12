@@ -16,6 +16,9 @@ rm -rf fonts
   - install iterm
   - install zsh
   - import iterm profiles from config-backups
+  - install vim-plug
+    - https://github.com/junegunn/vim-plug
+  - git config --global --edit
   - install homebrew
   - install nvm
   - install npm/node
