@@ -1,4 +1,3 @@
-* TODO Write symlinking script
 * TODO Write script to install fonts
 ```
 # if still using Roboto Mono Medium for Powerline
@@ -16,13 +15,12 @@ rm -rf fonts
 * Other things:
   - install iterm
   - install zsh
+  - import iterm profiles from config-backups
   - install homebrew
-  - install npm 
-    - use node website installation (if the below SET UP GLOBAL FOLDER part breaks, use brew isntead)
-      - SET UP 
-        - mkdir ~/.npm-global
-        - npm config set prefix '~/.npm-global'
-        - (path addition is set in ~/dotfiles/.bash_profile)
+  - install nvm
+  - install npm/node
+    # nvm install node
+  - run symlinking setup script
   - Chrome bookmarking strategy
   - install emacs-mac via homebrew and spacemacs from git
   ```
