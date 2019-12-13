@@ -1,17 +1,17 @@
 * TODO Write symlinking script
 * TODO Write script to install fonts
-```
-# if still using Roboto Mono Medium for Powerline
-# https://github.com/powerline/fonts
-# clone
-git clone https://github.com/powerline/fonts.git --depth=1
-# install
-cd fonts
-./install.sh
-# clean-up a bit
-cd ..
-rm -rf fonts
-```
+  ```
+  # if still using Roboto Mono Medium for Powerline
+  # https://github.com/powerline/fonts
+  # clone
+  git clone https://github.com/powerline/fonts.git --depth=1
+  # install
+  cd fonts
+  ./install.sh
+  # clean-up a bit
+  cd ..
+  rm -rf fonts
+  ```
 * TODO Figure out how to automate the ~/.vim/ instalation (with plug, :PlugInstall)
 * Other things:
   - install iterm

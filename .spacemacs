@@ -38,7 +38,7 @@ Activated layers, additional packages, excluded packages, etc"
      clojure
      html
      (javascript :variables
-                 ;;javascript-backend 'lsp
+                 javascript-backend 'tern
                  ;;javascript-fmt-tool 'prettier
                  ;;javascript-repl 'skewer
                  ;;javascript-repl 'nodejs
@@ -347,6 +347,9 @@ you should place your code here."
     (define-key org-tree-slide-mode-map (kbd "H-M-,") 'org-tree-slide-move-previous-tree)
     (define-key org-tree-slide-mode-map (kbd "H-M-.") 'org-tree-slide-move-next-tree)
     )
+
+  ;; Combines with modified code in flychceck.el to add this arg when flycheck runs flycheck-eslint-config-exists-p. Enables global eslint configs to be found on flycheck setup - which was causing issues starting flycheck.
+  (setq-default flycheck-eslint-args '("--resolve-plugins-relative-to" "/Users/parker.johnson/.nvm/versions/node/v13.3.0/lib/node_modules"))
 
   ;; System information
   (defun my/laptop-p ()
