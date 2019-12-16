@@ -70,7 +70,6 @@ Activated layers, additional packages, excluded packages, etc"
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
-                                      ;; org-gcal
                                       persistent-scratch
                                       rjsx-mode
                                       org-tree-slide
@@ -429,8 +428,7 @@ you should place your code here."
   ;; ~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org
   ;; Assign agenda files
   (setq org-agenda-files
-        '("~/org/work.org")
-        '("~/org/inbox.org"))
+        '("~/org/work.org" "~/org/inbox.org"))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -492,6 +490,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(org-agenda-files (quote ("~/org/work.org" "~/org/inbox.org")))
  '(evil-want-Y-yank-to-eol nil)
  '(package-selected-packages
    (quote
