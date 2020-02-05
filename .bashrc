@@ -10,3 +10,7 @@ export GERONIMO_HOME="/usr/local/geronimo-master-2.1.7/src/main/fakeroot/opt/ger
 # commenting these paths out because it's already in my bash_profile and emacs is complaining about it being declared here
 #export PATH=$ACTIVEMQ_HOME/bin:$JAVA_HOME:$PATH
 # source /Users/parker.johnson/perl5/perlbrew/etc/bashrc
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
