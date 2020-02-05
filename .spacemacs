@@ -379,7 +379,7 @@ you should place your code here."
   (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
 
   ;; Set time in modeline
-  (display-time-mode 1)
+  (load "~/.emacs.d/settings.el" t)
 
   ;; Too lazy to type 'no'
   (fset 'yes-or-no-p 'y-or-n-p)

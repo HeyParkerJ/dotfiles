@@ -1,5 +1,5 @@
 * TODO Write script to install fonts
-```
+  ```
 # if still using Roboto Mono Medium for Powerline
 # https://github.com/powerline/fonts
 # clone
