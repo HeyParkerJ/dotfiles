@@ -114,4 +114,6 @@ alias zshconfig="vim ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
 
 #the .npm-global thing is because I set up npm in a different way on my new work machine 09/04/2019
-export PATH="/Users/parker.johnson/.npm-global/bin:/usr/local/sbin:$PATH"
+#export PATH="/Users/parker.johnson/.npm-global/bin:/usr/local/sbin:$PATH"
+
+echo "SOURCED - .zshrc"
