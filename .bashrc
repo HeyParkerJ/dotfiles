@@ -1,6 +1,7 @@
 export PGDATA="/Library/PostgreSQL/9.6/data"
 
-export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home"
+#export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home"
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk-13.0.2.jdk/Contents/Home"
 export JRE_HOME=$JAVA_HOME/jre
 export ACTIVEMQ_HOME="/usr/local/apache-activemq-5.15.0"
 #export GERONIMO_HOME="/usr/local/geronimo-tomcat7-javaee6-3.0.1/"
