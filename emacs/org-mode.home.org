@@ -1,0 +1,35 @@
+#+begin_src emacs-lisp
+  (setq org-agenda-files '("~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/inbox.org"
+                           "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/work.org"
+                           "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/nosync/tickler.org"
+                           "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/org.org"
+                           "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/gcal.org"))
+
+  (setq org-capture-templates '(("t" "Todo [inbox]" entry
+                                 (file+headline "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/inbox.org" "Tasks")
+                                 ("T" "Tickler" entry
+                                  (file+headline "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/nosync/tickler.org" "Tickler")
+                                  "* %i%? \n %U")
+                                 ("S" "Someday" entry
+                                  (file+headline "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/nosync/someday.org" "Someday")
+                                  "* %i%? \n %U")
+                                 ("a" "Appointment" entry (file "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/gcal.org" )
+                                  "* %?\n\n%^T\n\n:PROPERTIES:\n\n:END:\n\n")
+                                 ("j" "Journal" entry (file+olp+datetree "~/org/journal.org")
+                                  "** %<%H:%M> %?\n")))
+        )
+#+end_src
+
+
+gcal
+
+#+begin_src emacs-lisp
+  (setq org-gcal-client-id (getenv "ORG_GCAL_CLIENT_ID")
+        org-gcal-client-secret (getenv "ORG_GCAL_CLIENT_SECRET")
+        org-gcal-file-alist '(((getenv "ORG_GCAL_EMAIL_ID") .  "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/gcal.org")))
+
+  (add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
+  (add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))
+#+end_src
+
+

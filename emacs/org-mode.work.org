@@ -1,0 +1,13 @@
+#+begin_src emacs-lisp
+  (setq org-capture-templates '(("t" "Todo [inbox]" entry
+                                 (file+headline "~/org/inbox.org" "Tasks")
+                                   "* TODO %i%?")
+                                   ))
+
+    #+end_src
+    
+work.org can contain todos but the majority of my tasks are created in inbox.org via capture templates
+#+begin_src emacs-lisp
+  (setq org-agenda-files
+        '("~/org/work.org" "~/org/inbox.org"))
+    #+end_src

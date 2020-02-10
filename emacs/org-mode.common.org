@@ -1,0 +1,34 @@
+Save every 30s of inactivity
+#+begin_src emacs-lisp
+  (add-hook 'auto-save-hook 'org-save-all-org-buffers)
+#+end_src
+
+Open agenda on startup
+#+begin_src emacs-lisp
+  (org-agenda-list)
+  (switch-to-buffer "*Org Agenda*")
+  (spacemacs/toggle-maximize-buffer)
+#+end_src
+
+Don't split windows when displaying agenda
+#+begin_src emacs-lisp
+  (setq org-agenda-window-setup 'current-window)
+#+end_src
+  
+Hook for toggling visual word wrap
+#+begin_src emacs-lisp
+  (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
+#+end_src
+  
+Change ellipsis
+Alt: ▼, ↴, ⬎, ⤷, ⤵, and ⋱
+#+begin_src emacs-lisp
+  (setq org-ellipsis "↴")
+#+end_src
+
+
+#+begin_src emacs-lisp
+  (setq org-todo-keywords
+        '((sequence "TODO(t)" "PRIORITY(P)" "IN-PROGRESS(p!)" "WAITING(w@)" "|" "DONE(d!)" "CANCELLED(c@)")))
+    #+end_src
+
