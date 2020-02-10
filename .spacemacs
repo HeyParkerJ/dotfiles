@@ -292,7 +292,7 @@ etc..."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers 'relative
+   dotspacemacs-line-numbers 't
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -352,16 +352,19 @@ you should place your code here."
     (define-key org-tree-slide-mode-map (kbd "H-M-.") 'org-tree-slide-move-next-tree)
     )
 
+  ;; System information
+  (defun my/laptop-p ()
+    (equal (system-name) "Parkers-MBP"))
+  (defun my/work-laptop-p ()
+    (equal (system-name) "m-pjohnson"))
   ;; Combines with modified code in flychceck.el to add this arg when flycheck runs flycheck-eslint-config-exists-p. Enables global eslint configs to be found on flycheck setup - which was causing issues starting flycheck.
   (setq-default flycheck-eslint-args '("--resolve-plugins-relative-to" "/Users/parker.johnson/.nvm/versions/node/v13.3.0/lib/node_modules"))
+>>>>>>> f74c28e6326ea4f8731085a22db31dc62bd18168
 
   ;; System information
   ;; Personal information
   (setq user-full-name "Parker Johnson"
         user-mail-address "parkerjohnsonwebdev@gmail.com")
-
-  ;; Secrets loading. Not set up now but this is how to do it.
-  ;; (load ~/dotfiles/.emacs.secrets t)
 
   ;; Backups. C-x C-f (find-file) should help sort through these if needed.
   ;; Should investigate if Spacemacs handles this already at all.
@@ -374,7 +377,7 @@ you should place your code here."
   (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
 
   ;; Set time in modeline
-  (display-time-mode 1)
+  (require 'org (org-babel-load-file (expand-file-name "~/.emacs.d/settings.org")) )
 
   ;; Too lazy to type 'no'
   (fset 'yes-or-no-p 'y-or-n-p)
@@ -410,49 +413,12 @@ you should place your code here."
   ;; persistent scratch
   (persistent-scratch-autosave-mode 1)
 
-;; Org
-  ;; Save every 30s of inactivity
-  (add-hook 'auto-save-hook 'org-save-all-org-buffers)
-
-  ;; open agenda on startup
-  (org-agenda-list)
-  (switch-to-buffer "*Org Agenda*")
-  (spacemacs/toggle-maximize-buffer)
-
-  ;; don't split windows when displaying agenda
-  (setq org-agenda-window-setup 'current-window)
-
-  ;; Hook for toggling visual word wrap
-  (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
-
-  ;; Change ellipsis
-  (setq org-ellipsis "↴")
-  ;; Alt: ▼, ↴, ⬎, ⤷, ⤵, and ⋱
-
-  ;; ~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org
-  ;; Assign agenda files
-  (setq org-agenda-files
-        '("~/org/work.org" "~/org/inbox.org"))
-
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Source Code Pro" :foundry "nil" :slant normal :weight normal :height 130 :width normal)))))
-
-  ;; org-capture template
-(setq org-capture-templates '(("t" "Todo [inbox]" entry
-                               (file+headline "~/org/inbox.org" "Tasks")
-                               "* TODO %i%?")
-                              ("w" "Todo work [work]" entry
-                               (file+headline "~/org/work.org" "Tasks")
-                               "* TODO %i%?")
-                              ))
-
-  ;; Org TO DO keywords
-  (setq org-todo-keywords
-        '((sequence "TODO(t)" "PRIORITY(P)" "IN-PROGRESS(p!)" "WAITING(w@)" "|" "DONE(d!)" "CANCELLED(c@)")))
 
 ;; clojure
   (add-to-list 'auto-mode-alist '("\\.clj\\'" . clojure-mode))
