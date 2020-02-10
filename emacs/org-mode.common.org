@@ -5,9 +5,22 @@ Save every 30s of inactivity
 
 Open agenda on startup
 #+begin_src emacs-lisp
-  (org-agenda-list)
-  (switch-to-buffer "*Org Agenda*")
-  (spacemacs/toggle-maximize-buffer)
+  ;;(org-agenda-list)
+  ;;(switch-to-buffer "*Org Agenda*")
+  ;;(spacemacs/toggle-maximize-buffer)
+#+end_src
+
+Custom agenda showing a block with weekly goals
+#+begin_src emacs-lisp
+      (setq org-agenda-custom-commands
+         '(("n" "Agenda, goals, all TODO"
+           ;; One block with a standard agenda view
+             ((agenda "")
+              ;; One block of All tasks tagged :goal:
+              (tags-todo "goal")
+              ;; One block of ALL tasks that are TODOs
+              (alltodo ""))
+             )))
 #+end_src
 
 Don't split windows when displaying agenda

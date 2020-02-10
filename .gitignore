@@ -4,3 +4,6 @@ private/*
 # Emacs temp file format
 \#*\#
 .\#*
+
+Ignore org files compiled to .el
+emacs/**/*.el

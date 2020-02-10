@@ -1,8 +1,18 @@
 (add-hook 'auto-save-hook 'org-save-all-org-buffers)
 
-(org-agenda-list)
-(switch-to-buffer "*Org Agenda*")
-(spacemacs/toggle-maximize-buffer)
+;;(org-agenda-list)
+;;(switch-to-buffer "*Org Agenda*")
+;;(spacemacs/toggle-maximize-buffer)
+
+(setq org-agenda-custom-commands
+   '(("n" "Agenda, goals, all TODO"
+     ;; One block with a standard agenda view
+       ((agenda "")
+        ;; One block of All tasks tagged :goal:
+        (tags-todo "goal")
+        ;; One block of ALL tasks that are TODOs
+        (alltodo ""))
+       )))
 
 (setq org-agenda-window-setup 'current-window)
 
