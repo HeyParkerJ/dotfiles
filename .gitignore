@@ -1,2 +1,6 @@
-private/*
 .DS_Store
+private/*
+
+# Emacs temp file format
+\#*\#
+.\#*
