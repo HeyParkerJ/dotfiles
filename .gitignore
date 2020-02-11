@@ -5,5 +5,8 @@ private/*
 \#*\#
 .\#*
 
-Ignore org files compiled to .el
-emacs/**/*.el
+#Ignore org files compiled to .el
+emacs/*.el
+emacs/org-mode.home.el
+emacs/org-mode.work.el
+emacs/org-mode.common.el
