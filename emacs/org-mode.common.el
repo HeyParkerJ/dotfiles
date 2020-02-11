@@ -11,8 +11,9 @@
         ;; One block of All tasks tagged :goal:
         (tags-todo "goal")
         ;; One block of ALL tasks that are TODOs
-        (alltodo ""))
-       )))
+        ((alltodo "") (org-agenda-skip-if 
+                       '(org-agenda-skip-entry-if '("-goal"))))
+        ))))
 
 (setq org-agenda-window-setup 'current-window)
 

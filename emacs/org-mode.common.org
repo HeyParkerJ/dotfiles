@@ -12,15 +12,18 @@ Open agenda on startup
 
 Custom agenda showing a block with weekly goals
 #+begin_src emacs-lisp
-      (setq org-agenda-custom-commands
-         '(("n" "Agenda, goals, all TODO"
-           ;; One block with a standard agenda view
-             ((agenda "")
-              ;; One block of All tasks tagged :goal:
-              (tags-todo "goal")
-              ;; One block of ALL tasks that are TODOs
-              (alltodo ""))
-             )))
+  (setq org-agenda-custom-commands
+     '(("n" "Agenda, goals, all TODO"
+       ;; One block with a standard agenda view
+         ((agenda "")
+          ;; One block of All tasks tagged :goal:
+          (tags-todo "goal")
+          ;; One block of ALL tasks that are TODOs
+          ((alltodo "") )
+          ))))
+;; attempting to add:
+;; (org-agenda-skip-if 
+;;   '(org-agenda-skip-entry-if '("-goal")))
 #+end_src
 
 Don't split windows when displaying agenda
