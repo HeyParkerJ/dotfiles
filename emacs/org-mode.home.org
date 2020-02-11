@@ -22,7 +22,6 @@
 
 
 gcal
-
 #+begin_src emacs-lisp
   (setq org-gcal-client-id (getenv "ORG_GCAL_CLIENT_ID")
         org-gcal-client-secret (getenv "ORG_GCAL_CLIENT_SECRET")

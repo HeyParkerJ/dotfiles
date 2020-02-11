@@ -19,7 +19,7 @@ Custom agenda showing a block with weekly goals
           ;; One block of All tasks tagged :goal:
           (tags-todo "goal")
           ;; One block of ALL tasks that are TODOs
-          ((alltodo "") )
+          (alltodo "")
           ))))
 ;; attempting to add:
 ;; (org-agenda-skip-if 
