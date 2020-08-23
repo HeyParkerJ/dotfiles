@@ -7,8 +7,7 @@
 
   (setq org-capture-templates '(("t" "Todo [inbox]" entry
                                  (file "~/org/inbox.org")
-                                 "* TODO %^{Task}\n"
-                                 :immediate-finish t)
+                                 "* TODO %^{Task}\n")
                                 ("S" "Someday" entry
                                  (file+headline "~/org/evil_plans.org" "Someday")
                                  "* %i%? \n %U" :immediate-finish t)
