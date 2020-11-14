@@ -2,6 +2,9 @@
   (setq org-capture-templates '(("t" "Todo [inbox]" entry
                                  (file+headline "~/org/inbox.org" "Tasks")
                                    "* TODO %i%?")
+                                ("s" "Someday [inbox]" entry
+                                 (file+headline "~/org/inbox.org" "Someday")
+                                 "* TODO %i%?     :someday:")
                                    ))
 
     #+end_src

@@ -12,17 +12,28 @@ Open agenda on startup
 
 Custom agenda showing a block with weekly goals
 #+begin_src emacs-lisp
-  (setq org-agenda-custom-commands
-     '(("n" "Agenda, goals, all TODO"
-       ;; One block with a standard agenda view
-         ((agenda "")
+(setq org-agenda-custom-commands
+      '(("a" "All tasks"
+         ;; One block of ALL tasks that are TODOs
+         ((alltodo "")))
+        ("n" "Agenda, goals, all TODO"
+         ;; One block with a standard agenda view
+         ((agenda ""
+                  ((org-agenda-skip-function
+                    '(org-agenda-skip-entry-if 'todo '("WAITING")))
+                   (org-agenda-overriding-header "Agenda")))
+          ;; One block of All waiting items
+          (todo "WAITING"
+                ((org-agenda-overriding-header "Items in status WAITING")))
           ;; One block of All tasks tagged :goal:
-          (tags-todo "goal")
-          ;; One block of ALL tasks that are TODOs
-          (alltodo "")
+          (tags-todo "goal"
+                     ((org-agenda-overriding-header "Goals")))
+          ;; One block of ALL someday items
+          (tags-todo "someday"
+                     ((org-agenda-overriding-header "Someday")))
           ))))
 ;; attempting to add:
-;; (org-agenda-skip-if 
+;; (org-agenda-skip-if
 ;;   '(org-agenda-skip-entry-if '("-goal")))
 #+end_src
 

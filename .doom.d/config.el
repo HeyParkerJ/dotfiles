@@ -74,6 +74,13 @@
 
 (setq evil-escape-key-sequence "fd")
 
+;; KEYBINDINGS
+(map! :leader
+      "TAB" #'switch-to-buffer)
+
+(map! "s-}" #'next-buffer
+      "s-{" #'previous-buffer)
+
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
