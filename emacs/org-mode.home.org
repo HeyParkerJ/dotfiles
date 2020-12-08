@@ -1,7 +1,5 @@
 #+begin_src emacs-lisp
   (setq org-agenda-files '("~/org/inbox.org"
-                           "~/org/work.org"
-                           "~/org/nosync/tickler.org"
                            "~/org/org.org"
                            "~/org/gcal.org"))
 
@@ -11,8 +9,8 @@
                                 ("S" "Someday" entry
                                  (file+headline "~/org/evil_plans.org" "Someday")
                                  "* %i%? \n %U" :immediate-finish t)
-                                ("a" "Appointment" entry (file "~/org/gcal.org" )
-                                 "* %?\n\n%^T\n\n:PROPERTIES:\n\n:END:\n\n")
+                                ;; ("a" "Appointment" entry (file "~/org/gcal.org" )
+                                ;;  "* %?\n\n%^T\n\n:PROPERTIES:\n\n:END:\n\n")
                                 ("j" "Journal" entry (file+olp+datetree "~/org/journal.org")
                                  "** %<%H:%M> %?\n")))
 #+end_src

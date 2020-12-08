@@ -80,9 +80,13 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
+echo "Sourced $ZSH/oh-my-zsh.sh"
 source ~/.bash_aliases
+echo "Sourced ~/.bash_aliases"
 source ~/.bashrc
+echo "Sourced ~/.bashrc"
 source ~/dotfiles/private/.secrets
+echo "Sourced dotfiles/private/.secrets"
 
 # User configuration
 
