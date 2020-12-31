@@ -96,6 +96,14 @@
 (map! "s-}" #'next-buffer
       "s-{" #'previous-buffer)
 
+;; There was an issue where meta key wasn't working - this fixes that
+;; macOS reports rebound modifiers on external keyboards as "right" modifiers, even if you're using left modifiers
+;; Doom binds ns-right-option-modifier or mac-right-option-modifier (depending on emacs distro) to 'none
+;; So this fixes that weird macOS functionality
+;; https://github.com/hlissner/doom-emacs/issues/3952
+(cond (IS-MAC
+       (setq mac-right-option-modifier 'meta)))
+
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one

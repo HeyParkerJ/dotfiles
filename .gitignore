@@ -7,3 +7,5 @@ private/*
 
 #Ignore org files compiled to .el
 emacs/*.el
+
+.doom.d/custom.el
