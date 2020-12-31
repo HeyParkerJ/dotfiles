@@ -1,18 +1,28 @@
+I occassionally break out a whole org file for a topic, but still want to retain the ability to file a thought away within that topic without organizing it further. By adding an inbox header to each of these files, I can do so.
 #+begin_src emacs-lisp
-  (setq org-agenda-files '("~/org/inbox.org"
-                           "~/org/org.org"
-                           "~/org/gcal.org"))
 
   (setq org-capture-templates '(("t" "Todo [inbox]" entry
                                  (file "~/org/inbox.org")
                                  "* TODO %^{Task}\n")
-                                ("S" "Someday" entry
-                                 (file+headline "~/org/evil_plans.org" "Someday")
+                                ("s" "Someday" entry
+                                 (file+headline "~/org/someday.org" "Inbox")
                                  "* %i%? \n %U" :immediate-finish t)
-                                ;; ("a" "Appointment" entry (file "~/org/gcal.org" )
-                                ;;  "* %?\n\n%^T\n\n:PROPERTIES:\n\n:END:\n\n")
+                                ("w" "Woodworking [inbox]" entry
+                                 (file+headline "~/org/wood.org" "Inbox")
+                                 "** %i%?")
+                                ("m" "Mind [inbox]" entry
+                                 (file+headline "~/org/mind.org" "Inbox")
+                                 "** %i%?")
+                                ("d" "Code Diary [inbox]" entry
+                                 (file+headline "~/org/code_diary.org" "Inbox")
+                                 "** %i%?")
                                 ("j" "Journal" entry (file+olp+datetree "~/org/journal.org")
                                  "** %<%H:%M> %?\n")))
+
+  (setq org-agenda-files '("~/org/inbox.org"
+                           "~/org/org.org"
+                           "~/org/projects.org"
+                           ))
 #+end_src
 
 
