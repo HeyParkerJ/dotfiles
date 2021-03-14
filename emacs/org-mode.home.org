@@ -1,28 +1,31 @@
 I occassionally break out a whole org file for a topic, but still want to retain the ability to file a thought away within that topic without organizing it further. By adding an inbox header to each of these files, I can do so.
+
+
 #+begin_src emacs-lisp
+(setq org-capture-templates '(("t" "Todo [inbox]" entry
+                               (file "~/org/inbox.org")
+                               "* TODO %^{Task}\n")
+                              ("s" "Someday" entry
+                               (file+headline "~/org/someday.org" "Inbox")
+                                        ; the \n %U adds the time
+                               "* TODO %i%? \n %U")
+                              ("w" "Woodworking [inbox]" entry
+                               (file+headline "~/org/wood.org" "Inbox")
+                               "** %i%? \n %U")
+                              ("m" "Mind [inbox]" entry
+                               (file+headline "~/org/mind.org" "Inbox")
+                               "** %i%? \n %U")
+                              ("c" "Code Diary [inbox]" entry
+                               (file+headline "~/org/code_diary.org" "Inbox")
+                               "** %i%? \n %U%^g") ;; %^g will prompt for a tag with file completion on the current file
+                              ("j" "Journal" entry
+                               (file+headline "~/org/mind.org" "Journal")
+                               "** %U\n*** What worked well\n- %? \n*** What didn't work well\n- \n*** What I'd like to work on\n- \n")))
 
-  (setq org-capture-templates '(("t" "Todo [inbox]" entry
-                                 (file "~/org/inbox.org")
-                                 "* TODO %^{Task}\n")
-                                ("s" "Someday" entry
-                                 (file+headline "~/org/someday.org" "Inbox")
-                                 "* %i%? \n %U" :immediate-finish t)
-                                ("w" "Woodworking [inbox]" entry
-                                 (file+headline "~/org/wood.org" "Inbox")
-                                 "** %i%?")
-                                ("m" "Mind [inbox]" entry
-                                 (file+headline "~/org/mind.org" "Inbox")
-                                 "** %i%?")
-                                ("d" "Code Diary [inbox]" entry
-                                 (file+headline "~/org/code_diary.org" "Inbox")
-                                 "** %i%?")
-                                ("j" "Journal" entry (file+olp+datetree "~/org/journal.org")
-                                 "** %<%H:%M> %?\n")))
-
-  (setq org-agenda-files '("~/org/inbox.org"
-                           "~/org/org.org"
-                           "~/org/projects.org"
-                           ))
+(setq org-agenda-files '("~/org/inbox.org"
+                         "~/org/org.org"
+                         "~/org/projects.org"
+                         ))
 #+end_src
 
 
