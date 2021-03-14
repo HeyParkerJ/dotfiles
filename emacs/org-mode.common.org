@@ -7,7 +7,6 @@ Open agenda on startup
 #+begin_src emacs-lisp
   ;;(org-agenda-list)
   ;;(switch-to-buffer "*Org Agenda*")
-  ;;(spacemacs/toggle-maximize-buffer)
 #+end_src
 
 Custom agenda showing a block with weekly goals

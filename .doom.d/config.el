@@ -48,7 +48,11 @@
 
   ;; System information
   (defun my/laptop-p ()
-    (equal (system-name) "Parkers-MBP"))
+    (or
+     ;; MacBook
+     (equal (system-name) "Parkers-MBP")
+     ;; TODO - this seems to be the generic linux box name? Add more detail or configure
+     (equal (system-name) "localhost.localdomain")))
   (defun my/work-laptop-p ()
     (equal (system-name) "m-pjohnson"))
 
