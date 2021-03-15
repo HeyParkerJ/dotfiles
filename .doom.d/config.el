@@ -25,7 +25,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'nimbus)
+;; (setq doom-theme 'nimbus)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -107,6 +107,11 @@
 ;; https://github.com/hlissner/doom-emacs/issues/3952
 (cond (IS-MAC
        (setq mac-right-option-modifier 'meta)))
+
+;; GOlang
+
+;; my exec-path and $PATH weren't in sync for some reason - I added a path reexport to both .zshrc and .bashrc but no luck
+(add-to-list 'exec-path "~/go/bin")
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
