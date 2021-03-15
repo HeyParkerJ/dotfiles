@@ -1,16 +1,31 @@
 #+begin_src emacs-lisp
-  (setq org-capture-templates '(("t" "Todo [inbox]" entry
-                                 (file+headline "~/org/inbox.org" "Tasks")
-                                   "* TODO %i%?")
-                                ("s" "Someday [inbox]" entry
-                                 (file+headline "~/org/inbox.org" "Someday")
-                                 "* TODO %i%?     :someday:")
-                                   ))
-
+;; %^g propts for tags with completion in the target file - %^G would prompt for completion on all agenda file  s
+(setq org-capture-templates '(("t" "Todo [inbox]" entry
+                               (file+headline "~/org/inbox.org" "Tasks")
+                               "* TODO %i%? \n%U")
+                              ("c" "Code Diary [inbox]" entry
+                               (file+headline "~/org/code_diary.org" "Inbox")
+                               "** %i%? \n %U %^g")
+                              ("s" "Someday [inbox]" entry
+                               (file+headline "~/org/inbox.org" "Someday")
+                               "* TODO %i%? \n%U :someday:")
+                              ("d" "Things I've done [work.org]" entry
+                               (file+headline "~/org/work.org" "Things I've Done")
+                               "** %i%? \n %U")
+                              ))
     #+end_src
     
 work.org can contain todos but the majority of my tasks are created in inbox.org via capture templates
 #+begin_src emacs-lisp
   (setq org-agenda-files
-        '("~/org/work.org" "~/org/inbox.org"))
+        '("~/org/work.org"
+          "~/org/inbox.org"
+          "~/org/code_diary.org"))
     #+end_src
+
+Define some custom templates that can be initiated with `< {letter} TAB`
+
+#+begin_src emacs-lisp
+(add-to-list 'org-structure-template-alist
+             '("j" "#   +NAME: ?\n#+BEGIN_SRC js \n\n#+END_SRC"))
+#+end_src

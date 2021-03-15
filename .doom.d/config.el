@@ -25,7 +25,8 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'nimbus)
+;;(setq doom-theme 'nimbus)
+(setq doom-theme 'modus-vivendi)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -80,6 +81,14 @@
 
 (map! "s-}" #'next-buffer
       "s-{" #'previous-buffer)
+
+;; Make flycheck errors much better
+(set-popup-rule! "^\\*Flycheck errors\\*$" :side 'bottom :size 0.4 :select t)
+
+;; lsp performance settings
+(setq lsp-eslint-run "onSave")
+(setq lsp-eslint-format nil)
+(setq lsp-enable-file-watchers nil)
 
 ;; There was an issue where meta key wasn't working - this fixes that
 ;; macOS reports rebound modifiers on external keyboards as "right" modifiers, even if you're using left modifiers

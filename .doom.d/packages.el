@@ -10,7 +10,10 @@
 (package! rjsx-mode)
 (package! graphql-mode)
 (package! nimbus-theme)
+;;(package! modus-vivendi-theme)
+(package! modus-themes)
 (package! indium)
+(package! jest)
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
