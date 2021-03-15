@@ -8,3 +8,5 @@ export PATH=”$HOME/.emacs.d/bin:$PATH # add Doom to path
 # golang stuff
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
+
+test -f ~/dotfiles/.work_config && source ~/dotfiles/.work_config
