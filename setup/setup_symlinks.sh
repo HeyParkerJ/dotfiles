@@ -24,3 +24,6 @@ mv ~/.doom.d ~/.doom.d.backup
 
 # default-packages
 ln -s ~/dotfiles/default-packages ~/.nvm/
+
+# p10k config
+ln -s ~/.p10k.zsh ~/
