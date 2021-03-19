@@ -11,10 +11,21 @@ Open agenda on startup
 
 Custom agenda showing a block with weekly goals
 #+begin_src emacs-lisp
+        (setq org-agenda-custom-commands
+              '(("n" "Agenda / INTR / PROG / NEXT"
+                 ((agenda "" ((org-agenda-span 'day)))
+                  (todo "INTR" nil)
+                  (todo "PROG" nil)
+                  (todo "NEXT" nil))
+                 nil)))
+#+end_src
+
+Old agenda here
 (setq org-agenda-custom-commands
+
       '(("a" "All tasks"
          ((alltodo "")))
-        ("n" "Agenda, goals, all TODO"
+("n" "Agenda, goals, all TODO"
          ((agenda ""
                   ((org-agenda-skip-function
                     '(org-agenda-skip-entry-if 'todo '("WAITING")))
@@ -26,8 +37,17 @@ Custom agenda showing a block with weekly goals
           (tags-todo "someday"
                      ((org-agenda-overriding-header "Someday")))
           ))))
-#+end_src
 
+I want to add this for my new workflow:
+;; Customized view for the daily workflow. (Command: "C-c a n")
+'(org-agenda-custom-commands
+  '(("n" "Agenda / INTR / PROG / NEXT"
+     ((agenda "" nil)
+      (todo "INTR" nil)
+      (todo "PROG" nil)
+      (todo "NEXT" nil))
+     nil)))
+     
 Don't split windows when displaying agenda
 #+begin_src emacs-lisp
   (setq org-agenda-window-setup 'current-window)
@@ -46,7 +66,24 @@ Alt: ▼, ↴, ⬎, ⤷, ⤵, and ⋱
 
 
 #+begin_src emacs-lisp
-  (setq org-todo-keywords
-        '((sequence "TODO(t)" "PRIORITY(P)" "IN-PROGRESS(p!)" "WAITING(w@)" "|" "DONE(d!)" "CANCELLED(c@)")))
-    #+end_src
+;; TODO keywords.
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "NEXT(n)" "PROG(p)" "INTR(i)" "|" "DONE(d)" "CANCELLED(c@)")))
 
+;; Old config here
+;; (setq org-todo-keywords
+;; '((sequence "TODO(t)" "IN-PROGRESS(p!)" "WAITING(w@)" "|" "DONE(d!)" "CANCELLED(c@)")))
+
+;; Show the daily agenda by default.
+(setq org-agenda-span 'day)
+
+;; Hide tasks that are scheduled in the future.
+(setq org-agenda-todo-ignore-scheduled 'future)
+
+;; Use "second" instead of "day" for time comparison.
+;; It hides tasks with a scheduled time like "<2020-11-15 Sun 11:30>"
+(setq org-agenda-todo-ignore-time-comparison-use-seconds t)
+
+;; Hide the deadline prewarning prior to scheduled date.
+(setq org-agenda-skip-deadline-prewarning-if-scheduled 'pre-scheduled)
+#+end_src

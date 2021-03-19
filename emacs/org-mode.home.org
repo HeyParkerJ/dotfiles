@@ -4,7 +4,7 @@ I occassionally break out a whole org file for a topic, but still want to retain
 #+begin_src emacs-lisp
 (setq org-capture-templates '(("t" "Todo [inbox]" entry
                                (file "~/org/inbox.org")
-                               "* TODO %^{Task}\n")
+                               "* TODO %i%?\n %U")
                               ("s" "Someday" entry
                                (file+headline "~/org/someday.org" "Inbox")
                                         ; the \n %U adds the time
