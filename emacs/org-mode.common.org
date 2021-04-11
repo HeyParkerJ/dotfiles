@@ -9,15 +9,25 @@ Open agenda on startup
   ;;(switch-to-buffer "*Org Agenda*")
 #+end_src
 
-Custom agenda showing a block with weekly goals
 #+begin_src emacs-lisp
         (setq org-agenda-custom-commands
-              '(("n" "Agenda / INTR / PROG / NEXT"
+              '(("n" "Agenda / INTR / PROG / NEXT / GOAL"
                  ((agenda "" ((org-agenda-span 'day)))
                   (todo "INTR" nil)
                   (todo "PROG" nil)
-                  (todo "NEXT" nil))
-                 nil)))
+                  (todo "NEXT" nil)
+                  )
+                 nil)
+                ("m" "Everything"
+                 ((agenda "" ((org-agenda-span 'day)))
+                  (todo "GOAL" nil)
+                  (todo "PROJECT" nil)
+                  (todo "INTR" nil)
+                  (todo "PROG" nil)
+                  (todo "NEXT" nil)
+                  )
+                 nil))
+              )
 #+end_src
 
 Old agenda here
@@ -68,7 +78,7 @@ Alt: ▼, ↴, ⬎, ⤷, ⤵, and ⋱
 #+begin_src emacs-lisp
 ;; TODO keywords.
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "NEXT(n)" "PROG(p)" "INTR(i)" "|" "DONE(d)" "CANCELLED(c@)")))
+      '((sequence "TODO(t)" "NEXT(n)" "PROG(p)" "INTR(i)" "GOAL(g)" "PROJECT(r)" "|" "DONE(d)" "CANCELLED(c@)")))
 
 ;; Old config here
 ;; (setq org-todo-keywords

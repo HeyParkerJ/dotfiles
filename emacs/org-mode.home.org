@@ -5,6 +5,9 @@ I occassionally break out a whole org file for a topic, but still want to retain
 (setq org-capture-templates '(("t" "Todo [inbox]" entry
                                (file "~/org/inbox.org")
                                "* TODO %i%?\n %U")
+                              ("g" "Goal" entry
+                               (file "~/org/inbox.org")
+                               "* GOAL %i%?\n %U")
                               ("s" "Someday" entry
                                (file+headline "~/org/someday.org" "Inbox")
                                         ; the \n %U adds the time
