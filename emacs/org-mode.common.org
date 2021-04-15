@@ -11,13 +11,16 @@ Open agenda on startup
 
 Custom agenda showing a block with weekly goals
 #+begin_src emacs-lisp
-        (setq org-agenda-custom-commands
-              '(("n" "Agenda / INTR / PROG / NEXT"
-                 ((agenda "" ((org-agenda-span 'day)))
-                  (todo "INTR" nil)
-                  (todo "PROG" nil)
-                  (todo "NEXT" nil))
-                 nil)))
+(setq org-agenda-custom-commands
+      '(("n" "Agenda / INTR / PROG / NEXT"
+         ((agenda "" ((org-agenda-span 'day)))
+          (todo "INTR" nil)
+          (todo "PROG" nil)
+          (todo "NEXT" nil))
+         nil)))
+
+;; Add a timestamp when task is set to 'done'
+(setq org-log-done 'time)
 #+end_src
 
 Old agenda here

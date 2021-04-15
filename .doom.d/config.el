@@ -58,7 +58,7 @@
   (defun my/work-laptop-p ()
     (equal (system-name) "m-pjohnson"))
 
-  (require 'org (org-babel-load-file (expand-file-name "~/dotfiles/emacs/org-mode.common.org")) )
+    (require 'org (org-babel-load-file (expand-file-name "~/dotfiles/emacs/org-mode.common.org")) )
   (when (my/laptop-p)
     (require 'org (org-babel-load-file (expand-file-name "~/dotfiles/emacs/org-mode.home.org")) ))
   (when (my/work-laptop-p)
@@ -96,8 +96,9 @@
 (setq evil-escape-key-sequence "fd")
 
 ;; KEYBINDINGS
-(map! :leader
-      "TAB" #'switch-to-buffer)
+;; Going to comment this because I want to try workspaces. Go back to using SPC b b for switch-to-buffer
+;; (map! :leader
+;;       "TAB" #'switch-to-buffer)
 
 (map! "s-}" #'next-buffer
       "s-{" #'previous-buffer)
