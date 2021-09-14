@@ -132,3 +132,6 @@ echo "SOURCED - .zshrc"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# added by Snowflake SnowSQL installer v1.2
+export PATH=/Users/parker.johnson/Applications/SnowSQL.app/Contents/MacOS:$PATH

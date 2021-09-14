@@ -14,6 +14,7 @@
 (package! indium)
 (package! ox-hugo)
 (package! jest)
+(package! org-tree-slide)
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)

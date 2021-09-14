@@ -27,7 +27,8 @@
 ;; `load-theme' function. This is the default:
 
 ;; (setq doom-theme 'nimbus)
-(setq doom-theme 'modus-vivendi)
+;; (setq doom-theme 'modus-vivendi)
+(setq doom-theme 'doom-material)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -64,6 +65,9 @@
   (when (my/work-laptop-p)
     (require 'org (org-babel-load-file (expand-file-name "~/dotfiles/emacs/org-mode.work.org")) ))
 
+(setq org-clock-sound "/System/Library/Sounds/Glass.aiff")
+(setq doom-font-increment 1) ; Default is 2, let's make it more granular
+
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
@@ -81,6 +85,12 @@
 ;; Auto-refresh dired on file change
 ;; https://www.reddit.com/r/emacs/comments/1acg6q/how_to_configure_dired_to_update_instantly_when/
 (add-hook 'dired-mode-hook 'auto-revert-mode)
+
+(use-package! highlight-indent-guides
+  :hook (prog-mode . highlight-indent-guides-mode)
+  :config (setq highlight-indent-guides-method 'character)
+  )
+
 
 ;; Too lazy to type 'no'
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -105,6 +115,19 @@
 
 ;; Make flycheck errors much better
 (set-popup-rule! "^\\*Flycheck errors\\*$" :side 'bottom :size 0.4 :select t)
+
+
+;; Needed to add javascript-eslint to the the next-checker after lsp so that it would actually load, as that wasn't happening by deafult
+;; also needed to runit after the lsp-afer-initalize-hook because otherwise 'lsp wasn't a valid checker
+(add-hook 'lsp-after-initialize-hook (lambda
+                                      ()
+                                      (flycheck-add-next-checker 'lsp 'javascript-eslint)))
+;;                                      https://github.com/hlissner/doom-emacs/issues/1530
+;; Potential alternative to the above
+;; (after! (:and lsp-mode flycheck)
+;; (flycheck-add-next-checker 'lsp 'javascript-eslint))
+
+
 
 ;; lsp performance settings
 (setq lsp-eslint-run "onSave")
