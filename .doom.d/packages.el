@@ -12,8 +12,8 @@
 (package! nimbus-theme)
 (package! modus-themes)
 (package! indium)
-(package! ox-hugo)
 (package! jest)
+(package! anki-editor)
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)

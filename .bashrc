@@ -9,4 +9,7 @@ export PATH=”$HOME/.emacs.d/bin:$PATH # add Doom to path
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
+# For pdf-tools
+export PKG_CONFIG_PATH=/usr/local/Cellar/zlib/1.2.8/lib/pkgconfig:/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig
+
 test -f ~/dotfiles/.work_config && source ~/dotfiles/.work_config
