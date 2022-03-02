@@ -9,12 +9,14 @@
 (package! persistent-scratch)
 (package! rjsx-mode)
 (package! graphql-mode)
-(package! nimbus-theme)
-(package! modus-themes)
+;; (package! nimbus-theme)
+;; (package! modus-themes)
 (package! indium)
 (package! ox-hugo)
-(package! jest)
+;; (package! jest)
+(package! jest-test-mode)
 (package! org-tree-slide)
+(package! yasnippet)
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)

@@ -12,15 +12,21 @@
                               ("d" "Things I've done [work.org]" entry
                                (file+headline "~/org/work.org" "Things I've Done")
                                "** %i%? \n %U")
+                              ("0" "Cycles" entry
+                               (file+headline "~/org/work.org" "Cycles per day")
+                               "** %U %i%?")
                               ))
     #+end_src
-    
+
+    #+RESULTS:
+
 work.org can contain todos but the majority of my tasks are created in inbox.org via capture templates
 #+begin_src emacs-lisp
   (setq org-agenda-files
         '("~/org/work.org"
           "~/org/inbox.org"
-          "~/org/code_diary.org"))
+          "~/org/code_diary.org"
+          "~/org/brain.org"))
     #+end_src
 
 Define some custom templates that can be initiated with `< {letter} TAB`

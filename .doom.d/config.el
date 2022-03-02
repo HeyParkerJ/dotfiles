@@ -9,6 +9,9 @@
 (setq user-full-name "Parker Johnson"
       user-mail-address "parkerjohnsonwebdev@gmail.com")
 
+(setq yas-snippet-dirs '("~/.doom.d/snippets"))
+(yas-global-mode 1)
+
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
 ;;
@@ -146,6 +149,7 @@
 
 ;; my exec-path and $PATH weren't in sync for some reason - I added a path reexport to both .zshrc and .bashrc but no luck
 (add-to-list 'exec-path "~/go/bin")
+
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;

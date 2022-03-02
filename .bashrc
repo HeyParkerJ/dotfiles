@@ -10,3 +10,5 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
 source ~/dotfiles/.work-config
+
+complete -C /usr/local/bin/terraform terraform
