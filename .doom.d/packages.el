@@ -13,7 +13,6 @@
 ;; (package! modus-themes)
 (package! indium)
 (package! ox-hugo)
-;; (package! jest)
 (package! jest-test-mode)
 (package! org-tree-slide)
 (package! yasnippet)
@@ -21,7 +20,8 @@
 (package! vscode-icon)
 (package! dap-mode)
 (package! autothemer)
-;; (package! dap-firefox)
+(package! jest)
+(package! anki-editor)
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
