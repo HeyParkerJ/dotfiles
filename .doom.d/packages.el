@@ -17,6 +17,11 @@
 (package! jest-test-mode)
 (package! org-tree-slide)
 (package! yasnippet)
+(package! dired-sidebar)
+(package! vscode-icon)
+(package! dap-mode)
+(package! autothemer)
+;; (package! dap-firefox)
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)

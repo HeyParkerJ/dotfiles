@@ -4,7 +4,7 @@ Save every 30s of inactivity
 #+end_src
 
 Open agenda on startup
- Show agenda on startup by deefault
+ Show agenda on startup by default
 #+begin_src emacs-lisp
   ;;(org-agenda-list)
   ;;(switch-to-buffer "*Org Agenda*")
@@ -29,10 +29,12 @@ This is all the global configuration that I need for my workflows
       '(
         ("n" "Agenda / INTR / PROG / NEXT / GOAL"
          ((agenda "" nil)
+          (todo "GOAL" nil)
           (todo "INTR" nil)
           (todo "PROG" nil)
           (todo "NEXT" nil)
           (todo "WAITING" nil)
+          (todo "TODO" nil)
           )
          ((org-agenda-span 'day))
          )
