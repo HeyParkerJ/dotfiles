@@ -1,4 +1,4 @@
-I occassionally break out a whole org file for a topic, but still want to retain the ability to file a thought away within that topic without organizing it further. By adding an inbox header to each of these files, I can do so.
+I occasionally break out a whole org file for a topic, but still want to retain the ability to file a thought away within that topic without organizing it further. By adding an inbox header to each of these files, I can do so.
 
 
 #+begin_src emacs-lisp

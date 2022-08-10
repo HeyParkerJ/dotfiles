@@ -9,6 +9,9 @@
 (setq user-full-name "Parker Johnson"
       user-mail-address "parkerjohnsonwebdev@gmail.com")
 
+(setq yas-snippet-dirs '("~/.doom.d/snippets"))
+(yas-global-mode 1)
+
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
 ;;
@@ -27,7 +30,9 @@
 ;; `load-theme' function. This is the default:
 
 ;; (setq doom-theme 'nimbus)
-(setq doom-theme 'modus-vivendi)
+;; (setq doom-theme 'modus-vivendi)
+;; (setq doom-theme 'doom-material)
+(setq doom-theme 'kanagawa)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -48,6 +53,11 @@
 ;;               (("C-c n i" . org-roam-insert))
 ;;               (("C-c n I" . org-roam-insert-immediate))))
 
+
+;; Show my favorite org agenda on startup
+(add-hook 'after-init-hook (lambda () (org-agenda nil "n")))
+
+
   ;; System information
   (defun my/laptop-p ()
     (or
@@ -64,6 +74,9 @@
   (when (my/work-laptop-p)
     (require 'org (org-babel-load-file (expand-file-name "~/dotfiles/emacs/org-mode.work.org")) ))
 
+(setq org-clock-sound "/System/Library/Sounds/Glass.aiff")
+(setq doom-font-increment 1) ; Default is 2, let's make it more granular
+
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
@@ -78,9 +91,44 @@
 (setq vc-make-backup-files t)
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
 
+;; magit setup
+
+(map! :map
+      magit-file-section-map
+      :n (kbd "RET") 'magit-diff-visit-file-other-window)
+(map! :map
+      magit-hunk-section-map
+      :n (kbd "RET") 'magit-diff-visit-file-other-window)
+
+;; dired-sidebar
+(use-package! dired-sidebar
+  :config
+  (setq dired-sidebar-subtree-line-prefix "__")
+  (setq dired-sidebar-theme 'vscode)
+  (setq dired-sidebar-use-term-integration t)
+  (setq dired-sidebar-use-custom-font t)
+  (setq dired-listing-switches "-alh")   ; human readable format when in detail
+  (setq dired-kill-when-opening-new-dired-buffer t) ; kill when changing dir
+  )
+(map!
+ :map dired-mode-map
+ :n "h" 'dired-up-directory
+ :leader
+ ("o p" #'dired-sidebar-toggle-sidebar))
+
+;; Time and date
+(setq display-time-day-and-date t)
+(setq display-time-mode t)
+
 ;; Auto-refresh dired on file change
 ;; https://www.reddit.com/r/emacs/comments/1acg6q/how_to_configure_dired_to_update_instantly_when/
 (add-hook 'dired-mode-hook 'auto-revert-mode)
+
+(use-package! highlight-indent-guides
+  :hook (prog-mode . highlight-indent-guides-mode)
+  :config (setq highlight-indent-guides-method 'character)
+  )
+
 
 ;; Too lazy to type 'no'
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -93,8 +141,6 @@
 ;; once you have selected your project, the top-level directory of the project is immediately opened for you in a dired buffer.
 (setq projectile-switch-project-action #'projectile-dired)
 
-(setq evil-escape-key-sequence "fd")
-
 ;; KEYBINDINGS
 ;; Going to comment this because I want to try workspaces. Go back to using SPC b b for switch-to-buffer
 ;; (map! :leader
@@ -103,13 +149,45 @@
 (map! "s-}" #'next-buffer
       "s-{" #'previous-buffer)
 
+(setq evil-escape-key-sequence "fd")
+
 ;; Make flycheck errors much better
 (set-popup-rule! "^\\*Flycheck errors\\*$" :side 'bottom :size 0.4 :select t)
 
+;; Needed to add javascript-eslint to the the next-checker after lsp so that it would actually load, as that wasn't happening by deafult
+;; also needed to runit after the lsp-afer-initalize-hook because otherwise 'lsp wasn't a valid checker
+(add-hook 'lsp-after-initialize-hook (lambda
+                                      ()
+                                      (flycheck-add-next-checker 'lsp 'javascript-eslint)))
+;;                                      https://github.com/hlissner/doom-emacs/issues/1530
+;; Potential alternative to the above
+;; (after! (:and lsp-mode flycheck)
+;; (flycheck-add-next-checker 'lsp 'javascript-eslint))
+
 ;; lsp performance settings
 (setq lsp-eslint-run "onSave")
+(setq +format-with-lsp nil) ; We want something that will respect our prettierrc to do this instead. Also I don't know how to configure this yet.
 (setq lsp-eslint-format nil)
 (setq lsp-enable-file-watchers nil)
+
+;; Recommendations from https://ianyepan.github.io/posts/emacs-ide/
+;; (setq lsp-auto-guess-root t)
+ (setq lsp-log-io nil)
+;; (setq lsp-restart 'auto-restart)
+;; (setq lsp-enable-symbol-highlighting nil)
+(setq lsp-enable-on-type-formatting nil)
+(setq lsp-signature-auto-activate nil)
+(setq lsp-signature-render-documentation nil)
+(setq lsp-eldoc-hook nil)
+(setq lsp-modeline-code-actions-enable nil)
+(setq lsp-modeline-diagnostics-enable nil)
+(setq lsp-headerline-breadcrumb-enable nil)
+(setq lsp-semantic-tokens-enable nil)
+(setq lsp-enable-folding nil)
+(setq lsp-enable-imenu nil)
+(setq lsp-enable-snippet nil)
+ (setq read-process-output-max (* 1024 1024)) ;; 1MB
+ (setq lsp-idle-delay 0.35)
 
 ;; There was an issue where meta key wasn't working - this fixes that
 ;; macOS reports rebound modifiers on external keyboards as "right" modifiers, even if you're using left modifiers
@@ -119,8 +197,7 @@
 (cond (IS-MAC
        (setq mac-right-option-modifier 'meta)))
 
-;; GOlang
-
+;; golang
 ;; my exec-path and $PATH weren't in sync for some reason - I added a path reexport to both .zshrc and .bashrc but no luck
 (add-to-list 'exec-path "~/go/bin")
 

@@ -4,32 +4,56 @@ Save every 30s of inactivity
 #+end_src
 
 Open agenda on startup
+ Show agenda on startup by default
 #+begin_src emacs-lisp
   ;;(org-agenda-list)
   ;;(switch-to-buffer "*Org Agenda*")
 #+end_src
 
+This is all the global configuration that I need for my workflows
 #+begin_src emacs-lisp
-        (setq org-agenda-custom-commands
-              '(("n" "Agenda / INTR / PROG / NEXT / GOAL"
-                 ((agenda "" ((org-agenda-span 'day)))
-                  (todo "INTR" nil)
-                  (todo "PROG" nil)
-                  (todo "NEXT" nil)
-                  )
-                 nil)
-                ("m" "Everything"
-                 ((agenda "" ((org-agenda-span 'day)))
-                  (todo "GOAL" nil)
-                  (todo "PROJECT" nil)
-                  (todo "INTR" nil)
-                  (todo "PROG" nil)
-                  (todo "NEXT" nil)
-                  )
-                 nil)))
+;; This changes the start date to the correct day, as previously it was behind about 3 days
+;; A caveat is that old, scheduled items will indeed begin showing up in my agendas
+(setq org-agenda-start-day nil)
+;; Hide tasks that are scheduled in the future.
+(setq org-agenda-todo-ignore-scheduled 'future)
+;; Use "second" instead of "day" for time comparison.
+;; It hides tasks with a scheduled time like "<2020-11-15 Sun 11:30>"
+(setq org-agenda-todo-ignore-time-comparison-use-seconds t)
+;; Hide the deadline prewarning prior to scheduled date.
+(setq org-agenda-skip-deadline-prewarning-if-scheduled 'pre-scheduled)
+#+end_src
 
-        ;; Add a timestamp when task is set to 'done'
-        (setq org-log-done 'time)
+#+begin_src emacs-lisp
+(setq org-agenda-custom-commands
+      '(
+        ("n" "Agenda / INTR / PROG / NEXT / GOAL"
+         ((agenda "" nil)
+          (todo "GOAL" nil)
+          (todo "INTR" nil)
+          (todo "PROG" nil)
+          (todo "NEXT" nil)
+          (todo "WAITING" nil)
+          (todo "TODO" nil)
+          )
+         ((org-agenda-span 'day))
+         )
+        ("m" "Everything"
+         ((agenda "" nil)
+          (todo "GOAL" nil)
+          (todo "PROJECT" nil)
+          (todo "INTR" nil)
+          (todo "PROG" nil)
+          (todo "NEXT" nil)
+          (todo "WAITING" nil)
+          )
+         ((org-agenda-span 'day))
+         )
+        )
+      )
+
+;; Add a timestamp when task is set to 'done'
+(setq org-log-done 'time)
 #+end_src
 
 Old agenda here
@@ -80,22 +104,10 @@ Alt: ▼, ↴, ⬎, ⤷, ⤵, and ⋱
 #+begin_src emacs-lisp
 ;; TODO keywords.
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "NEXT(n)" "PROG(p)" "INTR(i)" "GOAL(g)" "PROJECT(r)" "|" "DONE(d)" "CANCELLED(c@)")))
+      '((sequence "TODO(t)" "NEXT(n)" "PROG(p)" "INTR(i)" "GOAL(g)" "PROJECT(r)" "WAITING(w@)" "|" "DONE(d)" "CANCELLED(c@)")))
 
 ;; Old config here
 ;; (setq org-todo-keywords
 ;; '((sequence "TODO(t)" "IN-PROGRESS(p!)" "WAITING(w@)" "|" "DONE(d!)" "CANCELLED(c@)")))
 
-;; Show the daily agenda by default.
-(setq org-agenda-span 'day)
-
-;; Hide tasks that are scheduled in the future.
-(setq org-agenda-todo-ignore-scheduled 'future)
-
-;; Use "second" instead of "day" for time comparison.
-;; It hides tasks with a scheduled time like "<2020-11-15 Sun 11:30>"
-(setq org-agenda-todo-ignore-time-comparison-use-seconds t)
-
-;; Hide the deadline prewarning prior to scheduled date.
-(setq org-agenda-skip-deadline-prewarning-if-scheduled 'pre-scheduled)
 #+end_src
