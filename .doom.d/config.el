@@ -77,6 +77,10 @@
 (setq org-clock-sound "/System/Library/Sounds/Glass.aiff")
 (setq doom-font-increment 1) ; Default is 2, let's make it more granular
 
+;; for jq-mode - auto load when json file
+(with-eval-after-load "json-mode"
+  (define-key json-mode-map (kbd "C-c C-j") #'jq-interactively))
+
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)

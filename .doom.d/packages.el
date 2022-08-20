@@ -5,7 +5,6 @@
 ;; on the command line, then restart Emacs for the changes to take effect -- or
 ;; use 'M-x doom/reload'.
 
-
 (package! persistent-scratch)
 (package! rjsx-mode)
 (package! graphql-mode)
@@ -22,6 +21,8 @@
 (package! autothemer)
 (package! jest)
 (package! anki-editor)
+(package! jq-mode)
+(package! highlight-indent-guides)
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
