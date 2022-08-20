@@ -502,7 +502,1268 @@
   (tree-sitter-hl-face:keyword.compiler          (:foreground peachRed :bold t :italic t))
 
   (focus-unfocused (:foreground sumiInk-4))
- ))
+
+
+  ;; And then all the stuff I generated from autothemer-generate-templates
+(anzu-mode-line-no-match
+  (:inherit 'anzu-mode-line))
+ (helpful-heading
+  (:weight 'bold))
+ (edebug-disabled-breakpoint
+  (:extend t :background winterYellow))
+ (edebug-enabled-breakpoint
+  (:inherit 'highlight))
+ (Info-quoted
+  (:inherit 'fixed-pitch-serif))
+ (info-index-match
+  (:inherit 'match))
+ (info-header-node
+  (:inherit 'info-node))
+ (info-xref-visited
+  (:inherit
+   ('link-visited 'info-xref)))
+ (info-menu-star
+  (:foreground samuraiRed))
+ (info-menu-header
+  (:weight 'bold :inherit 'variable-pitch))
+ (info-title-4
+  (:weight 'bold :inherit 'variable-pitch))
+ (info-title-3
+  (:height 1.2 :inherit 'info-title-4))
+ (info-title-2
+  (:height 1.2 :inherit 'info-title-3))
+ (info-title-1
+  (:height 1.2 :inherit 'info-title-2))
+ (info-node
+  (:weight 'bold :slant 'italic :foreground fujiWhite))
+ (git-gutter-fr:deleted
+  (:inherit
+   ('git-gutter:deleted 'fringe)))
+ (git-gutter-fr:added
+  (:inherit
+   ('git-gutter:added 'fringe)))
+ (git-gutter-fr:modified
+  (:inherit
+   ('git-gutter:modified 'fringe)))
+ (git-gutter:unchanged
+  (:background roninYellow :inherit 'default))
+ (git-gutter:separator
+  (:weight 'bold :foreground lightBlue :inherit 'default))
+ (whitespace-space-after-tab
+  (:foreground samuraiRed :background roninYellow))
+ (whitespace-empty
+  (:foreground samuraiRed :background roninYellow))
+ (whitespace-big-indent
+  (:foreground samuraiRed :background samuraiRed))
+ (whitespace-indentation
+  (:foreground samuraiRed :background roninYellow))
+ (whitespace-space-before-tab
+  (:foreground samuraiRed :background roninYellow))
+ (whitespace-line
+  (:foreground sakuraPink :background winterGreen))
+ (whitespace-trailing
+  (:weight 'bold :foreground roninYellow :background samuraiRed))
+ (whitespace-newline
+  (:weight 'normal :foreground springViolet2))
+ (whitespace-tab
+  (:foreground springViolet2 :background sumiInk-3))
+ (whitespace-hspace
+  (:foreground springViolet2 :background winterYellow))
+ (whitespace-space
+  (:foreground springViolet2 :background winterGreen))
+ (evil-embrace-section-title-face
+  (:inherit 'font-lock-doc-face))
+ (embrace-help-mark-func-face
+  (:inherit 'font-lock-function-name-face))
+ (embrace-help-pair-face
+  (:inverse-video t :inherit 'font-lock-function-name-face))
+ (embrace-help-separator-face
+  (:inherit 'font-lock-comment-face))
+ (embrace-help-key-face
+  (:weight 'bold :inherit 'font-lock-constant-face))
+ (eros-result-overlay-face
+  (:box
+   (:line-width -1 :color sumiInk-0)
+   :background sumiInk-1b))
+ (highlight-quoted-quote
+  (:inherit 'font-lock-keyword-face))
+ (highlight-numbers-number
+  (:inherit 'font-lock-constant-face))
+ (highlight-indent-guides-top-character-face
+  (:foreground sumiInk-4))
+ (highlight-indent-guides-top-even-face
+  (:background sumiInk-4))
+ (highlight-indent-guides-top-odd-face
+  (:background comet))
+ (so-long-mode-line-inactive
+  (:inherit 'mode-line-inactive))
+ (so-long-mode-line-active
+  (:inherit 'mode-line-emphasis))
+ (ffap
+  (:inherit 'highlight))
+ (sp-show-pair-match-content-face nil)
+ (sp-show-pair-enclosing
+  (:inherit 'highlight))
+ (sp-show-pair-mismatch-face
+  (:inherit 'show-paren-mismatch))
+ (sp-show-pair-match-face
+  (:inherit 'show-paren-match))
+ (sp-wrap-tag-overlay-face
+  (:inherit 'sp-pair-overlay-face))
+ (sp-wrap-overlay-closing-pair
+  (:foreground samuraiRed :inherit 'sp-wrap-overlay-face))
+ (sp-wrap-overlay-opening-pair
+  (:foreground sumiInk-0 :inherit 'sp-wrap-overlay-face))
+ (sp-wrap-overlay-face
+  (:inherit 'sp-pair-overlay-face))
+ (sp-pair-overlay-face
+  (:inherit 'highlight))
+ (flycheck-posframe-border-face nil)
+ (flycheck-verify-select-checker
+  (:box
+   (:style 'released-button)))
+ (flycheck-error-list-highlight
+  (:weight 'bold))
+ (flycheck-error-list-error-message nil)
+ (flycheck-error-list-checker-name
+  (:inherit 'font-lock-function-name-face))
+ (flycheck-error-list-id-with-explainer
+  (:box
+   (:style 'released-button)
+   :inherit 'flycheck-error-list-id))
+ (flycheck-error-list-id
+  (:inherit 'font-lock-type-face))
+ (flycheck-error-list-filename
+  (:weight 'normal :inherit 'mode-line-buffer-id))
+ (flycheck-error-list-column-number nil)
+ (flycheck-error-list-line-number nil)
+ (flycheck-info
+  (:underline
+   (:style 'wave :color winterGreen)))
+ (flycheck-warning
+  (:underline
+   (:style 'wave :color roninYellow)))
+ (flycheck-error
+  (:underline
+   (:style 'wave :color samuraiRed)))
+ (flycheck-delimited-error nil)
+ (flycheck-error-delimiter nil)
+ (ibuffer-locked-buffer
+  (:foreground sakuraPink))
+ (which-key-docstring-face
+  (:inherit 'which-key-note-face))
+ (which-key-special-key-face
+  (:weight 'bold :inverse-video t :inherit 'which-key-key-face))
+ (which-key-highlighted-command-face
+  (:underline t :inherit 'which-key-command-description-face))
+ (which-key-note-face
+  (:inherit 'which-key-separator-face))
+ (which-key-separator-face
+  (:inherit 'font-lock-comment-face))
+ (company-echo-common
+  (:foreground samuraiRed))
+ (company-echo nil)
+ (company-tooltip-quick-access-selection
+  (:inherit 'company-tooltip-annotation-selection))
+ (company-tooltip-annotation-selection
+  (:inherit 'company-tooltip-annotation))
+ (company-tooltip-common-selection
+  (:inherit 'company-tooltip-common))
+ (company-tooltip-search-selection
+  (:inherit 'highlight))
+ (ivy-posframe-cursor
+  (:inherit 'cursor))
+ (avy-goto-char-timer-face
+  (:inherit 'highlight))
+ (avy-background-face
+  (:foreground fujiGray))
+ (avy-lead-face
+  (:foreground fujiWhite :background samuraiRed))
+ (avy-lead-face-2
+  (:foreground fujiWhite :background sakuraPink))
+ (avy-lead-face-1
+  (:foreground fujiWhite :background old-white))
+ (avy-lead-face-0
+  (:foreground fujiWhite :background sumiInk-4))
+ (all-the-icons-ivy-dir-face
+  (:foreground fujiWhite))
+ (counsel-outline-8
+  (:inherit 'org-level-8))
+ (counsel-outline-7
+  (:inherit 'org-level-7))
+ (counsel-outline-6
+  (:inherit 'org-level-6))
+ (counsel-outline-5
+  (:inherit 'org-level-5))
+ (counsel-outline-4
+  (:inherit 'org-level-4))
+ (counsel-outline-3
+  (:inherit 'org-level-3))
+ (counsel-outline-2
+  (:inherit 'org-level-2))
+ (counsel-outline-1
+  (:inherit 'org-level-1))
+ (counsel-application-name
+  (:inherit 'font-lock-builtin-face))
+ (counsel-evil-register-face
+  (:inherit 'counsel-outline-1))
+ (counsel--mark-ring-highlight
+  (:inherit 'highlight))
+ (counsel-active-mode
+  (:inherit 'font-lock-builtin-face))
+ (counsel-key-binding
+  (:inherit 'font-lock-keyword-face))
+ (counsel-variable-documentation
+  (:inherit 'font-lock-comment-face))
+ (xref-line-number
+  (:inherit 'compilation-line-number))
+ (ivy-yanked-word
+  (:inherit 'highlight))
+ (ivy-completions-annotations
+  (:inherit 'completions-annotations))
+ (ivy-separator
+  (:inherit 'font-lock-doc-face))
+ (ivy-prompt-match
+  (:inherit 'ivy-current-match))
+ (ivy-highlight-face
+  (:inherit 'highlight))
+ (ivy-virtual
+  (:inherit 'font-lock-builtin-face))
+ (ivy-remote
+  (:foreground crystalBlue))
+ (ivy-modified-outside-buffer
+  (:inherit 'default))
+ (ivy-modified-buffer
+  (:inherit 'default))
+ (ivy-org
+  (:inherit 'org-level-4))
+ (ivy-subdir
+  (:inherit 'dired-directory))
+ (ivy-match-required-face
+  (:foreground samuraiRed :inherit 'minibuffer-prompt))
+ (ivy-minibuffer-match-face-4
+  (:weight 'bold :background katanaGray))
+ (ivy-minibuffer-match-face-3
+  (:weight 'bold :background crystalBlue))
+ (ivy-cursor
+  (:foreground sumiInk-0 :background fujiWhite))
+ (evil-goggles-paste-face
+  (:inherit 'evil-goggles-default-face))
+ (evil-goggles-record-macro-face
+  (:inherit 'evil-goggles-default-face))
+ (evil-goggles-set-marker-face
+  (:inherit 'evil-goggles-default-face))
+ (evil-goggles-replace-with-register-face
+  (:inherit 'evil-goggles-default-face))
+ (evil-goggles-nerd-commenter-face
+  (:inherit 'evil-goggles-default-face))
+ (evil-goggles-commentary-face
+  (:inherit 'evil-goggles-default-face))
+ (evil-goggles-surround-face
+  (:inherit 'evil-goggles-default-face))
+ (evil-goggles-shift-face
+  (:inherit 'evil-goggles-default-face))
+ (evil-goggles-fill-and-move-face
+  (:inherit 'evil-goggles-default-face))
+ (evil-goggles-join-face
+  (:inherit 'evil-goggles-default-face))
+ (evil-goggles-indent-face
+  (:inherit 'evil-goggles-default-face))
+ (evil-goggles-change-face
+  (:inherit 'evil-goggles-default-face))
+ (evil-goggles-yank-face
+  (:inherit 'evil-goggles-default-face))
+ (evil-goggles-delete-face
+  (:inherit 'evil-goggles-default-face))
+ (evil-goggles--pulse-face nil)
+ (evil-goggles-default-face
+  (:inherit 'region))
+ (evil-snipe-matches-face
+  (:inherit 'region))
+ (evil-snipe-first-match-face
+  (:inherit 'isearch))
+ (nav-flash-face
+  (:extend t :inherit 'highlight))
+ (pulse-highlight-face
+  (:background boatYellow2))
+ (pulse-highlight-start-face
+  (:background boatYellow2))
+ (persp-face-lighter-default
+  (:inherit 'italic))
+ (persp-face-lighter-nil-persp
+  (:inherit 'bold-italic))
+ (persp-face-lighter-buffer-not-in-persp
+  (:weight 'bold :foreground waveBlue-1 :background samuraiRed))
+ (doom-modeline-buffer-timemachine
+  (:slant 'italic :inherit 'doom-modeline-buffer-file))
+ (doom-modeline-lsp-running
+  (:weight 'normal :slant 'normal :inherit 'compilation-mode-line-run))
+ (doom-modeline-lsp-error
+  (:weight 'normal :inherit 'error))
+ (doom-modeline-lsp-warning
+  (:weight 'normal :inherit 'warning))
+ (doom-modeline-lsp-success
+  (:weight 'normal :inherit 'success))
+ (doom-modeline-repl-warning
+  (:weight 'normal :inherit 'warning))
+ (doom-modeline-repl-success
+  (:weight 'normal :inherit 'success))
+ (doom-modeline-persp-buffer-not-in-persp
+  (:inherit
+   ('font-lock-doc-face 'bold 'italic)))
+ (doom-modeline-persp-name
+  (:inherit
+   ('font-lock-comment-face 'italic)))
+ (doom-modeline-debug-visual
+  (:background boatYellow1))
+ (doom-modeline-bar-inactive
+  (:background sumiInk-4))
+ (doom-modeline-unread-number
+  (:weight 'normal :slant 'italic))
+ (doom-modeline-notification
+  (:inherit 'doom-modeline-warning))
+ (doom-modeline-urgent
+  (:inherit
+   ('error 'bold)))
+ (doom-modeline-warning
+  (:inherit
+   ('warning 'bold)))
+ (doom-modeline-debug
+  (:slant 'normal :inherit
+          ('font-lock-doc-face 'bold)))
+ (doom-modeline-input-method-alt
+  (:slant 'normal :inherit
+          ('font-lock-doc-face 'bold)))
+ (doom-modeline-input-method
+  (:inherit
+   ('mode-line-emphasis 'bold)))
+ (doom-modeline-host
+  (:inherit 'italic))
+ (doom-modeline-highlight
+  (:inherit 'mode-line-emphasis))
+ (doom-modeline-project-root-dir
+  (:inherit
+   ('mode-line-emphasis 'bold)))
+ (doom-modeline-project-parent-dir
+  (:inherit
+   ('font-lock-comment-face 'bold)))
+ (doom-modeline-buffer-minor-mode
+  (:slant 'normal :inherit 'font-lock-doc-face))
+ (doom-modeline-vspc-face
+  (:inherit 'variable-pitch))
+ (doom-modeline-spc-face
+  (:inherit 'mode-line))
+ (all-the-icons-dsilver
+  (:foreground katanaGray))
+ (all-the-icons-lsilver
+  (:foreground old-white))
+ (all-the-icons-silver
+  (:foreground fujiGray))
+ (all-the-icons-dpink
+  (:foreground sakuraPink))
+ (all-the-icons-lpink
+  (:foreground fujiWhite))
+ (all-the-icons-pink
+  (:foreground fujiWhite))
+ (all-the-icons-dcyan
+  (:foreground sumiInk-4))
+ (all-the-icons-lcyan
+  (:foreground lightBlue))
+ (all-the-icons-cyan-alt
+  (:foreground lightBlue))
+ (all-the-icons-cyan
+  (:foreground waveAqua2))
+ (all-the-icons-dorange
+  (:foreground boatYellow1))
+ (all-the-icons-lorange
+  (:foreground roninYellow))
+ (all-the-icons-orange
+  (:foreground roninYellow))
+ (all-the-icons-lpurple
+  (:foreground fujiWhite))
+ (all-the-icons-purple-alt
+  (:foreground crystalBlue))
+ (all-the-icons-dmaroon
+  (:foreground fujiGray))
+ (all-the-icons-lmaroon
+  (:foreground boatYellow1))
+ (all-the-icons-maroon
+  (:foreground boatYellow1))
+ (all-the-icons-dblue
+  (:foreground sumiInk-4))
+ (all-the-icons-lblue
+  (:foreground lightBlue))
+ (all-the-icons-blue-alt
+  (:foreground dragonBlue))
+ (all-the-icons-blue
+  (:foreground waveAqua2))
+ (all-the-icons-dyellow
+  (:foreground boatYellow1))
+ (all-the-icons-lyellow
+  (:foreground surimiOrange))
+ (all-the-icons-yellow
+  (:foreground roninYellow))
+ (all-the-icons-lgreen
+  (:foreground old-white))
+ (all-the-icons-red-alt
+  (:foreground autumnRed))
+ (all-the-icons-dred
+  (:foreground winterRed))
+ (all-the-icons-lred
+  (:foreground peachRed))
+ (all-the-icons-red
+  (:foreground autumnRed))
+ (diary-button nil)
+ (diary-time
+  (:inherit 'font-lock-variable-name-face))
+ (diary-anniversary
+  (:inherit 'font-lock-keyword-face))
+ (vi-tilde-fringe-face
+  (:inherit
+   ('quote 'default)))
+ (doom-themes-org-hash-tag
+  (:inherit 'org-tag))
+ (doom-themes-org-at-tag
+  (:inherit 'org-formula))
+ (solaire-header-line-face
+  (:inherit 'header-line))
+ (solaire-mode-line-inactive-face
+  (:inherit 'mode-line-inactive))
+ (solaire-mode-line-face
+  (:inherit 'mode-line))
+ (solaire-region-face
+  (:inherit 'region))
+ (solaire-org-hide-face
+  (:inherit 'org-hide))
+ (solaire-hl-line-face
+  (:inherit 'hl-line))
+ (solaire-line-number-face
+  (:inherit
+   ('line-number 'solaire-default-face)))
+ (solaire-fringe-face
+  (:inherit 'solaire-default-face))
+ (dired-sidebar-face nil)
+ (dired-subtree-depth-6-face
+  (:background sumiInk-1b))
+ (dired-subtree-depth-5-face
+  (:background sumiInk-1b))
+ (dired-subtree-depth-4-face
+  (:background sumiInk-1))
+ (dired-subtree-depth-3-face
+  (:background sumiInk-1))
+ (dired-subtree-depth-2-face
+  (:background winterBlue))
+ (dired-subtree-depth-1-face
+  (:background winterBlue))
+ (rxt-highlight-face
+  (:background sumiInk-1))
+ (reb-regexp-grouping-construct
+  (:weight 'bold :underline t :inherit 'font-lock-keyword-face))
+ (reb-regexp-grouping-backslash
+  (:weight 'bold :underline t :inherit 'font-lock-keyword-face))
+ (reb-match-3
+  (:background winterYellow))
+ (reb-match-2
+  (:background winterYellow))
+ (reb-match-1
+  (:background waveBlue-1))
+ (reb-match-0
+  (:background waveBlue-2))
+ (hl-todo
+  (:weight 'bold :foreground sakuraPink))
+ (compilation-column-number
+  (:inherit 'font-lock-doc-face))
+ (compilation-line-number
+  (:inherit 'font-lock-keyword-face))
+ (compilation-mode-line-exit
+  (:weight 'bold :foreground winterGreen :inherit 'compilation-info))
+ (compilation-mode-line-run
+  (:inherit 'compilation-warning))
+ (compilation-mode-line-fail
+  (:weight 'bold :foreground samuraiRed :inherit 'compilation-error))
+ (compilation-info
+  (:inherit 'success))
+ (compilation-warning
+  (:inherit 'warning))
+ (compilation-error
+  (:inherit 'error))
+ (magit-popup-option-value
+  (:inherit 'font-lock-string-face))
+ (magit-popup-disabled-argument
+  (:inherit 'shadow))
+ (magit-popup-argument
+  (:inherit 'font-lock-warning-face))
+ (magit-popup-key
+  (:inherit 'font-lock-builtin-face))
+ (magit-popup-heading
+  (:inherit 'font-lock-keyword-face))
+ (magit-blame-date nil)
+ (magit-blame-name nil)
+ (magit-blame-hash nil)
+ (magit-blame-summary nil)
+ (magit-blame-heading
+  (:weight 'normal :slant 'normal :extend t :inherit 'magit-blame-highlight))
+ (magit-blame-dimmed
+  (:weight 'normal :slant 'normal :inherit 'magit-dimmed))
+ (magit-blame-margin
+  (:weight 'normal :slant 'normal :inherit 'magit-blame-highlight))
+ (magit-blame-highlight
+  (:extend t :foreground fujiWhite :background winterYellow))
+ (magit-reflog-other
+  (:foreground lightBlue))
+ (magit-reflog-remote
+  (:foreground lightBlue))
+ (magit-reflog-cherry-pick
+  (:foreground sumiInk-0))
+ (magit-reflog-rebase
+  (:foreground peachRed))
+ (magit-reflog-reset
+  (:foreground samuraiRed))
+ (magit-reflog-checkout
+  (:foreground waveBlue-1))
+ (magit-reflog-merge
+  (:foreground sumiInk-0))
+ (magit-reflog-amend
+  (:foreground peachRed))
+ (magit-reflog-commit
+  (:foreground sumiInk-0))
+ (magit-bisect-bad
+  (:foreground autumnRed))
+ (magit-bisect-skip
+  (:foreground boatYellow1))
+ (magit-bisect-good
+  (:foreground winterYellow))
+ (magit-sequence-exec
+  (:inherit 'magit-hash))
+ (magit-sequence-onto
+  (:inherit 'magit-sequence-done))
+ (magit-sequence-done
+  (:inherit 'magit-hash))
+ (magit-sequence-drop
+  (:foreground peachRed))
+ (magit-sequence-head
+  (:foreground lightBlue))
+ (magit-sequence-part
+  (:foreground carpYellow))
+ (magit-sequence-stop
+  (:foreground fujiWhite))
+ (magit-sequence-pick
+  (:inherit 'default))
+ (magit-filename
+  (:weight 'normal))
+ (magit-cherry-equivalent
+  (:foreground peachRed))
+ (magit-cherry-unmatched
+  (:foreground lightBlue))
+ (magit-signature-error
+  (:foreground lightBlue))
+ (magit-signature-revoked
+  (:foreground sakuraPink))
+ (magit-signature-expired-key
+  (:inherit 'magit-signature-expired))
+ (magit-signature-expired
+  (:foreground roninYellow))
+ (magit-signature-untrusted
+  (:foreground waveAqua2))
+ (magit-signature-bad
+  (:weight 'bold :foreground samuraiRed))
+ (magit-signature-good
+  (:foreground sumiInk-0))
+ (magit-keyword-squash
+  (:inherit 'font-lock-warning-face))
+ (magit-keyword
+  (:inherit 'font-lock-string-face))
+ (magit-refname-pullreq
+  (:inherit 'magit-refname))
+ (magit-refname-wip
+  (:inherit 'magit-refname))
+ (magit-refname-stash
+  (:inherit 'magit-refname))
+ (magit-refname
+  (:foreground fujiWhite))
+ (magit-head
+  (:inherit 'magit-branch-local))
+ (magit-branch-upstream
+  (:slant 'italic))
+ (magit-branch-current
+  (:box 1 :inherit 'magit-branch-local))
+ (magit-branch-local
+  (:foreground lightBlue))
+ (magit-branch-remote-head
+  (:box 1 :inherit 'magit-branch-remote))
+ (magit-branch-remote
+  (:foreground fujiWhite))
+ (magit-tag
+  (:foreground carpYellow))
+ (magit-hash
+  (:foreground fujiGray))
+ (magit-dimmed
+  (:foreground katanaGray))
+ (magit-header-line-key
+  (:inherit 'font-lock-builtin-face))
+ (magit-header-line
+  (:inherit 'magit-section-heading))
+ (package-status-avail-obso
+  (:inherit 'package-status-incompat))
+ (package-status-incompat
+  (:inherit 'error))
+ (package-status-unsigned
+  (:inherit 'font-lock-warning-face))
+ (package-status-dependency
+  (:inherit 'package-status-installed))
+ (package-status-installed
+  (:inherit 'font-lock-comment-face))
+ (package-status-disabled
+  (:inherit 'font-lock-warning-face))
+ (package-status-held
+  (:inherit 'font-lock-constant-face))
+ (package-status-new
+  (:inherit
+   ('bold 'package-status-available)))
+ (package-status-available
+  (:inherit 'default))
+ (package-status-external
+  (:inherit 'package-status-built-in))
+ (package-status-built-in
+  (:inherit 'font-lock-builtin-face))
+ (package-description
+  (:inherit 'default))
+ (package-name
+  (:inherit 'link))
+ (package-help-section-name
+  (:inherit
+   ('bold 'font-lock-function-name-face)))
+ (browse-url-button
+  (:inherit 'link))
+ (magit-header-line-log-select
+  (:inherit 'bold))
+ (magit-log-date
+  (:weight 'normal :slant 'normal :foreground fujiWhite))
+ (magit-log-author
+  (:weight 'normal :slant 'normal :foreground peachRed))
+ (magit-log-graph
+  (:foreground fujiWhite))
+ (magit-diffstat-removed
+  (:foreground autumnRed))
+ (magit-diffstat-added
+  (:foreground winterYellow))
+ (magit-diff-whitespace-warning
+  (:inherit 'trailing-whitespace))
+ (magit-diff-context-highlight
+  (:extend t :foreground springViolet2 :background winterGreen))
+ (magit-diff-their-highlight
+  (:inherit 'magit-diff-added-highlight))
+ (magit-diff-base-highlight
+  (:extend t :foreground fujiWhite :background winterYellow))
+ (magit-diff-our-highlight
+  (:inherit 'magit-diff-removed-highlight))
+ (magit-diff-removed-highlight
+  (:extend t :foreground fujiWhite :background winterYellow))
+ (magit-diff-added-highlight
+  (:extend t :foreground fujiWhite :background winterYellow))
+ (magit-diff-context
+  (:extend t :foreground springViolet2))
+ (magit-diff-their
+  (:inherit 'magit-diff-added))
+ (magit-diff-base
+  (:extend t :foreground fujiWhite :background winterYellow))
+ (magit-diff-our
+  (:inherit 'magit-diff-removed))
+ (magit-diff-removed
+  (:extend t :foreground fujiWhite :background winterYellow))
+ (magit-diff-added
+  (:extend t :foreground fujiWhite :background winterYellow))
+ (magit-diff-conflict-heading
+  (:inherit 'magit-diff-hunk-heading))
+ (magit-diff-lines-boundary
+  (:extend t :inherit 'magit-diff-lines-heading))
+ (magit-diff-lines-heading
+  (:extend t :foreground fujiWhite :background winterYellow :inherit 'magit-diff-hunk-heading-highlight))
+ (magit-diff-revision-summary-highlight
+  (:inherit 'magit-diff-hunk-heading-highlight))
+ (magit-diff-revision-summary
+  (:inherit 'magit-diff-hunk-heading))
+ (magit-diff-hunk-region
+  (:extend t :inherit 'bold))
+ (magit-diff-hunk-heading-selection
+  (:extend t :foreground autumnYellow :inherit 'magit-diff-hunk-heading-highlight))
+ (magit-diff-hunk-heading-highlight
+  (:extend t :foreground springViolet2 :background sumiInk-4))
+ (magit-diff-hunk-heading
+  (:extend t :foreground springViolet2 :background winterYellow))
+ (magit-diff-file-heading-selection
+  (:extend t :foreground autumnYellow :inherit 'magit-diff-file-heading-highlight))
+ (magit-diff-file-heading-highlight
+  (:extend t :inherit 'magit-section-highlight))
+ (magit-diff-file-heading
+  (:weight 'bold :extend t))
+ (smerge-refined-added
+  (:background winterGreen :inherit 'smerge-refined-change))
+ (smerge-refined-removed
+  (:background samuraiRed :inherit 'smerge-refined-change))
+ (smerge-refined-changed nil)
+ (smerge-markers
+  (:extend t :background winterYellow))
+ (smerge-base
+  (:extend t :background boatYellow1))
+ (smerge-lower
+  (:extend t :background winterYellow))
+ (smerge-upper
+  (:extend t :background winterYellow))
+ (diff-refine-added
+  (:background winterGreen :inherit 'diff-refine-changed))
+ (diff-refine-removed
+  (:background samuraiRed :inherit 'diff-refine-changed))
+ (diff-refine-changed
+  (:background boatYellow2))
+ (diff-nonexistent
+  (:inherit 'diff-file-header))
+ (diff-context
+  (:extend t))
+ (diff-function
+  (:inherit 'diff-header))
+ (diff-indicator-changed
+  (:foreground boatYellow2 :inherit 'diff-changed))
+ (diff-indicator-added
+  (:foreground winterGreen :inherit 'diff-added))
+ (diff-indicator-removed
+  (:foreground samuraiRed :inherit 'diff-removed))
+ (diff-changed nil)
+ (diff-added
+  (:extend t :background winterYellow :inherit 'diff-changed))
+ (diff-removed
+  (:extend t :background winterYellow :inherit 'diff-changed))
+ (diff-hunk-header
+  (:inherit 'diff-header))
+ (diff-index
+  (:inherit 'diff-file-header))
+ (diff-file-header
+  (:weight 'bold :extend t :background springViolet1))
+ (diff-header
+  (:extend t :background fujiGray))
+ (git-commit-comment-action
+  (:inherit 'bold))
+ (git-commit-comment-file
+  (:inherit 'git-commit-pseudo-header))
+ (git-commit-comment-heading
+  (:inherit 'git-commit-known-pseudo-header))
+ (git-commit-comment-detached
+  (:inherit 'git-commit-comment-branch-local))
+ (git-commit-comment-branch-remote
+  (:inherit 'font-lock-variable-name-face))
+ (git-commit-comment-branch-local
+  (:inherit 'font-lock-variable-name-face))
+ (git-commit-known-pseudo-header
+  (:inherit 'font-lock-keyword-face))
+ (git-commit-pseudo-header
+  (:inherit 'font-lock-string-face))
+ (git-commit-keyword
+  (:inherit 'font-lock-string-face))
+ (git-commit-nonempty-second-line
+  (:inherit 'font-lock-warning-face))
+ (git-commit-overlong-summary
+  (:inherit 'font-lock-warning-face))
+ (git-commit-summary
+  (:inherit 'font-lock-type-face))
+ (log-edit-unknown-header
+  (:inherit 'font-lock-comment-face))
+ (log-edit-header
+  (:inherit 'font-lock-keyword-face))
+ (log-edit-summary
+  (:inherit 'font-lock-function-name-face))
+ (message-mml
+  (:foreground waveAqua2))
+ (message-cited-text-4
+  (:foreground autumnRed))
+ (message-cited-text-3
+  (:foreground roninYellow))
+ (message-cited-text-2
+  (:foreground winterGreen))
+ (message-cited-text-1
+  (:foreground fujiWhite))
+ (message-separator
+  (:foreground lightBlue))
+ (message-header-newsgroups
+  (:weight 'bold :slant 'italic :foreground roninYellow))
+ (dired-ignored
+  (:inherit 'shadow))
+ (dired-special
+  (:inherit 'font-lock-variable-name-face))
+ (dired-symlink
+  (:inherit 'font-lock-keyword-face))
+ (dired-directory
+  (:inherit 'font-lock-function-name-face))
+ (dired-set-id
+  (:inherit 'font-lock-warning-face))
+ (dired-perm-write
+  (:inherit 'font-lock-comment-delimiter-face))
+ (dired-warning
+  (:inherit 'font-lock-warning-face))
+ (dired-flagged
+  (:inherit 'error))
+ (dired-marked
+  (:inherit 'warning))
+ (dired-header
+  (:inherit 'font-lock-type-face))
+ (epa-field-body
+  (:slant 'italic :foreground springBlue))
+ (epa-field-name
+  (:weight 'bold :foreground lightBlue))
+ (epa-string
+  (:foreground fujiWhite))
+ (epa-validity-disabled
+  (:slant 'italic :inverse-video t))
+ (epa-validity-low
+  (:slant 'italic))
+ (epa-validity-medium
+  (:slant 'italic :foreground lightBlue))
+ (epa-validity-high
+  (:weight 'bold :foreground lightBlue))
+ (rmail-header-name
+  (:inherit 'font-lock-function-name-face))
+ (rmail-highlight
+  (:inherit 'highlight))
+ (mm-command-output
+  (:foreground winterGreen))
+ (change-log-acknowledgment
+  (:inherit 'font-lock-comment-face))
+ (change-log-function
+  (:inherit 'font-lock-variable-name-face))
+ (change-log-conditionals
+  (:inherit 'font-lock-variable-name-face))
+ (change-log-list
+  (:inherit 'font-lock-keyword-face))
+ (change-log-file
+  (:inherit 'font-lock-function-name-face))
+ (change-log-email
+  (:inherit 'font-lock-variable-name-face))
+ (change-log-name
+  (:inherit 'font-lock-constant-face))
+ (change-log-date
+  (:inherit 'font-lock-string-face))
+ (magit-mode-line-process-error
+  (:inherit 'error))
+ (magit-mode-line-process
+  (:inherit 'mode-line-emphasis))
+ (magit-process-ng
+  (:foreground samuraiRed :inherit 'magit-section-heading))
+ (magit-process-ok
+  (:foreground sumiInk-0 :inherit 'magit-section-heading))
+ (transient-teal
+  (:foreground dragonBlue :inherit 'transient-key))
+ (transient-pink
+  (:foreground sakuraPink :inherit 'transient-key))
+ (transient-amaranth
+  (:foreground samuraiRed :inherit 'transient-key))
+ (transient-blue
+  (:foreground waveBlue-1 :inherit 'transient-key))
+ (transient-red
+  (:foreground samuraiRed :inherit 'transient-key))
+ (transient-separator
+  (:extend t :background winterYellow))
+ (transient-higher-level
+  (:underline t))
+ (transient-disabled-suffix
+  (:weight 'bold :foreground sumiInk-0 :background samuraiRed))
+ (transient-enabled-suffix
+  (:weight 'bold :foreground sumiInk-0 :background sumiInk-0))
+ (transient-inapt-suffix
+  (:slant 'italic :inherit 'shadow))
+ (transient-mismatched-key
+  (:underline t))
+ (transient-nonstandard-key
+  (:underline t))
+ (transient-unreachable-key
+  (:inherit 'shadow))
+ (transient-active-infix
+  (:inherit 'secondary-selection))
+ (transient-unreachable
+  (:inherit 'shadow))
+ (transient-inactive-value
+  (:inherit 'shadow))
+ (transient-inactive-argument
+  (:inherit 'shadow))
+ (transient-value
+  (:inherit 'font-lock-string-face))
+ (transient-argument
+  (:inherit 'font-lock-warning-face))
+ (transient-key
+  (:inherit 'font-lock-builtin-face))
+ (transient-heading
+  (:inherit 'font-lock-keyword-face))
+ (magit-section-heading-selection
+  (:extend t :foreground autumnYellow))
+ (magit-section-secondary-heading
+  (:weight 'bold :extend t))
+ (magit-section-heading
+  (:weight 'bold :extend t :foreground carpYellow))
+ (magit-section-highlight
+  (:extend t :background winterGreen))
+ (+org-todo-cancel
+  (:inherit
+   ('bold 'error 'org-todo)))
+ (+org-todo-onhold
+  (:inherit
+   ('bold 'warning 'org-todo)))
+ (+org-todo-project
+  (:inherit
+   ('bold 'font-lock-doc-face 'org-todo)))
+ (+org-todo-active
+  (:inherit
+   ('bold 'font-lock-constant-face 'org-todo)))
+ (org-mode-line-clock-overrun
+  (:background samuraiRed :inherit 'mode-line))
+ (org-mode-line-clock
+  (:inherit 'mode-line))
+ (org-tag-group
+  (:inherit 'org-tag))
+ (org-macro
+  (:inherit 'org-latex-and-related))
+ (org-latex-and-related
+  (:foreground carpYellow))
+ (org-agenda-calendar-sexp
+  (:inherit 'default))
+ (org-agenda-calendar-event
+  (:inherit 'default))
+ (org-agenda-diary
+  (:inherit 'default))
+ (org-agenda-current-time
+  (:inherit 'org-time-grid))
+ (org-time-grid
+  (:foreground carpYellow))
+ (org-agenda-filter-regexp
+  (:inherit 'mode-line))
+ (org-agenda-filter-effort
+  (:inherit 'mode-line))
+ (org-agenda-filter-category
+  (:inherit 'mode-line))
+ (org-agenda-filter-tags
+  (:inherit 'mode-line))
+ (org-agenda-restriction-lock
+  (:background sumiInk-1b))
+ (org-upcoming-distant-deadline
+  (:inherit 'org-default))
+ (org-imminent-deadline
+  (:inherit 'org-warning))
+ (org-scheduled-previously
+  (:foreground roninYellow))
+ (org-agenda-dimmed-todo-face
+  (:foreground katanaGray))
+ (org-scheduled-today
+  (:foreground springGreen))
+ (org-scheduled
+  (:foreground springGreen))
+ (org-agenda-date-weekend
+  (:weight 'bold :inherit 'org-agenda-date))
+ (org-agenda-clocking
+  (:inherit 'secondary-selection))
+ (org-agenda-date-weekend-today
+  (:inherit 'org-agenda-date-today))
+ (org-agenda-date-today
+  (:weight 'bold :slant 'italic :inherit 'org-agenda-date))
+ (org-agenda-date
+  (:inherit 'org-agenda-structure))
+ (org-agenda-structure-filter
+  (:inherit
+   ('org-warning 'org-agenda-structure)))
+ (org-agenda-structure-secondary
+  (:inherit 'org-agenda-structure))
+ (org-agenda-structure
+  (:foreground lightBlue))
+ (org-clock-overlay
+  (:foreground fujiWhite :background dragonBlue))
+ (org-verse
+  (:inherit 'org-block))
+ (org-quote
+  (:inherit 'org-block))
+ (org-verbatim
+  (:inherit
+   ('fixed-pitch 'shadow)))
+ (org-document-info-keyword
+  (:inherit 'shadow))
+ (org-document-info
+  (:foreground lightBlue))
+ (org-document-title
+  (:weight 'bold :foreground lightBlue))
+ (org-formula
+  (:foreground roninYellow :inherit 'fixed-pitch))
+ (org-table-header
+  (:foreground sumiInk-0 :background fujiWhite :inherit 'org-table))
+ (org-table
+  (:foreground lightBlue :inherit 'fixed-pitch))
+ (org-checkbox-statistics-done
+  (:inherit 'org-done))
+ (org-checkbox-statistics-todo
+  (:inherit 'org-todo))
+ (org-checkbox
+  (:inherit 'bold))
+ (org-priority
+  (:inherit 'font-lock-keyword-face))
+ (org-agenda-done
+  (:foreground springGreen))
+ (org-list-dt
+  (:weight 'bold))
+ (org-tag
+  (:weight 'bold))
+ (org-sexp-date
+  (:foreground lightBlue))
+ (org-date-selected
+  (:inverse-video t :foreground fujiWhite))
+ (org-target
+  (:underline t))
+ (org-link
+  (:inherit 'link))
+ (org-cite-key
+  (:inherit 'link))
+ (org-cite
+  (:inherit 'link))
+ (org-archived
+  (:inherit 'shadow))
+ (org-warning
+  (:inherit 'font-lock-warning-face))
+ (org-agenda-column-dateline
+  (:inherit 'org-column))
+ (org-column-title
+  (:weight 'bold :underline t :background winterYellow))
+ (org-column
+  (:weight 'normal :slant 'normal :underline nil :strike-through nil :background winterYellow))
+ (org-property-value nil)
+ (org-drawer
+  (:foreground lightBlue))
+ (org-special-keyword
+  (:inherit 'font-lock-keyword-face))
+ (org-dispatcher-highlight
+  (:weight 'bold :foreground roninYellow :background winterGreen))
+ (org-default
+  (:inherit 'default))
+ (outline-8
+  (:inherit 'font-lock-string-face))
+ (outline-7
+  (:inherit 'font-lock-builtin-face))
+ (outline-6
+  (:inherit 'font-lock-constant-face))
+ (outline-5
+  (:inherit 'font-lock-type-face))
+ (outline-4
+  (:inherit 'font-lock-comment-face))
+ (outline-3
+  (:inherit 'font-lock-keyword-face))
+ (outline-2
+  (:inherit 'font-lock-variable-name-face))
+ (outline-1
+  (:inherit 'font-lock-function-name-face))
+ (calendar-month-header
+  (:inherit 'font-lock-function-name-face))
+ (calendar-weekend-header
+  (:inherit 'font-lock-comment-face))
+ (calendar-weekday-header
+  (:inherit 'font-lock-constant-face))
+ (holiday
+  (:background winterYellow))
+ (diary
+  (:foreground roninYellow))
+ (calendar-today
+  (:underline t))
+ (custom-group-subtitle
+  (:weight 'bold))
+ (custom-group-tag
+  (:height 1.2 :weight 'bold :foreground lightBlue :inherit 'variable-pitch))
+ (custom-group-tag-1
+  (:height 1.2 :weight 'bold :foreground fujiWhite :inherit 'variable-pitch))
+ (custom-face-tag
+  (:inherit 'custom-variable-tag))
+ (custom-visibility
+  (:height 0.8 :inherit 'link))
+ (custom-variable-button
+  (:weight 'bold :underline t))
+ (custom-variable-tag
+  (:weight 'bold :foreground lightBlue))
+ (custom-variable-obsolete
+  (:foreground lightBlue))
+ (custom-comment-tag
+  (:foreground fujiWhite))
+ (custom-comment
+  (:background fujiGray))
+ (custom-state
+  (:foreground winterYellow))
+ (custom-documentation nil)
+ (custom-button-pressed-unraised
+  (:foreground sakuraPink :inherit 'custom-button-unraised))
+ (custom-button-pressed
+  (:box
+   (:line-width 2 :style 'pressed-button)
+   :foreground sumiInk-0 :background fujiWhite))
+ (custom-button-unraised
+  (:inherit 'underline))
+ (custom-button-mouse
+  (:box
+   (:line-width 2 :style 'released-button)
+   :foreground sumiInk-0 :background fujiWhite))
+ (custom-button
+  (:box
+   (:line-width 2 :style 'released-button)
+   :foreground sumiInk-0 :background fujiWhite))
+ (custom-saved
+  (:underline t))
+ (custom-themed
+  (:foreground fujiWhite :background waveBlue-1))
+ (custom-changed
+  (:foreground fujiWhite :background waveBlue-1))
+ (custom-set
+  (:foreground waveBlue-1 :background fujiWhite))
+ (custom-modified
+  (:foreground fujiWhite :background waveBlue-1))
+ (custom-rogue
+  (:foreground fujiWhite :background sumiInk-0))
+ (custom-invalid
+  (:foreground roninYellow :background samuraiRed))
+ (widget-button-pressed
+  (:foreground samuraiRed))
+ (widget-inactive
+  (:inherit 'shadow))
+ (widget-single-line-field
+  (:background fujiGray))
+ (widget-field
+  (:extend t :background fujiGray))
+ (widget-button
+  (:weight 'bold))
+ (widget-documentation
+  (:foreground winterYellow))
+ (yas--field-debug-face nil)
+ (yas-field-highlight-face
+  (:inherit 'region))
+ (flyspell-duplicate
+  (:underline
+   (:style 'wave :color roninYellow)))
+ (flyspell-incorrect
+  (:underline
+   (:style 'wave :color samuraiRed)))
+ (comint-highlight-input
+  (:weight 'bold))
+ (calc-selected-face
+  (:weight 'bold))
+ (calc-nonselected-face
+  (:slant 'italic :inherit 'shadow))
+ (rectangle-preview
+  (:inherit 'region))
+ (evil-ex-search
+  (:inherit 'isearch))
+ (evil-ex-info
+  (:slant 'italic :foreground samuraiRed))
+ (evil-ex-commands
+  (:slant 'italic :underline t))
+ (solaire-default-face
+  (:inherit 'default))
+ (+workspace-tab-face
+  (:inherit 'default))
+ (+workspace-tab-selected-face
+  (:inherit 'highlight))
+ (eldoc-highlight-function-argument
+  (:inherit 'bold))
+ (vc-edited-state
+  (:inherit 'vc-state-base))
+ (vc-missing-state
+  (:inherit 'vc-state-base))
+ (vc-removed-state
+  (:inherit 'vc-state-base))
+ (vc-conflict-state
+  (:inherit 'vc-state-base))
+ (vc-locally-added-state
+  (:inherit 'vc-state-base))
+ (vc-locked-state
+  (:inherit 'vc-state-base))
+ (vc-needs-update-state
+  (:inherit 'vc-state-base))
+ (vc-up-to-date-state
+  (:inherit 'vc-state-base))
+ (vc-state-base nil)
+ (buffer-menu-buffer
+  (:weight 'bold))
+ (tabulated-list-fake-header
+  (:weight 'bold :underline t :overline t))
+ (query-replace
+  (:inherit 'isearch))
+ (tab-bar-tab-inactive
+  (:background old-white :inherit 'tab-bar-tab))
+ (tab-bar-tab
+  (:box
+   (:line-width 1 :style 'released-button)
+   :inherit 'tab-bar))
+ (file-name-shadow
+  (:inherit 'shadow))
+ (lazy-highlight
+  (:background waveAqua1))
+ (isearch-fail
+  (:background winterRed))
+ (isearch
+  (:foreground winterRed :background sakuraPink))
+ (mouse-drag-and-drop-region
+  (:inherit 'region))
+ (font-lock-regexp-grouping-construct
+  (:inherit 'bold))
+ (completions-common-part
+  (:foreground lightBlue))
+ (completions-first-difference
+  (:inherit 'bold))
+ (next-error
+  (:inherit 'region))
+ (tty-menu-selected-face
+  (:background samuraiRed))
+ (tty-menu-disabled-face
+  (:foreground fujiWhite :background waveBlue-1))
+ (tty-menu-enabled-face
+  (:weight 'bold :foreground roninYellow :background waveBlue-1))
+ (read-multiple-choice-face
+  (:weight 'bold :inherit 'underline))
+ (help-argument-name
+  (:inherit 'italic))
+ (tab-bar
+  (:foreground sumiInk-0 :background fujiWhite :inherit 'variable-pitch))
+ (tool-bar
+  (:box
+   (:line-width 1 :style 'released-button)
+   :foreground sumiInk-0 :background old-white))
+ (mouse nil)
+ (scroll-bar nil)
+ (window-divider-last-pixel
+  (:foreground fujiGray))
+ (window-divider-first-pixel
+  (:foreground fujiWhite))
+ (header-line-highlight
+  (:inherit 'highlight))
+ (mode-line-emphasis
+  (:weight 'bold))
+ (nobreak-hyphen
+  (:foreground lightBlue))
+ (nobreak-space
+  (:underline t :inherit 'escape-glyph))
+ (escape-glyph
+  (:foreground lightBlue))
+ (fill-column-indicator
+  (:weight 'normal :slant 'normal :underline nil :overline nil :strike-through nil :box nil :inverse-video nil :stipple nil :inherit 'shadow))
+ (line-number-minor-tick
+  (:weight 'bold :background springViolet1))
+ (line-number-major-tick
+  (:weight 'bold :background old-white))
+ (secondary-selection
+  (:extend t :background dragonBlue))
+ (link-visited
+  (:foreground sakuraPink :inherit 'link))
+ (variable-pitch
+  (:family "Sans Serif"))
+ (fixed-pitch-serif
+  (:family "Monospace Serif"))
+ (fixed-pitch
+  (:family "Monospace"))
+ (underline
+  (:underline t))
+ (bold-italic
+  (:weight 'bold :slant 'italic))
+ (italic
+  (:slant 'italic))
+ (bold
+  (:weight 'bold)))
+ )
 
 ;;;###autoload
 (and load-file-name
