@@ -136,5 +136,8 @@ echo "SOURCED - .zshrc"
 # added by Snowflake SnowSQL installer v1.2
 export PATH=/Users/parker.johnson/Applications/SnowSQL.app/Contents/MacOS:$PATH
 
+# since I have so many emacs versionso that could get picked up....
+export EMACS=/Applications/Emacs.app/Contents/MacOS/Emacs
+
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform

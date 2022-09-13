@@ -100,6 +100,11 @@
       magit-hunk-section-map
       :n (kbd "RET") 'magit-diff-visit-file-other-window)
 
+;; avy jumps to portions of the screen given some input, lets set up a better keybind
+;; This wasn't working due to a weird error about void-variable goto
+;; (map! :desc \"Avy goto char timer\"
+;;       :n :leader "j" 'avy-goto-char-timer)
+
 ;; dired-sidebar
 (use-package! dired-sidebar
   :config
@@ -176,13 +181,13 @@
 ;; (setq lsp-restart 'auto-restart)
 ;; (setq lsp-enable-symbol-highlighting nil)
 (setq lsp-enable-on-type-formatting nil)
-(setq lsp-signature-auto-activate nil)
-(setq lsp-signature-render-documentation nil)
-(setq lsp-eldoc-hook nil)
-(setq lsp-modeline-code-actions-enable nil)
+;; (setq lsp-signature-auto-activate nil)
+;; (setq lsp-signature-render-documentation nil)
+;; (setq lsp-eldoc-hook nil)
+;; (setq lsp-modeline-code-actions-enable nil)
 (setq lsp-modeline-diagnostics-enable nil)
 (setq lsp-headerline-breadcrumb-enable nil)
-(setq lsp-semantic-tokens-enable nil)
+;; (setq lsp-semantic-tokens-enable nil)
 (setq lsp-enable-folding nil)
 (setq lsp-enable-imenu nil)
 (setq lsp-enable-snippet nil)
@@ -200,6 +205,36 @@
 ;; golang
 ;; my exec-path and $PATH weren't in sync for some reason - I added a path reexport to both .zshrc and .bashrc but no luck
 (add-to-list 'exec-path "~/go/bin")
+
+
+;; Super experimental file I snagged from online
+;; https://gitter.im/emacs-lsp/lsp-mode?at=5f3913a4ce98da26ecce6d3f
+;; (defun lsp-js-ts-rename-file ()
+;;   "Rename current file and all it's references in other files."
+;;   (interactive)
+;;   (let* ((name (buffer-name))
+;;          (old (buffer-file-name))
+;;          (basename (file-name-nondirectory old)))
+;;     (unless (and old (file-exists-p old))
+;;       (error "Buffer '%s' is not visiting a file." name))
+;;     (let ((new (read-file-name "New name: " (file-name-directory old) basename nil basename)))
+;;       (when (get-file-buffer new)
+;;         (error "A buffer named '%s' already exists." new))
+;;       (when (file-exists-p new)
+;;         (error "A file named '%s' already exists." new))
+;;       (lsp--send-execute-command
+;;        "_typescript.applyRenameFile"
+;;        (vector (list :sourceUri (lsp--buffer-uri)
+;;                      :targetUri (lsp--path-to-uri new))))
+;;       (mkdir (file-name-directory new) t)
+;;       (rename-file old new)
+;;       (rename-buffer new)
+;;       (set-visited-file-name new)
+;;       (set-buffer-modified-p nil)
+;;       (lsp-disconnect)
+;;       (setq-local lsp-buffer-uri nil)
+;;       (lsp)
+;;       (lsp--info "Renamed '%s' to '%s'." name (file-name-nondirectory new)))))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;

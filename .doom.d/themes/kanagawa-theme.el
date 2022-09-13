@@ -252,7 +252,7 @@
   (company-tooltip-scrollbar-thumb               (:background autumnRed))
   (company-tooltip-scrollbar-track               (:background sumiInk-2))
   (company-tooltip-search                        (:background carpYellow :foreground sumiInk-0 :distant-foreground fujiWhite))
-  (company-tooltip-selection                     (:background peachRed :foreground winterRed :bold t))
+  (company-tooltip-selection                     (:background fujiWhite :foreground winterRed :bold t))
   (company-tooltip-mouse                         (:background sumiInk-2 :foreground sumiInk-0 :distant-foreground fujiWhite))
   (company-tooltip-annotation                    (:foreground peachRed :distant-foreground sumiInk-1))
   (company-scrollbar-bg                          (:inherit 'tooltip))
@@ -304,7 +304,7 @@
   (ivy-confirm-face                              (:foreground waveAqua2))
 
   ;; posframe's
-  (ivy-posframe                                  (:background peachRed :foreground peachRed))
+  ;; (ivy-posframe                                  (:background peachRed :foreground peachRed))
   (ivy-posframe-border                           (:background peachRed :foreground peachRed))
 
   ;;treemacs
