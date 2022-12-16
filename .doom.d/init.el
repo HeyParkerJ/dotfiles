@@ -24,8 +24,7 @@
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ;; ( ivy +prescient +icons +childframe )
-       ;; ( ivy +prescient +icons +childframe )
-       ( vertico +icons +childframe)
+       (vertico +icons)
 
        :ui
        ;;deft              ; notational velocity for Emacs
@@ -103,6 +102,7 @@
        ;;rgb               ; creating color strings
        ;;taskrunner        ; taskrunner for all your projects
        terraform         ; infrastructure as code
+       ;; tree-sitter
        ;;tmux              ; an API for interacting with tmux
        ;;upload            ; map local to remote projects via ssh/ftp
 
@@ -130,7 +130,7 @@
        ;;idris             ;
        json              ; At least it ain't XML
        (java +meghanada) ; the poster child for carpal tunnel syndrome
-       ( javascript +lsp )        ; all(hope(abandon(ye(who(enter(here))))))
+       ( javascript +lsp +tree-sitter )        ; all(hope(abandon(ye(who(enter(here))))))
        ;;julia             ; a better, faster MATLAB
        ;;kotlin            ; a better, slicker Java(Script)
        ;;latex             ; writing papers in Emacs has never been so fun

@@ -20,7 +20,7 @@ ln -s ~/dotfiles/.vimrc ~/
 
 # Doom
 ln -s ~/dotfiles/.doom.d ~/
-mv ~/.doom.d ~/.doom.d.backup
+# mv ~/.doom.d ~/.doom.d.backup
 
 # default-packages
 ln -s ~/dotfiles/default-packages ~/.nvm/

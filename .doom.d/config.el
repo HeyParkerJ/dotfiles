@@ -34,6 +34,11 @@
 ;; (setq doom-theme 'doom-material)
 (setq doom-theme 'kanagawa)
 
+(setq doom-font (font-spec :family "Hack" :size 14 :weight 'regular)
+      doom-variable-pitch-font (font-spec :family "Hack" :size 13)
+      doom-unicode-font (font-spec :family "Hack")
+      doom-big-font (font-spec :family "Hack" :size 24))
+
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
@@ -66,7 +71,7 @@
      ;; TODO - this seems to be the generic linux box name? Add more detail or configure
      (equal (system-name) "localhost.localdomain")))
   (defun my/work-laptop-p ()
-    (equal (system-name) "m-pjohnson"))
+    (equal (system-name) "m-pjohnson2"))
 
     (require 'org (org-babel-load-file (expand-file-name "~/dotfiles/emacs/org-mode.common.org")) )
   (when (my/laptop-p)
@@ -121,6 +126,23 @@
  :leader
  ("o p" #'dired-sidebar-toggle-sidebar))
 
+(map! :map smerge-mode-map
+      :leader
+  ("m = <"  #'smerge-diff-base-upper)
+  ("m = ="  #'smerge-diff-upper-lower)
+  ("m = >"  #'smerge-diff-base-lower)
+  ("m C"    #'smerge-combine-with-next)
+  ("m E"    #'smerge-ediff)
+  ("m R"    #'smerge-refine)
+  ("m RET"  #'smerge-keep-current)
+  ("m a"    #'smerge-keep-all)
+  ("m b"    #'smerge-keep-base)
+  ("m j"    #'smerge-keep-lower)
+  ("m k"    #'smerge-keep-upper)
+  ("m n"    #'smerge-next)
+  ("m p"    #'smerge-prev)
+  ("m r"    #'smerge-resolve))
+
 ;; Time and date
 (setq display-time-day-and-date t)
 (setq display-time-mode t)
@@ -138,7 +160,8 @@
 ;; Too lazy to type 'no'
 (fset 'yes-or-no-p 'y-or-n-p)
 
-(add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
+;; This seems to be autoconfigured by something already
+;; (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
 
 ;; This keeps projectile from storing all buffers in a workspace when switching projects
 (setq +workspaces-on-switch-project-behavior nil)
@@ -169,6 +192,7 @@
 ;; (after! (:and lsp-mode flycheck)
 ;; (flycheck-add-next-checker 'lsp 'javascript-eslint))
 
+;; https://emacs-lsp.github.io/lsp-mode/page/lsp-typescript/#available-configurations
 ;; lsp performance settings
 (setq lsp-eslint-run "onSave")
 (setq +format-with-lsp nil) ; We want something that will respect our prettierrc to do this instead. Also I don't know how to configure this yet.
@@ -179,20 +203,20 @@
 ;; (setq lsp-auto-guess-root t)
  (setq lsp-log-io nil)
 ;; (setq lsp-restart 'auto-restart)
-;; (setq lsp-enable-symbol-highlighting nil)
+(setq lsp-enable-symbol-highlighting t)
 (setq lsp-enable-on-type-formatting nil)
 ;; (setq lsp-signature-auto-activate nil)
 ;; (setq lsp-signature-render-documentation nil)
 ;; (setq lsp-eldoc-hook nil)
-;; (setq lsp-modeline-code-actions-enable nil)
+(setq lsp-modeline-code-actions-enable t)
 (setq lsp-modeline-diagnostics-enable nil)
 (setq lsp-headerline-breadcrumb-enable nil)
 ;; (setq lsp-semantic-tokens-enable nil)
 (setq lsp-enable-folding nil)
-(setq lsp-enable-imenu nil)
+(setq lsp-enable-imenu t)
 (setq lsp-enable-snippet nil)
  (setq read-process-output-max (* 1024 1024)) ;; 1MB
- (setq lsp-idle-delay 0.35)
+ (setq lsp-idle-delay 0.25)
 
 ;; There was an issue where meta key wasn't working - this fixes that
 ;; macOS reports rebound modifiers on external keyboards as "right" modifiers, even if you're using left modifiers

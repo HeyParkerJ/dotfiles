@@ -88,8 +88,9 @@ plugins=(
   zsh-syntax-highlighting
 )
 
-source $ZSH/oh-my-zsh.sh
-echo "Sourced $ZSH/oh-my-zsh.sh"
+source $ZSH
+echo "Sourced $ZSH"
+
 source ~/.bash_aliases
 echo "Sourced ~/.bash_aliases"
 source ~/.bashrc
@@ -128,7 +129,6 @@ alias ohmyzsh="vim ~/.oh-my-zsh"
 
 #the .npm-global thing is because I set up npm in a different way on my new work machine 09/04/2019
 #export PATH="/Users/parker.johnson/.npm-global/bin:/usr/local/sbin:$PATH"
-echo "SOURCED - .zshrc"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -139,5 +139,32 @@ export PATH=/Users/parker.johnson/Applications/SnowSQL.app/Contents/MacOS:$PATH
 # since I have so many emacs versionso that could get picked up....
 export EMACS=/Applications/Emacs.app/Contents/MacOS/Emacs
 
+# initialize autocompletion
+autoload -U compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
+
+# history setup
+setopt SHARE_HISTORY
+HISTFILE=$HOME/.zhistory
+SAVEHIST=1000
+HISTSIZE=999
+setopt HIST_EXPIRE_DUPS_FIRST
+
+# autocompletion using arrow keys (based on history)
+bindkey '\e[A' history-search-backward
+bindkey '\e[B' history-search-forward
+
 complete -o nospace -C /usr/local/bin/terraform terraform
+source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
+
+
+# This is needed for nvm setup
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# source ~/dotfiles/nvm_autoswitch.sh
+
+echo "SOURCED - .zshrc"

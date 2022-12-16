@@ -26,7 +26,9 @@ work.org can contain todos but the majority of my tasks are created in inbox.org
         '("~/org/work.org"
           "~/org/inbox.org"
           "~/org/code_diary.org"
-          "~/org/brain.org"))
+          ))
+;; Going to try removing this from the agenda files so I can more easily source my necessary work from tasks and still have TODO items in my brain file
+;; "~/org/brain.org"
     #+end_src
 
 Define some custom templates that can be initiated with `< {letter} TAB`
