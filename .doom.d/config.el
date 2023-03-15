@@ -29,11 +29,6 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 
-;; (setq doom-theme 'nimbus)
-;; (setq doom-theme 'modus-vivendi)
-;; (setq doom-theme 'doom-material)
-(setq doom-theme 'kanagawa)
-
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
@@ -73,6 +68,14 @@
     (require 'org (org-babel-load-file (expand-file-name "~/dotfiles/emacs/org-mode.home.org")) ))
   (when (my/work-laptop-p)
     (require 'org (org-babel-load-file (expand-file-name "~/dotfiles/emacs/org-mode.work.org")) ))
+
+(when (my/laptop-p)
+  ;; (setq doom-theme 'nimbus)
+  ;; (setq doom-theme 'modus-vivendi)
+  ;; (setq doom-theme 'doom-material)
+  (setq doom-theme 'ef-bio))
+ (when (my/work-laptop-p)
+  (setq doom-theme 'kanagawa))
 
 (setq org-clock-sound "/System/Library/Sounds/Glass.aiff")
 (setq doom-font-increment 1) ; Default is 2, let's make it more granular
@@ -188,6 +191,12 @@
 (setq lsp-enable-snippet nil)
  (setq read-process-output-max (* 1024 1024)) ;; 1MB
  (setq lsp-idle-delay 0.35)
+
+;; dap-mode config
+(require 'dap-dlv-go)
+
+;; look cool
+(doom/set-frame-opacity 91)
 
 ;; There was an issue where meta key wasn't working - this fixes that
 ;; macOS reports rebound modifiers on external keyboards as "right" modifiers, even if you're using left modifiers

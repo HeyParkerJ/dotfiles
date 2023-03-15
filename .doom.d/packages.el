@@ -22,6 +22,10 @@
 (package! autothemer)
 (package! jest)
 (package! anki-editor)
+(package! ef-themes)
+
+;; Personal laptop wasn't finding this package, so adding specifically
+(package! highlight-indent-guides)
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)

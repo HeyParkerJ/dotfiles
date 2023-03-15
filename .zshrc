@@ -134,7 +134,7 @@ echo "SOURCED - .zshrc"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # added by Snowflake SnowSQL installer v1.2
-export PATH=/Users/parker.johnson/Applications/SnowSQL.app/Contents/MacOS:$PATH
+# export PATH=/Users/parker.johnson/Applications/SnowSQL.app/Contents/MacOS:$PATH
 
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/local/bin/terraform terraform
+# autoload -U +X bashcompinit && bashcompinit
+# complete -o nospace -C /usr/local/bin/terraform terraform

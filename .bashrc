@@ -9,7 +9,7 @@ export PATH=”$HOME/.emacs.d/bin:$PATH # add Doom to path
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
-source ~/dotfiles/.work-config
+# source ~/dotfiles/.work-config
 
 complete -C /usr/local/bin/terraform terraform
 # For pdf-tools

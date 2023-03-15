@@ -28,6 +28,7 @@ I occasionally break out a whole org file for a topic, but still want to retain 
 (setq org-agenda-files '("~/org/inbox.org"
                          "~/org/org.org"
                          "~/org/projects.org"
+                         "~/org/brain.org"
                          ))
 #+end_src
 
