@@ -167,5 +167,8 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 # source ~/dotfiles/nvm_autoswitch.sh
 
+alias pip='python3 -m pip'
+
 echo "SOURCED - .zshrc"
 source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
+source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
