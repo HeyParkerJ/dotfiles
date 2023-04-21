@@ -88,15 +88,20 @@ plugins=(
   zsh-syntax-highlighting
 )
 
+if [ "$HOST" = 'Parkers-MacBook-Pro.local' ]; then
+  export MACHINE_TYPE="personal"
+elif [ "$HOST" = 'my-work-laptop' ]; then
+  export MACHINE_TYPE="work"
+else
+  echo "UNKNOWN HOSTNAME: Many scripts will not execute properly"
+fi
+
 source $ZSH
 echo "Sourced $ZSH"
 
-source ~/.bash_aliases
-echo "Sourced ~/.bash_aliases"
-source ~/.bashrc
-echo "Sourced ~/.bashrc"
-source ~/dotfiles/private/.secrets
-echo "Sourced dotfiles/private/.secrets"
+source ~/.bash_aliases && echo "Sourced ~/.bash_aliases"
+source ~/.bashrc && echo "Sourced ~/.bashrc"
+test -f ~/dotfiles/private/.secrets && source ~/dotfiles/private/.secrets && echo "Sourced dotfiles/private/.secrets"
 
 # User configuration
 
@@ -125,7 +130,7 @@ echo "Sourced dotfiles/private/.secrets"
 #
 # Example aliases
 alias zshconfig="vim ~/.zshrc"
-alias ohmyzsh="vim ~/.oh-my-zsh"
+# alias ohmyzsh="vim ~/.oh-my-zsh"
 
 #the .npm-global thing is because I set up npm in a different way on my new work machine 09/04/2019
 #export PATH="/Users/parker.johnson/.npm-global/bin:/usr/local/sbin:$PATH"
@@ -169,6 +174,5 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 alias pip='python3 -m pip'
 
-echo "SOURCED - .zshrc"
-source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
-source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
+test -f /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme && source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
+test -f /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme && source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
