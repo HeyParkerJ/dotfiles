@@ -168,3 +168,5 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 # source ~/dotfiles/nvm_autoswitch.sh
 
 echo "SOURCED - .zshrc"
+
+complete -o nospace -C /opt/homebrew/bin/terraform terraform

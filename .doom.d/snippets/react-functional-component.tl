@@ -1,18 +1,16 @@
 # -*- mode: snippet -*-
-# name: React#functionComponent
+# name: React#prkr-functionComponent
 # key: fc
 # --
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const propTypes = {};
+interface ${1:Component}Props {
+  callbackFn: () => void;
+}
 
-const defaultProps = {};
-
-const ${1:Component} = (props) => {};
-
-${1:Component}.propTypes = propTypes;
-${1:Component}.defaultProps = defaultProps;
+const ${1:Component} = ({ callbackFn }: ${1:Component}Props) => {
+  return <button onClick={callbackFn} />
+};
 
 export default ${1:Component};
-

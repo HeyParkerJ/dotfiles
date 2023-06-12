@@ -11,6 +11,8 @@
 (package! graphql-mode)
 ;; (package! nimbus-theme)
 ;; (package! modus-themes)
+;; TODO - got an error when tried to remove autothemer, track it down
+ (package! autothemer)
 (package! indium)
 (package! ox-hugo)
 (package! jest-test-mode)
@@ -19,10 +21,10 @@
 (package! dired-sidebar)
 (package! vscode-icon)
 (package! dap-mode)
-(package! autothemer)
 (package! jest)
 (package! anki-editor)
 (package! highlight-indent-guides)
+(package! flycheck-pos-tip)
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)

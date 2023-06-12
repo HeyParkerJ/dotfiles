@@ -218,6 +218,12 @@
  (setq read-process-output-max (* 1024 1024)) ;; 1MB
  (setq lsp-idle-delay 0.25)
 
+(setq lsp-ui-sideline-delay 0)
+
+;; TODO move to flycheck area
+(with-eval-after-load 'flycheck
+  (flycheck-pos-tip-mode))
+
 ;; There was an issue where meta key wasn't working - this fixes that
 ;; macOS reports rebound modifiers on external keyboards as "right" modifiers, even if you're using left modifiers
 ;; Doom binds ns-right-option-modifier or mac-right-option-modifier (depending on emacs distro) to 'none
