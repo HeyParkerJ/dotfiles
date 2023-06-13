@@ -18,3 +18,4 @@ complete -C /usr/local/bin/terraform terraform
 export PKG_CONFIG_PATH=/usr/local/Cellar/zlib/1.2.8/lib/pkgconfig:/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig
 
 test -f ~/dotfiles/.work_config && source ~/dotfiles/.work_config
+. "$HOME/.cargo/env"

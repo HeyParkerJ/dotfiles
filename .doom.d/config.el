@@ -15,12 +15,6 @@
   (defun my/work-laptop-p ()
     (equal (system-name) "m-pjohnson2"))
 
-(require 'org (org-babel-load-file (expand-file-name "~/dotfiles/emacs/org-mode.common.org")) )
-(when (my/laptop-p)
-  (require 'org (org-babel-load-file (expand-file-name "~/dotfiles/emacs/org-mode.home.org")) ))
-(when (my/work-laptop-p)
-  (require 'org (org-babel-load-file (expand-file-name "~/dotfiles/emacs/org-mode.work.org")) ))
-
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
 ;;
@@ -133,15 +127,16 @@
 
 (setq org-agenda-custom-commands
       '(
-        ("n" "Agenda / INTR / PROG / NEXT / GOAL"
+        ("n" "Agenda / INTR / PROG / NEXT"
          ((agenda "" nil)
-          (todo "GOAL" nil)
           (todo "INTR" nil)
           (todo "PROG" nil)
           (todo "NEXT" nil)
           (todo "WAITING" nil)
-          (todo "TODO" nil)
-          )
+          (todo "PROJECTS"
+                  ((org-agenda-skip-function
+                    '(org-agenda-skip-entry-if 'todo '("WAITING")))
+          ))
          ((org-agenda-span 'day))
          )
         ("m" "Everything"
@@ -160,33 +155,6 @@
 
 ;; Add a timestamp when task is set to 'done'
 (setq org-log-done 'time)
-
-(setq org-agenda-custom-commands
-
-      '(("a" "All tasks"
-         ((alltodo "")))
-("n" "Agenda, goals, all TODO"
-         ((agenda ""
-                  ((org-agenda-skip-function
-                    '(org-agenda-skip-entry-if 'todo '("WAITING")))
-                   (org-agenda-overriding-header "Agenda")))
-          (todo "WAITING"
-                ((org-agenda-overriding-header "Items in status WAITING")))
-          (tags-todo "goal"
-                     ((org-agenda-overriding-header "Goals")))
-          (tags-todo "someday"
-                     ((org-agenda-overriding-header "Someday")))
-          ))))
-
-;; I want to add this for my new workflow:
-;; Customized view for the daily workflow. (Command: "C-c a n")
-'(org-agenda-custom-commands
-  '(("n" "Agenda / INTR / PROG / NEXT"
-     ((agenda "" nil)
-      (todo "INTR" nil)
-      (todo "PROG" nil)
-      (todo "NEXT" nil))
-     nil)))
 
 (setq org-agenda-window-setup 'current-window)
 
@@ -268,9 +236,3 @@
 
 (cond (IS-MAC
        (setq mac-right-option-modifier 'meta)))
-
-;; (map! :desc \"Avy goto char timer\"
-      ;; :n :leader "j" 'avy-goto-char-timer)
-
-;; my exec-path and $PATH weren't in sync for some reason - I added a path reexport to both .zshrc and .bashrc but no luck
-(add-to-list 'exec-path "~/go/bin")

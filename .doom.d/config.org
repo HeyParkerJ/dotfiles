@@ -112,7 +112,7 @@ The config that helps the config config good
 
 #+end_src
 I used to put my agenda config in untangled files, but now that we're moving this whole config to literate, this isn't as useful
-#+begin_src emacs-lisp tangle: no
+#+begin_src emacs-lisp :tangle no
     (require 'org (org-babel-load-file (expand-file-name "~/dotfiles/emacs/org-mode.common.org")) )
   (when (my/laptop-p)
     (require 'org (org-babel-load-file (expand-file-name "~/dotfiles/emacs/org-mode.home.org")) ))
@@ -255,15 +255,16 @@ Here lies all the global configuration that I need for my workflows
 #+begin_src emacs-lisp
 (setq org-agenda-custom-commands
       '(
-        ("n" "Agenda / INTR / PROG / NEXT / GOAL"
+        ("n" "Agenda / INTR / PROG / NEXT"
          ((agenda "" nil)
-          (todo "GOAL" nil)
           (todo "INTR" nil)
           (todo "PROG" nil)
           (todo "NEXT" nil)
           (todo "WAITING" nil)
-          (todo "TODO" nil)
-          )
+          (todo "PROJECTS"
+                  ((org-agenda-skip-function
+                    '(org-agenda-skip-entry-if 'todo '("WAITING")))
+          ))
          ((org-agenda-span 'day))
          )
         ("m" "Everything"
@@ -285,7 +286,7 @@ Here lies all the global configuration that I need for my workflows
 #+end_src
 
 Old agenda here
-#+begin_src emacs-lisp tangle: no
+#+begin_src emacs-lisp :tangle no
 (setq org-agenda-custom-commands
 
       '(("a" "All tasks"
@@ -463,13 +464,13 @@ Backups. C-x C-f (find-file) should help sort through these if needed.
 * navigation
 avy jumps to portions of the screen given some input, lets set up a better keybind
 This wasn't working due to a weird error about void-variable goto
-#+begin_src emacs-lisp tangle: no
+#+begin_src emacs-lisp :tangle no
  ;; (map! :desc \"Avy goto char timer\"
        ;; :n :leader "j" 'avy-goto-char-timer)
 #+end_src
 
 * golang
-#+begin_src emacs-lisp tangle: no
+#+begin_src emacs-lisp :tangle no
 ;; my exec-path and $PATH weren't in sync for some reason - I added a path reexport to both .zshrc and .bashrc but no luck
 (add-to-list 'exec-path "~/go/bin")
 #+end_src
