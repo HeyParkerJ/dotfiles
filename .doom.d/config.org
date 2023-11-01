@@ -34,16 +34,19 @@ Specifying a file will tell a block where to tangle to...
 ;; (package! modus-themes)
 (package! indium)
 (package! ox-hugo)
-(package! jest-test-mode)
+;; (package! jest-test-mode)
 (package! org-tree-slide)
 (package! yasnippet)
 (package! dired-sidebar)
 (package! vscode-icon)
 (package! dap-mode)
-(package! autothemer)
+;; (package! autothemer)
 (package! jest)
-(package! anki-editor)
+;; (package! anki-editor)
 (package! highlight-indent-guides)
+
+(package! lsp-pyright)
+;; (package! poetry)
 #+end_src
 
 ** Notes from doom's original config...
@@ -142,7 +145,7 @@ I used to put my agenda config in untangled files, but now that we're moving thi
 ;; (setq doom-theme 'nimbus)
 ;; (setq doom-theme 'modus-vivendi)
 ;; (setq doom-theme 'doom-material)
-(setq doom-theme 'kanagawa)
+(setq doom-theme 'doom-one)
 
 (setq doom-font (font-spec :family "Hack" :size 14 :weight 'regular)
       doom-variable-pitch-font (font-spec :family "Hack" :size 13)
@@ -252,69 +255,44 @@ Here lies all the global configuration that I need for my workflows
 (setq org-agenda-skip-deadline-prewarning-if-scheduled 'pre-scheduled)
 #+end_src
 
+#+RESULTS:
+: pre-scheduled
+
+#+begin_src emacs-lisp
+;; %^g propts for tags with completion in the target file - %^G would prompt for completion on all agenda file  s
+(setq org-capture-templates '(("t" "Todo [inbox]" entry
+                               (file "~/org/inbox.org")
+                               "* TODO %i%? \n%U")
+                              ("c" "Code Diary [inbox]" entry
+                               (file+headline "~/org/code_diary.org" "Inbox")
+                               "** %i%? \n %U %^g")
+                              ))
+#+end_src
+
+#+RESULTS:
+| t | Todo [inbox] | entry | (file ~/org/inbox.org) | * TODO %i%? |
+
 #+begin_src emacs-lisp
 (setq org-agenda-custom-commands
-      '(
-        ("n" "Agenda / INTR / PROG / NEXT"
+      '(("n" "Agenda / INTR / PROG / NEXT"
          ((agenda "" nil)
           (todo "INTR" nil)
           (todo "PROG" nil)
           (todo "NEXT" nil)
           (todo "WAITING" nil)
-          (todo "PROJECTS"
-                  ((org-agenda-skip-function
-                    '(org-agenda-skip-entry-if 'todo '("WAITING")))
-          ))
-         ((org-agenda-span 'day))
-         )
-        ("m" "Everything"
-         ((agenda "" nil)
-          (todo "GOAL" nil)
-          (todo "PROJECT" nil)
-          (todo "INTR" nil)
-          (todo "PROG" nil)
-          (todo "NEXT" nil)
-          (todo "WAITING" nil)
+          (todo "TODO" nil)
           )
          ((org-agenda-span 'day))
          )
         )
       )
 
+(setq org-agenda-files
+      '("~/org/brain.org"
+        "~/org/inbox.org"))
+
 ;; Add a timestamp when task is set to 'done'
 (setq org-log-done 'time)
-#+end_src
-
-Old agenda here
-#+begin_src emacs-lisp :tangle no
-(setq org-agenda-custom-commands
-
-      '(("a" "All tasks"
-         ((alltodo "")))
-("n" "Agenda, goals, all TODO"
-         ((agenda ""
-                  ((org-agenda-skip-function
-                    '(org-agenda-skip-entry-if 'todo '("WAITING")))
-                   (org-agenda-overriding-header "Agenda")))
-          (todo "WAITING"
-                ((org-agenda-overriding-header "Items in status WAITING")))
-          (tags-todo "goal"
-                     ((org-agenda-overriding-header "Goals")))
-          (tags-todo "someday"
-                     ((org-agenda-overriding-header "Someday")))
-          ))))
-
-;; I want to add this for my new workflow:
-;; Customized view for the daily workflow. (Command: "C-c a n")
-'(org-agenda-custom-commands
-  '(("n" "Agenda / INTR / PROG / NEXT"
-     ((agenda "" nil)
-      (todo "INTR" nil)
-      (todo "PROG" nil)
-      (todo "NEXT" nil))
-     nil)))
-
-
 #+end_src
 
 Don't split windows when displaying agenda
@@ -337,7 +315,7 @@ Alt: ▼, ↴, ⬎, ⤷, ⤵, and ⋱
 #+begin_src emacs-lisp
 ;; TODO keywords.
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "NEXT(n)" "PROG(p)" "INTR(i)" "GOAL(g)" "PROJECT(r)" "WAITING(w@)" "|" "DONE(d)" "CANCELLED(c@)")))
+      '((sequence "TODO(t)" "NEXT(n)" "PROG(p)" "WAITING(w@)" "|" "DONE(d)" "CANCELLED(c@)")))
 
 ;; Old config here
 ;; (setq org-todo-keywords
@@ -407,7 +385,8 @@ If I used org roam, the config would look something like...
 (setq evil-escape-key-sequence "fd")
 
 ;; Show my favorite org agenda on startup
-(add-hook 'after-init-hook (lambda () (org-agenda nil "n")))
+;; Jul-11-2023 - This was making my emacs unresponsive on personal laptop
+;; (add-hook 'after-init-hook (lambda () (org-agenda nil "n")))
 
 ;; Too lazy to type 'no'
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -505,3 +484,31 @@ This wasn't working due to a weird error about void-variable goto
        (lsp)
        (lsp--info "Renamed '%s' to '%s'." name (file-name-nondirectory new)))))
  #+end_src
+* python
+** keybinds
+#+begin_src emacs-lisp
+;; python-mode-map C-c >
+;; This doesn't work for some reason - didn't figure out why
+;; (map! :mode python-mode-map
+;;       "C-c h" #'python-indent-shift-left
+;;       "C-c l" #'python-indent-shift-right )
+#+end_src
+** pyright
+#+begin_src emacs-lisp
+(use-package lsp-pyright
+  :ensure t
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-pyright)
+                          (lsp))))  ; or lsp-deferred
+
+#+end_src
+
+** poetry
+#+begin_src emacs-lisp :tangle no
+(use-package! poetry
+  :after python
+  :init
+  (setq poetry-tracking-strategy 'switch-buffer)
+  (add-hook 'python-mode-hook #'poetry-tracking-mode))
+
+#+end_src

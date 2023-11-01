@@ -35,7 +35,7 @@
 ;; (setq doom-theme 'nimbus)
 ;; (setq doom-theme 'modus-vivendi)
 ;; (setq doom-theme 'doom-material)
-(setq doom-theme 'kanagawa)
+(setq doom-theme 'doom-one)
 
 (setq doom-font (font-spec :family "Hack" :size 14 :weight 'regular)
       doom-variable-pitch-font (font-spec :family "Hack" :size 13)
@@ -125,33 +125,32 @@
 ;; Hide the deadline prewarning prior to scheduled date.
 (setq org-agenda-skip-deadline-prewarning-if-scheduled 'pre-scheduled)
 
+;; %^g propts for tags with completion in the target file - %^G would prompt for completion on all agenda file  s
+(setq org-capture-templates '(("t" "Todo [inbox]" entry
+                               (file "~/org/inbox.org")
+                               "* TODO %i%? \n%U")
+                              ("c" "Code Diary [inbox]" entry
+                               (file+headline "~/org/code_diary.org" "Inbox")
+                               "** %i%? \n %U %^g")
+                              ))
+
 (setq org-agenda-custom-commands
-      '(
-        ("n" "Agenda / INTR / PROG / NEXT"
+      '(("n" "Agenda / INTR / PROG / NEXT"
          ((agenda "" nil)
           (todo "INTR" nil)
           (todo "PROG" nil)
           (todo "NEXT" nil)
           (todo "WAITING" nil)
-          (todo "PROJECTS"
-                  ((org-agenda-skip-function
-                    '(org-agenda-skip-entry-if 'todo '("WAITING")))
-          ))
-         ((org-agenda-span 'day))
-         )
-        ("m" "Everything"
-         ((agenda "" nil)
-          (todo "GOAL" nil)
-          (todo "PROJECT" nil)
-          (todo "INTR" nil)
-          (todo "PROG" nil)
-          (todo "NEXT" nil)
-          (todo "WAITING" nil)
+          (todo "TODO" nil)
           )
          ((org-agenda-span 'day))
          )
         )
       )
+
+(setq org-agenda-files
+      '("~/org/brain.org"
+        "~/org/inbox.org"))
 
 ;; Add a timestamp when task is set to 'done'
 (setq org-log-done 'time)
@@ -164,7 +163,7 @@
 
 ;; TODO keywords.
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "NEXT(n)" "PROG(p)" "INTR(i)" "GOAL(g)" "PROJECT(r)" "WAITING(w@)" "|" "DONE(d)" "CANCELLED(c@)")))
+      '((sequence "TODO(t)" "NEXT(n)" "PROG(p)" "WAITING(w@)" "|" "DONE(d)" "CANCELLED(c@)")))
 
 ;; Old config here
 ;; (setq org-todo-keywords
@@ -209,7 +208,8 @@
 (setq evil-escape-key-sequence "fd")
 
 ;; Show my favorite org agenda on startup
-(add-hook 'after-init-hook (lambda () (org-agenda nil "n")))
+;; Jul-11-2023 - This was making my emacs unresponsive on personal laptop
+;; (add-hook 'after-init-hook (lambda () (org-agenda nil "n")))
 
 ;; Too lazy to type 'no'
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -236,3 +236,15 @@
 
 (cond (IS-MAC
        (setq mac-right-option-modifier 'meta)))
+
+;; python-mode-map C-c >
+;; This doesn't work for some reason - didn't figure out why
+;; (map! :mode python-mode-map
+;;       "C-c h" #'python-indent-shift-left
+;;       "C-c l" #'python-indent-shift-right )
+
+(use-package lsp-pyright
+  :ensure t
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-pyright)
+                          (lsp))))  ; or lsp-deferred

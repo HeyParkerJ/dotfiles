@@ -142,7 +142,13 @@ alias zshconfig="vim ~/.zshrc"
 export PATH=/Users/parker.johnson/Applications/SnowSQL.app/Contents/MacOS:$PATH
 
 # since I have so many emacs versionso that could get picked up....
-export EMACS=/Applications/Emacs.app/Contents/MacOS/Emacs
+# This one is for a custom built one that gets put in applications
+# export EMACS=/Applications/Emacs.app/Contents/MacOS/Emacs
+
+# Commenting because I think the brew emacs formula already has this as 'emacs'
+# export EMACS=/opt/homebrew/opt/emacs-mac
+export EMACS=/opt/homebrew/bin/emacs
+
 
 # initialize autocompletion
 autoload -U compinit && compinit
@@ -173,6 +179,9 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 # source ~/dotfiles/nvm_autoswitch.sh
 
 alias pip='python3 -m pip'
+alias python='python3'
 
 test -f /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme && source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
 test -f /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme && source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
+
+export PATH="/Users/parker/.local/bin:$PATH"
