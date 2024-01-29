@@ -258,15 +258,18 @@ Here lies all the global configuration that I need for my workflows
 #+RESULTS:
 : pre-scheduled
 
+Doom will initialize its own org-capture-templates after this is executed, so put it in an `after! org` declaration
 #+begin_src emacs-lisp
 ;; %^g propts for tags with completion in the target file - %^G would prompt for completion on all agenda file  s
-(setq org-capture-templates '(("t" "Todo [inbox]" entry
-                               (file "~/org/inbox.org")
-                               "* TODO %i%? \n%U")
-                              ("c" "Code Diary [inbox]" entry
-                               (file+headline "~/org/code_diary.org" "Inbox")
-                               "** %i%? \n %U %^g")
-                              ))
+(after! org
+  (setq org-capture-templates '(("t" "Todo [inbox]" entry
+                                 (file "~/org/inbox.org")
+                                 "* TODO %i%? \n%U")
+                                ("c" "Code Diary [inbox]" entry
+                                 (file+headline "~/org/code_diary.org" "Inbox")
+                                 "** %i%? \n %U %^g")
+                                ))
+  )
 #+end_src
 
 #+RESULTS:
