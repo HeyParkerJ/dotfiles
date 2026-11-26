@@ -1,0 +1,517 @@
+* Tips
+You do not need to rerun 'doom sync' after modifying this file
+
+If you don't want a block to be tangled, you can specify with the :tangle parameter
+
+#+begin_src emacs-lisp :tangle no
+(message "Don't tangle me")
+#+end_src
+
+ Here are some additional functions/macros that could help you configure Doom:
+
+ - `load!' for loading external *.el files relative to this one
+ - `use-package' for configuring packages
+ - `after!' for running code after a package has loaded
+ - `add-load-path!' for adding directories to the `load-path', relative to
+   this file. Emacs searches the `load-path' when you load packages with
+   `require' or `use-package'.
+ - `map!' for binding new keys
+
+ To get information about any of these functions/macros, move the cursor over
+ the highlighted symbol at press 'K' (non-evil users must press 'C-c g k').
+ This will open documentation for it, including demos of how they are used.
+
+ You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
+ they are implemented.
+
+* packages.el
+Specifying a file will tell a block where to tangle to...
+#+begin_src emacs-lisp :tangle packages.el
+(package! persistent-scratch)
+(package! rjsx-mode)
+(package! graphql-mode)
+;; (package! nimbus-theme)
+;; (package! modus-themes)
+(package! indium)
+(package! ox-hugo)
+;; (package! jest-test-mode)
+(package! org-tree-slide)
+(package! yasnippet)
+(package! dired-sidebar)
+;; (package! vscode-icon)
+(package! dap-mode)
+;; (package! autothemer)
+(package! jest)
+(package! anki-editor)
+(package! highlight-indent-guides)
+
+(package! lsp-pyright)
+;; (package! poetry)
+#+end_src
+
+** Notes from doom's original config...
+ To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
+(package! some-package)
+
+ To install a package directly from a remote git repo, you must specify a
+ `:recipe'. You'll find documentation on what `:recipe' accepts here:
+ https://github.com/raxod502/straight.el#the-recipe-format
+(package! another-package
+  :recipe (:host github :repo "username/repo"))
+
+ If the package you are trying to install does not contain a PACKAGENAME.el
+ file, or is located in a subdirectory of the repo, you'll need to specify
+ `:files' in the `:recipe':
+(package! this-package
+  :recipe (:host github :repo "username/repo"
+           :files ("some-file.el" "src/lisp/*.el")))
+
+ If you'd like to disable a package included with Doom, you can do so here
+ with the `:disable' property:
+;(package! builtin-package :disable t)
+
+ You can override the recipe of a built in package without having to specify
+ all the properties for `:recipe'. These will inherit the rest of its recipe
+ from Doom or MELPA/ELPA/Emacsmirror:
+(package! builtin-package :recipe (:nonrecursive t))
+(package! builtin-package-2 :recipe (:repo "myfork/package"))
+
+ Specify a `:branch' to install a package from a particular branch or tag.
+ This is required for some packages whose default branch isn't 'master' (which
+ our package manager can't deal with; see raxod502/straight.el#279)
+(package! builtin-package :recipe (:branch "develop"))
+
+ Use `:pin' to specify a particular commit to install.
+(package! builtin-package :pin "1a2b3c4d5e")
+
+
+ Doom's packages are pinned to a specific commit and updated from release to
+ release. The `unpin!' macro allows you to unpin single packages...
+(unpin! pinned-package)
+ ...or multiple packages
+(unpin! pinned-package another-pinned-package)
+ ...Or *all* packages (NOT RECOMMENDED; will likely break things)
+(unpin! t)
+
+* Meta config section
+The config that helps the config config good
+#+begin_src emacs-lisp
+;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
+
+;; Some functionality uses this to identify you, e.g. GPG configuration, email
+;; clients, file templates and snippets.
+(setq user-full-name "Parker Johnson"
+      user-mail-address "parkerjohnsonwebdev@gmail.com")
+
+  ;; System information
+  (defun my/laptop-p ()
+    (or
+     ;; MacBook
+     (equal (system-name) "Parkers-Macbook-Pro.local")
+     ;; TODO - this seems to be the generic linux box name? Add more detail or configure
+     (equal (system-name) "localhost.localdomain")))
+  (defun my/work-laptop-p ()
+    (equal (system-name) "m-pjohnson2"))
+
+#+end_src
+I used to put my agenda config in untangled files, but now that we're moving this whole config to literate, this isn't as useful
+#+begin_src emacs-lisp :tangle no
+    (require 'org (org-babel-load-file (expand-file-name "~/dotfiles/emacs/org-mode.common.org")) )
+  (when (my/laptop-p)
+    (require 'org (org-babel-load-file (expand-file-name "~/dotfiles/emacs/org-mode.home.org")) ))
+  (when (my/work-laptop-p)
+    (require 'org (org-babel-load-file (expand-file-name "~/dotfiles/emacs/org-mode.work.org")) ))
+#+end_src
+
+* Visual effects
+#+begin_src emacs-lisp
+;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
+;; are the three important ones:
+;;
+;; + `doom-font'
+;; + `doom-variable-pitch-font'
+;; + `doom-big-font' -- used for `doom-big-font-mode'; use this for
+;;   presentations or streaming.
+;;
+;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
+;; font string. You generally only need these two:
+;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
+;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
+
+;; There are two ways to load a theme. Both assume the theme is installed and
+;; available. You can either set `doom-theme' or manually load a theme with the
+;; `load-theme' function. This is the default:
+
+;; (setq doom-theme 'nimbus)
+;; (setq doom-theme 'modus-vivendi)
+;; (setq doom-theme 'doom-material)
+(setq doom-theme 'doom-tomorrow-night)
+
+(setq doom-font (font-spec :family "Hack" :size 14 :weight 'regular)
+      ;; doom-variable-pitch-font (font-spec :family "Hack" :size 13)
+      ;; doom-unicode-font (font-spec :family "Hack")
+      ;; doom-big-font (font-spec :family "Hack" :size 24)
+      )
+
+(setq doom-font-increment 1) ; Default is 2, let's make it more granular
+
+;; This determines the style of line numbers in effect. If set to `nil', line
+;; numbers are disabled. For relative line numbers, set this to `relative'.
+(setq display-line-numbers-type t)
+
+(use-package! highlight-indent-guides
+  :hook (prog-mode . highlight-indent-guides-mode)
+  :config (setq highlight-indent-guides-method 'character))
+
+;; Display time and date
+(setq display-time-day-and-date t)
+(setq display-time-mode t)
+#+end_src
+
+* magit / git / merging
+#+begin_src emacs-lisp
+(map! :map
+      magit-file-section-map
+      :n (kbd "RET") 'magit-diff-visit-file-other-window)
+(map! :map
+      magit-hunk-section-map
+      :n (kbd "RET") 'magit-diff-visit-file-other-window)
+
+(map! :map smerge-mode-map
+      :leader
+  ("m = <"  #'smerge-diff-base-upper)
+  ("m = ="  #'smerge-diff-upper-lower)
+  ("m = >"  #'smerge-diff-base-lower)
+  ("m C"    #'smerge-combine-with-next)
+  ("m E"    #'smerge-ediff)
+  ("m R"    #'smerge-refine)
+  ("m RET"  #'smerge-keep-current)
+  ("m a"    #'smerge-keep-all)
+  ("m b"    #'smerge-keep-base)
+  ("m j"    #'smerge-keep-lower)
+  ("m k"    #'smerge-keep-upper)
+  ("m n"    #'smerge-next)
+  ("m p"    #'smerge-prev)
+  ("m r"    #'smerge-resolve))
+
+#+end_src
+
+* dired
+#+begin_src emacs-lisp
+;; dired-sidebar
+(use-package! dired-sidebar
+  :config
+  (setq dired-sidebar-subtree-line-prefix "__")
+  (setq dired-sidebar-theme 'vscode)
+  (setq dired-sidebar-use-term-integration t)
+  (setq dired-sidebar-use-custom-font t)
+  (setq dired-listing-switches "-alh")   ; human readable format when in detail
+  (setq dired-kill-when-opening-new-dired-buffer t) ; kill when changing dir
+  )
+(map!
+ :map dired-mode-map
+ :n "h" 'dired-up-directory
+ :leader
+ ("o p" #'dired-sidebar-toggle-sidebar))
+
+;; Auto-refresh dired on file change
+;; https://www.reddit.com/r/emacs/comments/1acg6q/how_to_configure_dired_to_update_instantly_when/
+(add-hook 'dired-mode-hook 'auto-revert-mode)
+#+end_src
+
+* projectile
+#+begin_src emacs-lisp
+;; This keeps projectile from storing all buffers in a workspace when switching projects
+(setq +workspaces-on-switch-project-behavior nil)
+
+;; once you have selected your project, the top-level directory of the project is immediately opened for you in a dired buffer.
+(setq projectile-switch-project-action #'projectile-dired)
+#+end_src
+
+* org-mode
+#+begin_src emacs-lisp
+;; If you use `org' and don't want your org files in the default location below,
+;; change `org-directory'. It must be set before org loads!
+(setq org-directory "~/org/")
+
+(setq org-clock-sound "/System/Library/Sounds/Glass.aiff")
+#+end_src
+
+Save every 30s of inactivity
+#+begin_src emacs-lisp
+  (add-hook 'auto-save-hook 'org-save-all-org-buffers)
+#+end_src
+
+Here lies all the global configuration that I need for my workflows
+#+begin_src emacs-lisp
+;; This changes the start date to the correct day, as previously it was behind about 3 days
+;; A caveat is that old, scheduled items will indeed begin showing up in my agendas
+(setq org-agenda-start-day nil)
+;; Hide tasks that are scheduled in the future.
+(setq org-agenda-todo-ignore-scheduled 'future)
+;; Use "second" instead of "day" for time comparison.
+;; It hides tasks with a scheduled time like "<2020-11-15 Sun 11:30>"
+(setq org-agenda-todo-ignore-time-comparison-use-seconds t)
+;; Hide the deadline prewarning prior to scheduled date.
+(setq org-agenda-skip-deadline-prewarning-if-scheduled 'pre-scheduled)
+#+end_src
+
+#+RESULTS:
+: pre-scheduled
+
+Doom will initialize its own org-capture-templates after this is executed, so put it in an `after! org` declaration
+#+begin_src emacs-lisp
+;; %^g propts for tags with completion in the target file - %^G would prompt for completion on all agenda file  s
+(after! org
+  (setq org-capture-templates '(("t" "Todo [inbox]" entry
+                                 (file "~/org/inbox.org")
+                                 "* TODO %i%? \n%U")
+                                ("c" "Code Diary [inbox]" entry
+                                 (file+headline "~/org/code_diary.org" "Inbox")
+                                 "** %i%? \n %U %^g")
+                                ))
+  ;; TODO keywords.
+  (setq org-todo-keywords
+        '((sequence "TODO(t)" "NEXT(n)" "PROG(p)" "WAITING(w@)" "|" "DONE(d)" "CANCELLED(c@)")))
+
+  ;; Old config here
+  ;; (setq org-todo-keywords
+  ;; '((sequence "TODO(t)" "IN-PROGRESS(p!)" "WAITING(w@)" "|" "DONE(d!)" "CANCELLED(c@)")))
+
+
+  )
+#+end_src
+
+#+RESULTS:
+| t | Todo [inbox] | entry | (file ~/org/inbox.org) | * TODO %i%? |
+
+#+begin_src emacs-lisp
+(setq org-agenda-custom-commands
+      '(("n" "Agenda / INTR / PROG / NEXT"
+         ((agenda "" nil)
+          (todo "INTR" nil)
+          (todo "PROG" nil)
+          (todo "NEXT" nil)
+          (todo "WAITING" nil)
+          (todo "TODO" nil)
+          )
+         ((org-agenda-span 'day))
+         )
+        )
+      )
+
+(setq org-agenda-files
+      '("~/org/brain.org"
+        "~/org/inbox.org"
+        "~/org/thespocialspa.org"))
+
+;; Add a timestamp when task is set to 'done'
+(setq org-log-done 'time)
+#+end_src
+
+Don't split windows when displaying agenda
+#+begin_src emacs-lisp
+  (setq org-agenda-window-setup 'current-window)
+#+end_src
+
+Hook for toggling visual word wrap
+#+begin_src emacs-lisp
+  (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
+#+end_src
+
+Change ellipsis
+Alt: ▼, ↴, ⬎, ⤷, ⤵, and ⋱
+#+begin_src emacs-lisp
+  (setq org-ellipsis "↴")
+#+end_src
+
+* org-roam
+If I used org roam, the config would look something like...
+#+begin_src emacs-lisp :tangle no
+ org roam config
+ (use-package org-roam
+       :ensure t
+       :hook
+       (after-init . org-roam-mode)
+       :custom
+       (org-roam-directory "~/org")
+       :bind (:map org-roam-mode-map
+               (("C-c n l" . org-roam)
+                ("C-c n f" . org-roam-find-file)
+                ("C-c n g" . org-roam-graph))
+               :map org-mode-map
+               (("C-c n i" . org-roam-insert))
+               (("C-c n I" . org-roam-insert-immediate))))
+#+end_src
+
+* lsp
+#+begin_src emacs-lisp
+;; Needed to add javascript-eslint to the the next-checker after lsp so that it would actually load, as that wasn't happening by deafult
+;; also needed to runit after the lsp-afer-initalize-hook because otherwise 'lsp wasn't a valid checker
+(add-hook 'lsp-after-initialize-hook (lambda
+                                      ()
+                                      (flycheck-add-next-checker 'lsp 'javascript-eslint)))
+;;                                      https://github.com/hlissner/doom-emacs/issues/1530
+;; Potential alternative to the above
+;; (after! (:and lsp-mode flycheck)
+;; (flycheck-add-next-checker 'lsp 'javascript-eslint))
+
+;; https://emacs-lsp.github.io/lsp-mode/page/lsp-typescript/#available-configurations
+;; lsp performance settings
+(setq lsp-eslint-run "onSave")
+(setq +format-with-lsp nil) ; We want something that will respect our prettierrc to do this instead. Also I don't know how to configure this yet.
+(setq lsp-eslint-format nil)
+(setq lsp-enable-file-watchers nil)
+
+;; Recommendations from https://ianyepan.github.io/posts/emacs-ide/
+;; (setq lsp-auto-guess-root t)
+ (setq lsp-log-io nil)
+;; (setq lsp-restart 'auto-restart)
+(setq lsp-enable-symbol-highlighting t)
+(setq lsp-enable-on-type-formatting nil)
+;; (setq lsp-signature-auto-activate nil)
+;; (setq lsp-signature-render-documentation nil)
+;; (setq lsp-eldoc-hook nil)
+(setq lsp-modeline-code-actions-enable t)
+(setq lsp-modeline-diagnostics-enable nil)
+(setq lsp-headerline-breadcrumb-enable nil)
+;; (setq lsp-semantic-tokens-enable nil)
+(setq lsp-enable-folding nil)
+(setq lsp-enable-imenu t)
+(setq lsp-enable-snippet nil)
+(setq read-process-output-max (* 1024 1024)) ;; 1MB
+(setq lsp-idle-delay 0.25)
+#+end_src
+
+* general QOL
+#+begin_src emacs-lisp
+(setq evil-escape-key-sequence "fd")
+
+;; Show my favorite org agenda on startup
+;; Jul-11-2023 - This was making my emacs unresponsive on personal laptop
+;; (add-hook 'after-init-hook (lambda () (org-agenda nil "n")))
+
+;; Too lazy to type 'no'
+(fset 'yes-or-no-p 'y-or-n-p)
+#+end_src
+
+* performance
+"Disk space is cheap. Save lots" - Sacha Chua
+#+begin_src emacs-lisp
+(setq delete-old-versions -1)
+(setq version-control t)
+(setq vc-make-backup-files t)
+(setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
+#+end_src
+
+Backups. C-x C-f (find-file) should help sort through these if needed.
+#+begin_src emacs-lisp
+(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+#+end_src
+
+* flycheck
+#+begin_src emacs-lisp
+;; Make flycheck errors much better
+(set-popup-rule! "^\\*Flycheck errors\\*$" :side 'bottom :size 0.4 :select t)
+#+end_src
+
+* general keybinds
+#+begin_src emacs-lisp
+;; Going to comment this because I want to try workspaces. Go back to using SPC b b for switch-to-buffer
+;; (map! :leader
+;;       "TAB" #'switch-to-buffer)
+
+(map! "s-}" #'next-buffer
+      "s-{" #'previous-buffer)
+#+end_src
+
+* yas
+#+begin_src emacs-lisp
+(setq yas-snippet-dirs '("~/.doom.d/snippets"))
+(yas-global-mode 1)
+#+end_src
+
+* macos fixes
+ There was an issue where meta key wasn't working - this fixes that
+ macOS reports rebound modifiers on external keyboards as "right" modifiers, even if you're using left modifiers
+ Doom binds ns-right-option-modifier or mac-right-option-modifier (depending on emacs distro) to 'none
+ So this fixes that weird macOS functionality
+ https://github.com/hlissner/doom-emacs/issues/3952
+#+begin_src emacs-lisp
+
+(cond (IS-MAC
+       (setq mac-right-option-modifier 'meta)))
+#+end_src
+
+* navigation
+avy jumps to portions of the screen given some input, lets set up a better keybind
+This wasn't working due to a weird error about void-variable goto
+#+begin_src emacs-lisp :tangle no
+ ;; (map! :desc \"Avy goto char timer\"
+       ;; :n :leader "j" 'avy-goto-char-timer)
+#+end_src
+
+* golang
+#+begin_src emacs-lisp :tangle no
+;; my exec-path and $PATH weren't in sync for some reason - I added a path reexport to both .zshrc and .bashrc but no luck
+(add-to-list 'exec-path "~/go/bin")
+#+end_src
+
+* Super experimental file I snagged from online
+ https://gitter.im/emacs-lsp/lsp-mode?at=5f3913a4ce98da26ecce6d3f
+ #+begin_src emacs-lisp :tangle no
+ (defun lsp-js-ts-rename-file ()
+   "Rename current file and all it's references in other files."
+   (interactive)
+   (let* ((name (buffer-name))
+          (old (buffer-file-name))
+          (basename (file-name-nondirectory old)))
+     (unless (and old (file-exists-p old))
+       (error "Buffer '%s' is not visiting a file." name))
+     (let ((new (read-file-name "New name: " (file-name-directory old) basename nil basename)))
+       (when (get-file-buffer new)
+         (error "A buffer named '%s' already exists." new))
+       (when (file-exists-p new)
+         (error "A file named '%s' already exists." new))
+       (lsp--send-execute-command
+        "_typescript.applyRenameFile"
+        (vector (list :sourceUri (lsp--buffer-uri)
+                      :targetUri (lsp--path-to-uri new))))
+       (mkdir (file-name-directory new) t)
+       (rename-file old new)
+       (rename-buffer new)
+       (set-visited-file-name new)
+       (set-buffer-modified-p nil)
+       (lsp-disconnect)
+       (setq-local lsp-buffer-uri nil)
+       (lsp)
+       (lsp--info "Renamed '%s' to '%s'." name (file-name-nondirectory new)))))
+ #+end_src
+* python
+** keybinds
+#+begin_src emacs-lisp
+;; python-mode-map C-c >
+;; This doesn't work for some reason - didn't figure out why
+;; (map! :mode python-mode-map
+;;       "C-c h" #'python-indent-shift-left
+;;       "C-c l" #'python-indent-shift-right )
+#+end_src
+** pyright
+#+begin_src emacs-lisp
+(use-package lsp-pyright
+  :ensure t
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-pyright)
+                          (lsp))))  ; or lsp-deferred
+
+#+end_src
+
+** poetry
+#+begin_src emacs-lisp :tangle no
+(use-package! poetry
+  :after python
+  :init
+  (setq poetry-tracking-strategy 'switch-buffer)
+  (add-hook 'python-mode-hook #'poetry-tracking-mode))
+
+#+end_src
