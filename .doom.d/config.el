@@ -5,15 +5,15 @@
 (setq user-full-name "Parker Johnson"
       user-mail-address "parkerjohnsonwebdev@gmail.com")
 
-  ;; System information
-  (defun my/laptop-p ()
-    (or
-     ;; MacBook
-     (equal (system-name) "Parkers-Macbook-Pro.local")
-     ;; TODO - this seems to be the generic linux box name? Add more detail or configure
-     (equal (system-name) "localhost.localdomain")))
-  (defun my/work-laptop-p ()
-    (equal (system-name) "m-pjohnson2"))
+;; System information
+(defun my/laptop-p ()
+  (or
+   ;; MacBook
+   (equal (system-name) "Parkers-Macbook-Pro.local")
+   ;; TODO - this seems to be the generic linux box name? Add more detail or configure
+   (equal (system-name) "localhost.localdomain")))
+(defun my/work-laptop-p ()
+  (equal (system-name) "m-pjohnson2"))
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -35,12 +35,13 @@
 ;; (setq doom-theme 'nimbus)
 ;; (setq doom-theme 'modus-vivendi)
 ;; (setq doom-theme 'doom-material)
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-tomorrow-night)
 
 (setq doom-font (font-spec :family "Hack" :size 14 :weight 'regular)
-      doom-variable-pitch-font (font-spec :family "Hack" :size 13)
-      doom-unicode-font (font-spec :family "Hack")
-      doom-big-font (font-spec :family "Hack" :size 24))
+      ;; doom-variable-pitch-font (font-spec :family "Hack" :size 13)
+      ;; doom-unicode-font (font-spec :family "Hack")
+      ;; doom-big-font (font-spec :family "Hack" :size 24)
+      )
 
 (setq doom-font-increment 1) ; Default is 2, let's make it more granular
 
@@ -65,20 +66,20 @@
 
 (map! :map smerge-mode-map
       :leader
-  ("m = <"  #'smerge-diff-base-upper)
-  ("m = ="  #'smerge-diff-upper-lower)
-  ("m = >"  #'smerge-diff-base-lower)
-  ("m C"    #'smerge-combine-with-next)
-  ("m E"    #'smerge-ediff)
-  ("m R"    #'smerge-refine)
-  ("m RET"  #'smerge-keep-current)
-  ("m a"    #'smerge-keep-all)
-  ("m b"    #'smerge-keep-base)
-  ("m j"    #'smerge-keep-lower)
-  ("m k"    #'smerge-keep-upper)
-  ("m n"    #'smerge-next)
-  ("m p"    #'smerge-prev)
-  ("m r"    #'smerge-resolve))
+      ("m = <"  #'smerge-diff-base-upper)
+      ("m = ="  #'smerge-diff-upper-lower)
+      ("m = >"  #'smerge-diff-base-lower)
+      ("m C"    #'smerge-combine-with-next)
+      ("m E"    #'smerge-ediff)
+      ("m R"    #'smerge-refine)
+      ("m RET"  #'smerge-keep-current)
+      ("m a"    #'smerge-keep-all)
+      ("m b"    #'smerge-keep-base)
+      ("m j"    #'smerge-keep-lower)
+      ("m k"    #'smerge-keep-upper)
+      ("m n"    #'smerge-next)
+      ("m p"    #'smerge-prev)
+      ("m r"    #'smerge-resolve))
 
 ;; dired-sidebar
 (use-package! dired-sidebar
@@ -126,13 +127,29 @@
 (setq org-agenda-skip-deadline-prewarning-if-scheduled 'pre-scheduled)
 
 ;; %^g propts for tags with completion in the target file - %^G would prompt for completion on all agenda file  s
-(setq org-capture-templates '(("t" "Todo [inbox]" entry
-                               (file "~/org/inbox.org")
-                               "* TODO %i%? \n%U")
-                              ("c" "Code Diary [inbox]" entry
-                               (file+headline "~/org/code_diary.org" "Inbox")
-                               "** %i%? \n %U %^g")
-                              ))
+(after! org
+  (setq org-capture-templates '(("t" "Todo")
+                                ("ti" "Todo [inbox]" entry
+                                 (file "~/org/inbox.org")
+                                 "* TODO %i%? \n%U")
+                                ("tt" "Todo [TheSocialSpa]" entry
+                                 (file "~/org/thespocialspa.org")
+                                 "* TODO %i%? \n%U")  ; Replace this with your new template
+                                ("c" "Code Diary [inbox]" entry
+                                 (file+headline "~/org/code_diary.org" "Inbox")
+                                 "** %i%? \n %U %^g")
+                                ))
+  ;;
+  ;; TODO keywords.
+  (setq org-todo-keywords
+        '((sequence "TODO(t)" "NEXT(n)" "PROG(p)" "WAITING(w@)" "|" "DONE(d)" "CANCELLED(c@)")))
+
+  ;; Old config here
+  ;; (setq org-todo-keywords
+  ;; '((sequence "TODO(t)" "IN-PROGRESS(p!)" "WAITING(w@)" "|" "DONE(d!)" "CANCELLED(c@)")))
+
+
+  )
 
 (setq org-agenda-custom-commands
       '(("n" "Agenda / INTR / PROG / NEXT"
@@ -150,7 +167,8 @@
 
 (setq org-agenda-files
       '("~/org/brain.org"
-        "~/org/inbox.org"))
+        "~/org/inbox.org"
+        "~/org/thespocialspa.org"))
 
 ;; Add a timestamp when task is set to 'done'
 (setq org-log-done 'time)
@@ -161,19 +179,11 @@
 
 (setq org-ellipsis "↴")
 
-;; TODO keywords.
-(setq org-todo-keywords
-      '((sequence "TODO(t)" "NEXT(n)" "PROG(p)" "WAITING(w@)" "|" "DONE(d)" "CANCELLED(c@)")))
-
-;; Old config here
-;; (setq org-todo-keywords
-;; '((sequence "TODO(t)" "IN-PROGRESS(p!)" "WAITING(w@)" "|" "DONE(d!)" "CANCELLED(c@)")))
-
 ;; Needed to add javascript-eslint to the the next-checker after lsp so that it would actually load, as that wasn't happening by deafult
 ;; also needed to runit after the lsp-afer-initalize-hook because otherwise 'lsp wasn't a valid checker
 (add-hook 'lsp-after-initialize-hook (lambda
-                                      ()
-                                      (flycheck-add-next-checker 'lsp 'javascript-eslint)))
+                                       ()
+                                       (flycheck-add-next-checker 'lsp 'javascript-eslint)))
 ;;                                      https://github.com/hlissner/doom-emacs/issues/1530
 ;; Potential alternative to the above
 ;; (after! (:and lsp-mode flycheck)
@@ -188,7 +198,7 @@
 
 ;; Recommendations from https://ianyepan.github.io/posts/emacs-ide/
 ;; (setq lsp-auto-guess-root t)
- (setq lsp-log-io nil)
+(setq lsp-log-io nil)
 ;; (setq lsp-restart 'auto-restart)
 (setq lsp-enable-symbol-highlighting t)
 (setq lsp-enable-on-type-formatting nil)
@@ -246,5 +256,5 @@
 (use-package lsp-pyright
   :ensure t
   :hook (python-mode . (lambda ()
-                          (require 'lsp-pyright)
-                          (lsp))))  ; or lsp-deferred
+                         (require 'lsp-pyright)
+                         (lsp))))  ; or lsp-deferred

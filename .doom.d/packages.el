@@ -9,11 +9,11 @@
 (package! org-tree-slide)
 (package! yasnippet)
 (package! dired-sidebar)
-(package! vscode-icon)
+;; (package! vscode-icon)
 (package! dap-mode)
 ;; (package! autothemer)
 (package! jest)
-;; (package! anki-editor)
+(package! anki-editor)
 (package! highlight-indent-guides)
 
 (package! lsp-pyright)

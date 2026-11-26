@@ -185,3 +185,6 @@ test -f /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme && source /usr/loca
 test -f /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme && source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
 
 export PATH="/Users/parker/.local/bin:$PATH"
+
+complete -o nospace -C /opt/homebrew/bin/terraform terraform
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"

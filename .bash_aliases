@@ -16,3 +16,5 @@ alias npmnuke='rm -rf node_modules && rm package-lock.json && npm i && say "Fini
 alias visualregression='npm run build:storybook && cd visual-regression && npm i && npm run docker-clean && npm run docker-build && npm run docker-test && cd ..'
 alias gpass='pbcopy < ~/dotfiles/private/.npass'
 alias wd='webdriver-manager clean && webdriver-manager update && webdriver-manager start'
+
+alias kyl-db='psql -h localhost -p 5433 -U postgres -d postgres'
