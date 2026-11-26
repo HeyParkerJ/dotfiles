@@ -1,0 +1,10 @@
+alias ll='ls -FGlAhp'
+cd() { builtin cd "$@" && ll; }   # always list directory contents after cd
+alias cdnotes='cd ~/Documents/notes'
+alias whoson='lsof -i -n -P'
+alias preview="fzf --preview 'bat --color \"always\" {}'"
+alias help='tldr'
+alias cat='bat'
+alias doom='~/.emacs.d/bin/doom'
+alias npmnuke='rm -rf node_modules package-lock.json && npm i'
+alias kyl-db='psql -h localhost -p 5433 -U postgres -d postgres'

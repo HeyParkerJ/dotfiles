@@ -10,8 +10,7 @@ BACKUP="$HOME/.dotfiles-backup/$(date +%Y%m%d%H%M%S)"
 # Paths relative to $HOME (and to this repo). Entries that don't exist in the
 # repo yet are skipped with a notice, so this is safe to run mid-migration.
 LINKS=(
-  .zshrc .zprofile .zshenv .p10k.zsh
-  .bash_aliases .bash_profile .bashrc
+  .zshrc .zsh_aliases .zprofile .zshenv .p10k.zsh
   .vimrc .gitconfig
   .doom.d
   .config/nvim .config/git/ignore .config/ghostty/config

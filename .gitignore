@@ -9,6 +9,3 @@ private/*
 emacs/*.el
 
 .doom.d/custom.el
-
-# Work machine specific stuff to never commit
-.work_config
