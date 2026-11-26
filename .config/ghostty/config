@@ -1,0 +1,4 @@
+# Pass Option+Left/Right through as real M-<left>/M-<right> (for Emacs org-mode)
+# instead of Ghostty's default esc:b / esc:f word-jump bindings.
+keybind = alt+left=unbind
+keybind = alt+right=unbind
